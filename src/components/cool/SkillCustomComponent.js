@@ -3,6 +3,7 @@ import { getTargetIncrease, handleTargetCoolTime, handleTargetList } from "../..
 import { groupBy } from "lodash";
 import Tooltip from "../../common/item/ToolTip";
 import { lv105ItemId } from "../../common/itemInfo";
+import { skillCastingTime } from "../../common/skillInfo";
 
 const SkillCustomComponent = ({ skills }) => {
 
@@ -237,7 +238,7 @@ const SkillCustomComponent = ({ skills }) => {
                                 <div className="flex justify-between">
                                     <span>
                                         <span>{skillName}</span>
-                                        <span className="ml-[5px]">{Math.ceil(40 / skill.skillCoolTime)}회</span>
+                                        <span className="ml-[5px]">{Math.ceil(40 / (skill.skillCoolTime + (skillCastingTime[skillName] || 0)))}회</span>
                                         {/* <span className="ml-[5px]">Lv{skill.skillLevel}</span> */}
 
                                     </span>

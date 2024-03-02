@@ -74,6 +74,5 @@ export function handleTargetCoolTime(name, list, skillObj, skills) {
         obj.skillCoolTime = obj.defaultCoolTime * 0.3
     }
 
-    console.log(skillObj)
     return skillObj
 }

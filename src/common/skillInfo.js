@@ -826,5 +826,4 @@ skillCastingTime['독충 쫓기'] = 0.3;
 skillCastingTime['안개무리'] = 0.5;
 
 
-
-export default skillImage;
+export { skillCastingTime }

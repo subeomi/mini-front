@@ -1,5 +1,6 @@
 import { jobInfoMap } from "../charInfo";
 import { isBuffInList } from "../globalFunction";
+import { skillCastingTime } from "../skillInfo";
 import { coolTimeInc, coolTimeIncRunes, coolTimeIncTalisman, coolTimeIncWeapons, coolTimeRec, coolTimeRed, coolTimeRedRunes, coolTimeRedTalisman, coolTimeRedTrait, coolTimeRedWeapons, nomalGearCoolTimeInc, nomalGearCoolTimeRec, nomalGearCoolTimeRed } from "./itemCoolTimeInfo";
 
 // const stackDivisionList = {
@@ -194,6 +195,10 @@ export function findCharSkill(s) {
                     skill.coolTime = 10;
                 } else if (swc && skill.name === "썬더 콜링") {
                     skill.coolTime = 20;
+                }
+
+                if (typeof skillCastingTime[skill.name] !== 'undefined') {
+                    skill.castingTime = skillCastingTime[skill.name];
                 }
 
                 if (stackName) {
