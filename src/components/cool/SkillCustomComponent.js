@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
-import { getTargetIncrease, handleTargetCoolTime, handleTargetList } from "../../common/skill/skillCustomFunction";
+import { getTargetIncrease, handleAddElement, handleMoreCustom, handleTargetCoolTime, handleTargetList } from "../../common/skill/skillCustomFunction";
 import { groupBy } from "lodash";
 import Tooltip from "../../common/item/ToolTip";
 import { lv105ItemId } from "../../common/itemInfo";
 import { skillCastingTime } from "../../common/skillInfo";
+import SkillModalComponent from "./SkillModalComponent";
 
 const SkillCustomComponent = ({ skills }) => {
 
-    const [skillObj, setSkillObj] = useState({})
+    const [skillObj, setSkillObj] = useState({});
     const [target, setTarget] = useState({});
     const [setting, setSetting] = useState(false);
     const [cList, setCList] = useState({});
+    const [modalInfo, setModalInfo] = useState({ lvl: 0, type: "" });
+    const [moreListModal, setMoreListModal] = useState(false);
+    const [addedMoreList, setAddedMoreList] = useState({});
 
     const handleTargetList = (skills) => {
         const result = {};
@@ -34,6 +38,16 @@ const SkillCustomComponent = ({ skills }) => {
         return Object.keys(obj).length !== 0;
     };
 
+    const closeModal = () => {
+        setMoreListModal(false);
+    };
+
+    const listModal = (lvl, type) => {
+        setModalInfo({ lvl: lvl, type: type });
+        setMoreListModal(true);
+    }
+
+    // 체크된 요소의 인덱스번호 추가 제거
     const handleCListOption = (target, type, index) => {
         if (setting) {
             setCList(prevCList => {
@@ -50,16 +64,27 @@ const SkillCustomComponent = ({ skills }) => {
         }
     };
 
+    const addElement = (name, list, type) => {
+        const newObj = handleAddElement(name, list, skillObj, type);
+        setSkillObj(newObj);
+        setTarget({ [Object.keys(target)[0]]: newObj[Object.keys(target)[0]] });
+    };
+
     useEffect(() => {
         setSkillObj(JSON.parse(JSON.stringify(skills)));
         const handleCList = handleTargetList(skills);
         setCList(handleCList);
     }, [skills])
 
-    console.log('cList: ', cList)
+    console.log('skillObj ', skillObj)
+    // console.log('cList: ', cList)
+    console.log('target: ', target)
+    console.log('skills: ', skills)
 
     return (
         <div className="flex relative h-screen">
+            {moreListModal &&
+                <SkillModalComponent target={target} lvl={modalInfo.lvl} type={modalInfo.type} closeModal={closeModal} addElement={addElement} />}
             <div className="w-[45%] p-2 mb-10">
                 {
                     isEmptyObject(target) && (
@@ -76,25 +101,32 @@ const SkillCustomComponent = ({ skills }) => {
                                 {(skills?.[Object.keys(target)[0]]?.cal?.increase?.length > 0 ||
                                     target?.[Object.keys(target)[0]]?.cal?.increase?.length > 0) && (
                                         <>
-                                            <div className="text-[18px]">
+                                            <div className="text-[18px] flex items-center">
                                                 <span className="font-bold text-red-700">쿨타임 증가</span>
                                                 <span className="pl-1 font-bold">{getTargetIncrease(target, 'inc')}</span>
+                                                <span className="pl-1 text-[26px] font-bold"
+                                                    onClick={() => { listModal(target.requiredLevel, 'inc') }}
+                                                >+</span>
                                             </div>
-                                            {skills[Object.keys(target)[0]].cal.increase.map((item, index) => (
+                                            {target[Object.keys(target)[0]].cal.increase.map((item, index) => (
                                                 <div key={index} className="pl-2">
                                                     {item[3] * 100 > 0 && (
                                                         <>
+                                                            {console.log(item)}
+                                                            {console.log(skills[Object.keys(target)[0]].cal.increase[0])}
+                                                            {console.log(skills[Object.keys(target)[0]].cal.increase[0] === item)}
                                                             <span
                                                                 className={`flex items-center ${cList[Object.keys(target)[0]]?.inc?.includes(index)
                                                                     ? 'text-gray-500 line-through' : ''}`}
                                                                 onClick={() => { handleCListOption(Object.keys(target)[0], 'inc', index) }}
                                                             >
-                                                                {setting && <input
-                                                                    className="mr-2"
-                                                                    type="checkbox"
-                                                                    checked={cList[Object.keys(target)[0]]?.inc?.includes(index)}
-                                                                    onChange={() => { }}
-                                                                />}
+                                                                {setting && skills[Object.keys(target)[0]].cal.increase.includes(item) &&
+                                                                    <input
+                                                                        className="mr-2"
+                                                                        type="checkbox"
+                                                                        checked={cList[Object.keys(target)[0]]?.inc?.includes(index)}
+                                                                        onChange={() => { }}
+                                                                    />}
                                                                 <span className="ml-1">
                                                                     {item[1]} - {(item[3] * 100)}%
                                                                 </span>
@@ -137,6 +169,7 @@ const SkillCustomComponent = ({ skills }) => {
                                                     )}
                                                 </div>
                                             ))}
+                                            { }
                                         </>
                                     )}
                             </div>
@@ -232,6 +265,7 @@ const SkillCustomComponent = ({ skills }) => {
                                 `}
                                 onClick={() => {
                                     setTarget({ [skillName]: skill });
+                                    handleMoreCustom(skill);
                                 }}
                                 key={skill.skillId}
                             >
