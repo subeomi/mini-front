@@ -8,7 +8,7 @@
                     <div key={equip.itemName + '_' + index}>
 
                         {
-                            checkCoolTimeOptions(option.explainDetail, index === 2 ? "불의 숨결" : "바칼옵션")
+                            checkCoolTimeOptions(option.explainDetail, index === 2 ? "불의 숨결" : "바칼 융합")
                                 ? <span className="font-bold">{option.explainDetail}</span>
                                 : <span>{option.explainDetail}</span>
                         }

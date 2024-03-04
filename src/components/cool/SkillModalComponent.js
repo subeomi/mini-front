@@ -42,7 +42,7 @@ const SkillModalComponent = ({ target, lvl, type, closeModal, addElement }) => {
                     <h2 className="text-2xl font-bold m-2">type 옵션 추가</h2>
                 </div>
                 {moreList.length > 0 && moreList.map((item,index) => (
-                    <div className="flex justify-between w-[300px]" key={index}>
+                    <div className="flex justify-between w-[350px]" key={index}>
                         <span>
                             {item[1]} - {(item[3] * 100)}%
                         </span>

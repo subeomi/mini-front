@@ -9,7 +9,7 @@ const IndexPage = () => {
     return (
         <div className="bg-black">
             <BaseNav></BaseNav>
-            <div className="flex justify-center">
+            <div className="flex justify-center h-screen">
                 <div className="w-[1000px]">
                     <ListComponent />
                 </div>

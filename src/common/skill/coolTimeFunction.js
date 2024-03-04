@@ -36,7 +36,7 @@ export function setCharMath(s) {
                         if (index === 2) {
                             result = checkCoolTimeOptions(option.explainDetail, "불의 숨결");
                         } else {
-                            result = checkCoolTimeOptions(option.explainDetail, "바칼옵션");
+                            result = checkCoolTimeOptions(option.explainDetail, "바칼 융합");
                         }
 
                         if (result) eArr.push(result);
