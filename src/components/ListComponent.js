@@ -14,6 +14,28 @@ const ListComponent = () => {
     const [search, setSearch] = useState(initState);
     const [isSearching, setIsSearching] = useState(false);
 
+    const getSearchHistory = () => {
+        const search = localStorage.getItem('search.History');
+        return search ? JSON.parse(search) : [];
+    }
+
+    const addSearchHistory = (keyword) => {
+        let recent = getSearchHistory();
+
+        const index = recent.indexOf(keyword);
+        if (index !== -1) {
+            recent.splice(index, 1);
+        }
+
+        recent.unshift(keyword);
+
+        if (recent.length > 10) {
+            recent = recent.slice(0, 10);
+        }
+
+        localStorage.setItem('search.History', JSON.stringify(recent));
+    }
+
     const searchCool = () => {
 
         if (isSearching) {
@@ -28,6 +50,7 @@ const ListComponent = () => {
                     nav('/server', { state: { message: 'DNF_SYSTEM_INSPECT' } });
                 }
 
+                addSearchHistory(search);
                 setCharList(data.data.rows);
             }).catch(err => {
                 console.log("캐릭터 검색 에러: " + err);
