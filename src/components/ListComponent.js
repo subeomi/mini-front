@@ -1,31 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getCharList, getCharProfile } from "../api/dnfAPI";
 import { transServerId } from "../common/globalFunction";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, createSearchParams, useLocation, useNavigate } from "react-router-dom";
 
 const initState = {
-    characterName: ''
+    type: 'character',
+    keyword: ''
 }
 
 const ListComponent = () => {
 
     const nav = useNavigate();
+    const location = useLocation();
     const [charList, setCharList] = useState([]);
     const [search, setSearch] = useState(initState);
     const [isSearching, setIsSearching] = useState(false);
+    const [recentSearch, setRecentSearch] = useState([]);
 
     const getSearchHistory = () => {
         const search = localStorage.getItem('search.History');
         return search ? JSON.parse(search) : [];
     }
 
+    const deleteSearchHistory = (index) => {
+        let recent = getSearchHistory();
+
+        recent.splice(index, 1);
+
+        localStorage.setItem('search.History', JSON.stringify(recent));
+        setRecentSearch(recent);
+    }
+
     const addSearchHistory = (keyword) => {
         let recent = getSearchHistory();
 
-        const index = recent.indexOf(keyword);
-        if (index !== -1) {
-            recent.splice(index, 1);
-        }
+        recent = recent.filter(item => item.characterName !== keyword.characterName);
 
         recent.unshift(keyword);
 
@@ -34,9 +43,16 @@ const ListComponent = () => {
         }
 
         localStorage.setItem('search.History', JSON.stringify(recent));
+        setRecentSearch(recent);
     }
 
-    const searchCool = () => {
+    const goSearch = () => {
+        const searchParams = createSearchParams({ type: search.type, keyword: search.keyword }).toString();
+        addSearchHistory(search.keyword);
+        nav(`/search?${searchParams}`);
+    }
+
+    const searchCool = (k) => {
 
         if (isSearching) {
             return;
@@ -45,12 +61,11 @@ const ListComponent = () => {
         setIsSearching(true);
 
         setTimeout(() => {
-            getCharList(search).then(data => {
+            getCharList(k).then(data => {
                 if (data.data.massege === 'DNF_SYSTEM_INSPECT') {
                     nav('/server', { state: { message: 'DNF_SYSTEM_INSPECT' } });
                 }
 
-                addSearchHistory(search);
                 setCharList(data.data.rows);
             }).catch(err => {
                 console.log("캐릭터 검색 에러: " + err);
@@ -64,9 +79,19 @@ const ListComponent = () => {
 
     const handleOnEnter = e => {
         if (e.key === 'Enter') {
-            searchCool();
+            goSearch();
         }
     };
+
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+        const characterId = searchParams.get("keyword");
+
+        setSearch({ characterName: characterId });
+
+        searchCool({ characterName: characterId });
+
+    }, [location.search])
 
     console.log(search);
     console.log(charList);
@@ -89,13 +114,13 @@ const ListComponent = () => {
                     <div id="searchButton">
                         <button
                             className="border-2 p-2"
-                            onClick={searchCool}
+                            onClick={goSearch}
                         >버튼</button>
                     </div>
                 </div>
 
                 <div className="p-2 flex flex-wrap gap-0 justify-center min-h-screen">
-                    {charList.length > 0 && charList.map(char => (
+                    {charList && charList.length > 0 && charList.map(char => (
                         <Link key={char.characterId}
                             className="w-[220px] h-[340px] bg-white border-2 rounded-xl border-slate-600 m-1 py-[10px] flex flex-col 
                         justify-center items-center hover:bg-slate-100 cursor-pointer"

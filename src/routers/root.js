@@ -3,8 +3,9 @@ import { createBrowserRouter } from "react-router-dom";
 
 
 const Index = lazy(() => import("../pages/IndexPage"));
-const Character = lazy(() => import("../pages/cool/CharInfoPage"))
-const ServerStatus = lazy(() => import("../pages/ServerStatusPage"))
+const Search = lazy(() => import("../pages/cool/SearchPage"));
+const Character = lazy(() => import("../pages/cool/CharInfoPage"));
+const ServerStatus = lazy(() => import("../pages/ServerStatusPage"));
 
 const router = createBrowserRouter([
     {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
     {
         path: "character",
         element: <Suspense><Character /></Suspense>
+    },
+    {
+        path: "search",
+        element: <Suspense><Search /></Suspense>
     },
     {
         path: "server",

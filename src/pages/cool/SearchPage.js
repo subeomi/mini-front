@@ -1,20 +1,18 @@
+import ListComponent from "../../components/ListComponent";
+import BaseNav from "../../layouts/BaseNav";
 
-import BaseNav from "../layouts/BaseNav";
-import IndexComponent from "../components/IndexComponent";
 
-
-const IndexPage = () => {
-
+const SearchPage = () => {
     return (
         <div className="bg-black">
             <BaseNav></BaseNav>
             <div className="flex justify-center h-screen">
                 <div className="w-[1000px]">
-                    <IndexComponent />
+                    <ListComponent />
                 </div>
             </div>
         </div>
     );
 }
 
-export default IndexPage;
+export default SearchPage;
