@@ -108,7 +108,7 @@ const SkillCustomComponent = ({ skills }) => {
                                                     onClick={() => { listModal(target.requiredLevel, 'inc') }}
                                                 >+</span>
                                             </div>
-                                            {target[Object.keys(target)[0]].cal.increase.map((item, index) => (
+                                            {skills[Object.keys(target)[0]].cal.increase.map((item, index) => (
                                                 <div key={index} className="pl-2">
                                                     {item[3] * 100 > 0 && (
                                                         <>
@@ -146,7 +146,7 @@ const SkillCustomComponent = ({ skills }) => {
                                                     onClick={() => { listModal(target.requiredLevel, 'rec') }}
                                                 >+</span>
                                             </div>
-                                            {target[Object.keys(target)[0]].cal.recovery.map((item, index) => (
+                                            {skills[Object.keys(target)[0]].cal.recovery.map((item, index) => (
                                                 <div key={index} className="pl-2">
                                                     {item[3] * 100 > 0 && (
                                                         <>
@@ -185,7 +185,7 @@ const SkillCustomComponent = ({ skills }) => {
                                                     onClick={() => { listModal(target.requiredLevel, 'red') }}
                                                 >+</span>
                                             </div>
-                                            {target[Object.keys(target)[0]].cal.reduce.map((item, index) => (
+                                            {skills[Object.keys(target)[0]].cal.reduce.map((item, index) => (
                                                 <div key={index} className="pl-2">
                                                     {item[3] * 100 > 0 && (
                                                         <>
