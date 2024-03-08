@@ -536,7 +536,8 @@ export function checkCoolTimeRunes(i) {
         for (const tal of tals) {
 
             if (Array.isArray(tal.runes)) {
-                for (const rune of tal.runes) {
+                // for (const rune of tal.runes) {
+                tal.runes.forEach((rune, index) => {
                     let skillLv = 0;
                     let skillName = '';
 
@@ -552,6 +553,7 @@ export function checkCoolTimeRunes(i) {
                         if (rune.itemName.includes(type)) {
                             let arr = coolTimeRedRunes[type];
                             arr.splice(2, 1, skillName);
+                            arr.splice(0, 1, arr[0].concat("I"));
                             result.reduce[result.reduce.length] = { 'reduce': [...arr] };
                             break;
                         }
@@ -560,11 +562,12 @@ export function checkCoolTimeRunes(i) {
                         if (rune.itemName.includes(type)) {
                             let arr = coolTimeIncRunes[type];
                             arr.splice(2, 1, skillName);
+                            arr.splice(0, 1, arr[0].concat("I"));
                             result.increase[result.increase.length] = { 'increase': [...arr] };
                             break;
                         }
                     }
-                }
+                })
             }
         }
 
@@ -1100,7 +1103,7 @@ export function checkCoolTimeTalisman(t) {
                     result.increase.push({ 'increase': coolTimeIncTalisman[match] });
                 }
             }
-        }
+        };
     }
 
     return result;

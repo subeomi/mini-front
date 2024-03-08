@@ -48,16 +48,16 @@ const SkillCustomComponent = ({ skills }) => {
     }
 
     // 체크된 요소의 인덱스번호 추가 제거
-    const handleCListOption = (target, type, index) => {
+    const handleCListOption = (target, type, list) => {
         if (setting) {
             setCList(prevCList => {
                 const updatedCList = { ...prevCList };
-                if (updatedCList[target][type].includes(index)) {
+                if (updatedCList[target][type].includes(list)) {
                     // 이미 리스트에 있는 경우 해당 요소를 제거합니다.
-                    updatedCList[target][type] = updatedCList[target][type].filter((item) => item !== index);
+                    updatedCList[target][type] = updatedCList[target][type].filter((item) => item !== list);
                 } else {
                     // 리스트에 없는 경우 해당 요소를 추가합니다.
-                    updatedCList[target][type] = [...updatedCList[target][type], index];
+                    updatedCList[target][type] = [...updatedCList[target][type], list];
                 }
                 return updatedCList;
             });
@@ -77,7 +77,7 @@ const SkillCustomComponent = ({ skills }) => {
     }, [skills])
 
     console.log('skillObj ', skillObj)
-    // console.log('cList: ', cList)
+    console.log('cList: ', cList)
     console.log('target: ', target)
     console.log('skills: ', skills)
 
@@ -113,15 +113,15 @@ const SkillCustomComponent = ({ skills }) => {
                                                     {item[3] * 100 > 0 && (
                                                         <>
                                                             <span
-                                                                className={`flex items-center ${cList[Object.keys(target)[0]]?.inc?.includes(index)
+                                                                className={`flex items-center ${cList[Object.keys(target)[0]]?.inc?.includes(item)
                                                                     ? 'text-gray-500 line-through' : ''}`}
-                                                                onClick={() => { handleCListOption(Object.keys(target)[0], 'inc', index) }}
+                                                                onClick={() => { handleCListOption(Object.keys(target)[0], 'inc', item) }}
                                                             >
                                                                 {setting && JSON.stringify(skills[Object.keys(target)[0]].cal.increase).includes(JSON.stringify(item)) &&
                                                                     <input
                                                                         className="mr-2"
                                                                         type="checkbox"
-                                                                        checked={cList[Object.keys(target)[0]]?.inc?.includes(index)}
+                                                                        checked={cList[Object.keys(target)[0]]?.inc?.includes(item)}
                                                                         onChange={() => { }}
                                                                     />}
                                                                 <span className="ml-1">
@@ -151,15 +151,15 @@ const SkillCustomComponent = ({ skills }) => {
                                                     {item[3] * 100 > 0 && (
                                                         <>
                                                             <span
-                                                                className={`flex items-center ${cList[Object.keys(target)[0]]?.rec?.includes(index)
+                                                                className={`flex items-center ${cList[Object.keys(target)[0]]?.rec?.includes(item)
                                                                     ? 'text-gray-500 line-through' : ''}`}
-                                                                onClick={() => { handleCListOption(Object.keys(target)[0], 'rec', index) }}
+                                                                onClick={() => { handleCListOption(Object.keys(target)[0], 'rec', item) }}
                                                             >
                                                                 {setting && JSON.stringify(skills[Object.keys(target)[0]].cal.recovery).includes(JSON.stringify(item)) &&
                                                                     <input
                                                                         className="mr-2"
                                                                         type="checkbox"
-                                                                        checked={cList[Object.keys(target)[0]]?.rec?.includes(index)}
+                                                                        checked={cList[Object.keys(target)[0]]?.rec?.includes(item)}
                                                                         onChange={() => { }}
                                                                     />}
                                                                 <span className="ml-1">
@@ -190,15 +190,15 @@ const SkillCustomComponent = ({ skills }) => {
                                                     {item[3] * 100 > 0 && (
                                                         <>
                                                             <span
-                                                                className={`flex items-center ${cList[Object.keys(target)[0]]?.red?.includes(index)
+                                                                className={`flex items-center ${cList[Object.keys(target)[0]]?.red?.includes(item)
                                                                     ? 'text-gray-500 line-through' : ''}`}
-                                                                onClick={() => { handleCListOption(Object.keys(target)[0], 'red', index) }}
+                                                                onClick={() => { handleCListOption(Object.keys(target)[0], 'red', item) }}
                                                             >
                                                                 {setting && JSON.stringify(skills[Object.keys(target)[0]].cal.reduce).includes(JSON.stringify(item)) &&
                                                                     <input
                                                                         className="mr-2"
                                                                         type="checkbox"
-                                                                        checked={cList[Object.keys(target)[0]]?.red?.includes(index)}
+                                                                        checked={cList[Object.keys(target)[0]]?.red?.includes(item)}
                                                                         onChange={() => { }}
                                                                     />}
                                                                 <span className="ml-1">

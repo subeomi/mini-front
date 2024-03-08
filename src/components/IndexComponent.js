@@ -58,9 +58,11 @@ const IndexComponent = () => {
         nav(`/search?${searchParams}`);
     }
 
+    console.log(recentSearch)
+
     return (
-        <div>
-            <div className="w-[500] bg-white">
+        <div className="flex justify-center">
+            <div className="w-[500px] h-[300px] bg-white">
 
                 <div className="flex justify-center">
                     <input
@@ -85,7 +87,7 @@ const IndexComponent = () => {
                         {recentSearch.map((item, index) => (
                             <div className="py-1 px-3 text-[14px] bg-gray-100 flex mx-1 relative" key={index}>
                                 <span>
-                                    {item.keyword}
+                                    {item}
                                 </span>
                                 <button
                                     className='w-4 h-4 bg-white rounded-full flex items-center justify-center absolute right-[-8px] top-[-9px]'

@@ -60,9 +60,11 @@ export function handleTargetCoolTime(name, list, skillObj, skills) {
     const obj = skillObj[name];
     const org = skills[name];
 
-    const inc = obj.cal.increase.filter((_, index) => !list[name]?.inc?.includes(index));
-    const rec = obj.cal.recovery.filter((_, index) => !list[name]?.rec?.includes(index));
-    const red = obj.cal.reduce.filter((_, index) => !list[name]?.red?.includes(index));
+    const inc = obj.cal.increase.filter(incItem => !list[name]?.inc?.some(listItem => JSON.stringify(listItem) === JSON.stringify(incItem)));
+    const rec = obj.cal.recovery.filter(recItem => !list[name]?.rec?.some(listItem => JSON.stringify(listItem) === JSON.stringify(recItem)));
+    const red = obj.cal.reduce.filter(redItem => !list[name]?.red?.some(listItem => JSON.stringify(listItem) === JSON.stringify(redItem)));
+
+    console.log(inc, rec, red)
 
     obj.cal.increase = inc
     obj.cal.recovery = rec
