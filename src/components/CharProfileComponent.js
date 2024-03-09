@@ -3,14 +3,14 @@ import { transServerId } from "../common/globalFunction";
 const CharProfileComponent = ({ data, serverId, custom, setCustom }) => {
     return (
         <>
-            <div className="flex relative p-2">
-                <img className="border-2 rounded-lg border-slate-700"
+            <div className="flex relative p-2 text-white">
+                <img className="border-2 rounded-lg border-[rgb(23,27,36)]"
                     src={`https://img-api.neople.co.kr/df/servers/${serverId}/characters/${data.characterId}?zoom=1`} />
                 <span className="ml-2">
-                    <span className="font-bold text-[18px]">{data.characterName}</span>
-                    <p className="text-[14px]">{data.jobGrowName}</p>
+                    <span className="block font-bold text-[18px] my-2">{data.characterName}</span>
+                    <span className="block text-[14px]">{data.jobGrowName}</span>
                     <span>{transServerId(serverId)}</span>
-                    <span className="flex items-center">
+                    <span className="block flex items-center">
                         <span>{data.adventureName}</span>
                         <i id="v-s"></i>
                         <span>{data.guildName}</span>

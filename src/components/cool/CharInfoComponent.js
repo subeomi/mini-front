@@ -58,7 +58,7 @@ const CharInfoComponent = () => {
             {info.equipment && (
                 <>
                     <div name="equip"
-                        className="w-[1000px] bg-gray-200">
+                        className="w-[1000px]">
                         <CharProfileComponent custom={custom} setCustom={setCustom} serverId={profile.serverId} data={info.data}></CharProfileComponent>
                         {renderComponent()}
                     </div>

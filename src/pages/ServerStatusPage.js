@@ -10,14 +10,14 @@ const ServerStatusPage = () => {
     console.log(loc)
 
     return (
-        <>
+        <div className="bg-[rgb(23,27,36)]">
             <BaseNav></BaseNav>
-            <div className="flex justify-center items-center font-bold">
+            <div className="flex justify-center items-center font-bold ">
                 {msg === 'DNF_SYSTEM_INSPECT' && (
                     <InspectComponent></InspectComponent>
                 )}
             </div>
-        </>
+        </div>
     );
 }
 

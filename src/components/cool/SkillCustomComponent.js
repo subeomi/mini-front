@@ -266,7 +266,7 @@ const SkillCustomComponent = ({ skills }) => {
                 }
 
             </div>
-            <div className="w-[45%] right-0 absolute">
+            <div className="w-[45%] right-0 absolute text-white">
                 <span className="pb-2">스킬 정보</span>
                 <Tooltip text="횟수: 40초 동안 해당 스킬만 사용했을 때">
                     <button className='w-5 h-5 bg-gray-500 rounded-full flex items-center justify-center mx-1' type="button">
@@ -274,13 +274,14 @@ const SkillCustomComponent = ({ skills }) => {
                     </button>
                 </Tooltip>
                 <div className="my-2">
-                    {skillObj && Object.keys(skillObj).reverse().map(skillName => {
+                    {skillObj && Object.keys(skillObj).reverse().map((skillName, index) => {
                         if (skillName === 'math') return;
                         const skill = skillObj[skillName];
                         return (
                             <div
-                                className={`cursor-pointer hover:bg-gray-200
-                                ${Object.keys(target).includes(skillName) && 'bg-gray-200 font-bold'}
+                                className={`cursor-pointer hover:bg-[rgb(80,121,179)] bg-[rgb(35,41,50)] mb-1 p-1
+                                ${Object.keys(target).includes(skillName) && 'bg-[rgb(20,100,210)] font-bold'}
+                                ${index % 2 === 0 && 'bg-[rgb(40,50,57)]'}
                                 `}
                                 onClick={() => {
                                     setTarget({ [skillName]: skill });
@@ -291,7 +292,7 @@ const SkillCustomComponent = ({ skills }) => {
                                 <div className="flex justify-between">
                                     <span>
                                         <span>{skillName}</span>
-                                        <span className="ml-[5px]">{Math.ceil(40 / (skill.skillCoolTime + (skillCastingTime[skillName] || 0)))}회</span>
+                                        <span className="ml-[5px]">{skill.count}회</span>
                                         {/* <span className="ml-[5px]">Lv{skill.skillLevel}</span> */}
 
                                     </span>

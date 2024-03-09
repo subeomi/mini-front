@@ -3,12 +3,12 @@ import Tooltip from "../../common/item/ToolTip";
 const EquipAndSkilsComponent = ({ skills, equipment }) => {
     return (
         <>
-            <div className="flex relative">
-                <div className="w-[45%]">
-                    <p className="pb-2">장착 장비</p>
-                    {equipment.length > 0 && equipment.map(equip => (
+            <div className="flex relative text-white">
+                <div className="w-[45%] border-4 border-[rgb(23,27,36)]">
+                    <p className="pb-2 pl-2 font-bold">장착 장비</p>
+                    {equipment.length > 0 && equipment.map((equip, index) => (
                         <div key={equip.itemId}
-                            className="flex items-center h-min-[50px]"
+                            className={`flex items-center h-min-[50px] mb-1 pt-1 bg-[rgb(35,41,50)] ${index % 2 === 0 && 'bg-[rgb(40,50,57)]'}`}
                         >
                             <p className="w-[64px] items-center justify-center flex mx-1">{equip.slotName}</p>
                             <span>
@@ -52,9 +52,9 @@ const EquipAndSkilsComponent = ({ skills, equipment }) => {
                         </div>
                     ))}
                 </div>
-                <div className="w-[45%] right-0 absolute">
+                <div className="w-[45%] right-0 absolute text-white h-full">
                     <div className="flex items-center">
-                        <span className="">스킬 정보</span>
+                        <span className="font-bold">스킬 정보</span>
                         <Tooltip text="횟수: 40초 동안 해당 스킬만 사용했을 때">
                             <button className='w-5 h-5 bg-gray-500 rounded-full flex items-center justify-center mx-1' type="button">
                                 <span className="text-white text-sm">?</span>
@@ -62,11 +62,11 @@ const EquipAndSkilsComponent = ({ skills, equipment }) => {
                         </Tooltip>
                     </div>
                     <div className="my-2">
-                        {skills && Object.keys(skills).reverse().map(skillName => {
+                        {skills && Object.keys(skills).reverse().map((skillName, index) => {
                             if (skillName === 'math') return;
                             const skill = skills[skillName];
                             return (
-                                <div key={skill.skillId}>
+                                <div key={skill.skillId} className={`bg-[rgb(35,41,50)] mb-1 p-1 ${index % 2 === 0 && 'bg-[rgb(40,50,57)]'}`}>
                                     <div className="flex justify-between">
                                         <span>
                                             <span>{skillName}</span>
