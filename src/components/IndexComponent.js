@@ -26,12 +26,12 @@ const IndexComponent = () => {
         setRecentSearch(recent);
     }
 
-    const addSearchHistory = (keyword) => {
+    const addSearchHistory = (search) => {
         let recent = getSearchHistory();
 
-        recent = recent.filter(item => item.keyword !== keyword.keyword);
+        recent = recent.filter(item => item.type !== search.type || item.keyword !== search.keyword);
 
-        recent.unshift(keyword);
+        recent.unshift(search);
 
         if (recent.length > 10) {
             recent = recent.slice(0, 10);
@@ -54,7 +54,12 @@ const IndexComponent = () => {
 
     const goSearch = () => {
         const searchParams = createSearchParams({ type: search.type, keyword: search.keyword }).toString();
-        addSearchHistory(search.keyword);
+        addSearchHistory(search);
+        nav(`/search?${searchParams}`);
+    }
+
+    const goRecent = (item) => {
+        const searchParams = createSearchParams({ type: item.type, keyword: item.keyword }).toString();
         nav(`/search?${searchParams}`);
     }
 
@@ -68,7 +73,7 @@ const IndexComponent = () => {
                     <input
                         type="text"
                         className="border-2 p-2"
-                        value={search.keyword}
+                        value={search.keyword || ''}
                         placeholder="캐릭터명"
                         onChange={e => {
                             setSearch({ ...search, keyword: e.target.value });
@@ -83,15 +88,22 @@ const IndexComponent = () => {
                     </div>
                 </div>
                 {recentSearch.length > 0 &&
-                    <div className="w-[500px] m-4 flex justify-center">
+                    <div className="m-4 flex justify-center items-center">
                         {recentSearch.map((item, index) => (
-                            <div className="py-1 px-3 text-[14px] bg-gray-100 flex mx-1 relative" key={index}>
+                            <div
+                                className="py-1 px-3 text-[14px] bg-gray-100 flex mx-2 relative cursor-pointer"
+                                key={index}
+                                onClick={() => goRecent(item)}
+                            >
                                 <span>
-                                    {item}
+                                    {item.keyword}
                                 </span>
                                 <button
                                     className='w-4 h-4 bg-white rounded-full flex items-center justify-center absolute right-[-8px] top-[-9px]'
-                                    onClick={() => deleteSearchHistory(index)}
+                                    onClick={(e) => {
+                                        deleteSearchHistory(index);
+                                        e.stopPropagation();
+                                    }}
                                 >
                                     <span className="block text-gray-500 text-sm">×</span>
                                 </button>

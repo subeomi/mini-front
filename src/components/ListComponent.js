@@ -22,21 +22,12 @@ const ListComponent = () => {
         return search ? JSON.parse(search) : [];
     }
 
-    const deleteSearchHistory = (index) => {
+    const addSearchHistory = (search) => {
         let recent = getSearchHistory();
 
-        recent.splice(index, 1);
+        recent = recent.filter(item => item.type !== search.type || item.keyword !== search.keyword);
 
-        localStorage.setItem('search.History', JSON.stringify(recent));
-        setRecentSearch(recent);
-    }
-
-    const addSearchHistory = (keyword) => {
-        let recent = getSearchHistory();
-
-        recent = recent.filter(item => item.characterName !== keyword.characterName);
-
-        recent.unshift(keyword);
+        recent.unshift(search);
 
         if (recent.length > 10) {
             recent = recent.slice(0, 10);
@@ -48,7 +39,7 @@ const ListComponent = () => {
 
     const goSearch = () => {
         const searchParams = createSearchParams({ type: search.type, keyword: search.keyword }).toString();
-        addSearchHistory(search.keyword);
+        addSearchHistory(search);
         nav(`/search?${searchParams}`);
     }
 
@@ -88,13 +79,12 @@ const ListComponent = () => {
         const characterId = searchParams.get("keyword");
 
         setSearch({ characterName: characterId });
-
         searchCool({ characterName: characterId });
 
     }, [location.search])
 
-    console.log(search);
-    console.log(charList);
+    // console.log('search: ', search);
+    // console.log(charList);
 
     return (
         <div className="flex justify-center">
@@ -104,10 +94,10 @@ const ListComponent = () => {
                     <input
                         type="text"
                         className="border-2 p-2"
-                        value={search.characterName}
+                        value={search.keyword || ''}
                         placeholder="캐릭터명"
                         onChange={e => {
-                            setSearch({ ...search, characterName: e.target.value });
+                            setSearch({ ...search, keyword: e.target.value });
                         }}
                         onKeyDown={handleOnEnter}
                     ></input>

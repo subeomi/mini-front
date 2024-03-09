@@ -58,7 +58,6 @@ function calSkillCustomCT(cal) {
 export function handleTargetCoolTime(name, list, skillObj, skills) {
 
     const obj = skillObj[name];
-    const org = skills[name];
 
     const inc = obj.cal.increase.filter(incItem => !list[name]?.inc?.some(listItem => JSON.stringify(listItem) === JSON.stringify(incItem)));
     const rec = obj.cal.recovery.filter(recItem => !list[name]?.rec?.some(listItem => JSON.stringify(listItem) === JSON.stringify(recItem)));

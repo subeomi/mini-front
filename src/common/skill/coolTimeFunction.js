@@ -213,7 +213,8 @@ export function findCharSkill(s) {
                                 'castingTime': skill.castingTime,
                                 'consumeValue': skill.consumeValue,
                                 'cal': {},
-                                'defaultCoolTime': skill.coolTime
+                                'defaultCoolTime': skill.coolTime,
+                                'maxCnt': Math.ceil(40 / (skill.coolTime / stackName[s] * 0.3 + (skillCastingTime[skill.name] || 0)))
                             };
                             return;
                         }
@@ -228,7 +229,8 @@ export function findCharSkill(s) {
                     'castingTime': skill.castingTime,
                     'consumeValue': skill.consumeValue,
                     'cal': {},
-                    'defaultCoolTime': skill.coolTime
+                    'defaultCoolTime': skill.coolTime,
+                    'maxCnt': Math.ceil(40 / (skill.coolTime * 0.3 + (skillCastingTime[skill.name] || 0)))
                 };
 
                 // creator가 true이고 skill에 type 속성이 없을 때만 type 속성을 추가합니다.

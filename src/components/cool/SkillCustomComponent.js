@@ -97,16 +97,28 @@ const SkillCustomComponent = ({ skills }) => {
                                     {parseFloat(((1 - new Function('return ' + target?.[Object.keys(target)[0]]?.cal?.calMath)()) * 100).toFixed(1))}% 감소됨
                                 </span>
                             </span>
+                            <div className="font-bold">
+                                횟수
+                                <span className={`${target?.[Object.keys(target)[0]]?.count === skills?.[Object.keys(target)[0]]?.maxCnt && 'text-red-600'}`}>
+                                    {target?.[Object.keys(target)[0]]?.count}
+                                </span>
+                                /
+                                <span className="text-red-600">
+                                    {skills?.[Object.keys(target)[0]]?.maxCnt}
+                                </span>
+                                회
+                            </div>
                             <div className="mt-2">
                                 {(skills?.[Object.keys(target)[0]]?.cal?.increase?.length > 0 ||
                                     target?.[Object.keys(target)[0]]?.cal?.increase?.length > 0) && (
                                         <>
-                                            <div className="text-[18px] flex items-center">
+                                            <div className="text-[18px] h-[39px] flex items-center">
                                                 <span className="font-bold text-red-700">쿨타임 증가</span>
                                                 <span className="pl-1 font-bold">{getTargetIncrease(target, 'inc')}</span>
-                                                <span className="pl-1 text-[26px] font-bold"
-                                                    onClick={() => { listModal(target.requiredLevel, 'inc') }}
-                                                >+</span>
+                                                {setting &&
+                                                    <span className="pl-1 text-[24px] font-bold cursor-pointer"
+                                                        onClick={() => { listModal(target.requiredLevel, 'inc') }}
+                                                    >+</span>}
                                             </div>
                                             {skills[Object.keys(target)[0]].cal.increase.map((item, index) => (
                                                 <div key={index} className="pl-2">
@@ -139,12 +151,13 @@ const SkillCustomComponent = ({ skills }) => {
                                 {(skills?.[Object.keys(target)[0]]?.cal?.recovery?.length > 0 ||
                                     target?.[Object.keys(target)[0]]?.cal?.recovery?.length > 0) && (
                                         <>
-                                            <div className="text-[18px]">
+                                            <div className="text-[18px] h-[39px] flex items-center">
                                                 <span className="font-bold text-lime-700">쿨타임 회복 속도 증가</span>
                                                 <span className="pl-1 font-bold">{getTargetIncrease(target, 'rec')}</span>
-                                                <span className="pl-1 text-[26px] font-bold"
-                                                    onClick={() => { listModal(target.requiredLevel, 'rec') }}
-                                                >+</span>
+                                                {setting &&
+                                                    <span className="pl-1 text-[26px] font-bold cursor-pointer"
+                                                        onClick={() => { listModal(target.requiredLevel, 'rec') }}
+                                                    >+</span>}
                                             </div>
                                             {skills[Object.keys(target)[0]].cal.recovery.map((item, index) => (
                                                 <div key={index} className="pl-2">
@@ -178,12 +191,13 @@ const SkillCustomComponent = ({ skills }) => {
                                 {(skills?.[Object.keys(target)[0]]?.cal?.reduce?.length > 0 ||
                                     target?.[Object.keys(target)[0]]?.cal?.reduce?.length > 0) && (
                                         <>
-                                            <div className="text-[18px]">
+                                            <div className="text-[18px] h-[39px] flex items-center">
                                                 <span className="font-bold text-sky-700">쿨타임 감소</span>
                                                 <span className="pl-1 font-bold">{getTargetIncrease(target, 'red')}</span>
-                                                <span className="pl-1 text-[26px] font-bold"
-                                                    onClick={() => { listModal(target.requiredLevel, 'red') }}
-                                                >+</span>
+                                                {setting &&
+                                                    <span className="pl-1 text-[26px] font-bold cursor-pointer"
+                                                        onClick={() => { listModal(target.requiredLevel, 'red') }}
+                                                    >+</span>}
                                             </div>
                                             {skills[Object.keys(target)[0]].cal.reduce.map((item, index) => (
                                                 <div key={index} className="pl-2">
