@@ -210,10 +210,11 @@ export function findCharSkill(s) {
                                 'skillId': skill.skillId,
                                 'skillCoolTime': skill.coolTime / stackName[s],
                                 'skillLevel': skill.level,
-                                'castingTime': skill.castingTime,
+                                'castingTime': skillCastingTime[skill.name] || 0,
                                 'consumeValue': skill.consumeValue,
                                 'cal': {},
                                 'defaultCoolTime': skill.coolTime,
+                                'castingCoolTime': skill.coolTime + (skillCastingTime[skill.name] || 0),
                                 'maxCnt': Math.ceil(40 / (skill.coolTime / stackName[s] * 0.3 + (skillCastingTime[skill.name] || 0)))
                             };
                             return;
@@ -226,10 +227,11 @@ export function findCharSkill(s) {
                     'skillId': skill.skillId,
                     'skillCoolTime': skill.coolTime,
                     'skillLevel': skill.level,
-                    'castingTime': skill.castingTime,
+                    'castingTime': skillCastingTime[skill.name] || 0,
                     'consumeValue': skill.consumeValue,
                     'cal': {},
                     'defaultCoolTime': skill.coolTime,
+                    'castingCoolTime': skill.coolTime + (skillCastingTime[skill.name] || 0),
                     'maxCnt': Math.ceil(40 / (skill.coolTime * 0.3 + (skillCastingTime[skill.name] || 0)))
                 };
 
@@ -393,7 +395,7 @@ function calSkillCT(k, s, coolTimeMath) {
                 }
             }
 
-            count += Math.ceil(40 / (result + skillValue.castingTime));
+            count += Math.ceil(40 / (result + (skillCastingTime[skill] || 0)));
 
             // 스택형 탈리스만 {스킬명 : 쿨타임을 나눌 수}
             const stackName = checkStackTalisman(tal);

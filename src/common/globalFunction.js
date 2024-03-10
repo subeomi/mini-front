@@ -157,7 +157,9 @@ export function isBuffInList(b) {
     "약식소환 : 빅대디",
     "약식소환 : 트윙클 아티스트",
     "카리스마",
-    "류심"
+    "류심",
+    "멸!",
+    "갈!"
   ]
 
   return buffs.includes(b);

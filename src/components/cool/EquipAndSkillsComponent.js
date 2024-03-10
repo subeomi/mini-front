@@ -5,7 +5,7 @@ const EquipAndSkilsComponent = ({ skills, equipment }) => {
         <>
             <div className="flex relative text-white">
                 <div className="w-[45%] border-4 border-[rgb(23,27,36)]">
-                    <p className="pb-2 pl-2 font-bold">장착 장비</p>
+                    <p className="pb-2 font-bold">장착 장비</p>
                     {equipment.length > 0 && equipment.map((equip, index) => (
                         <div key={equip.itemId}
                             className={`flex items-center h-min-[50px] mb-1 pt-1 bg-[rgb(35,41,50)] ${index % 2 === 0 && 'bg-[rgb(40,50,57)]'}`}

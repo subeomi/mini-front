@@ -8,13 +8,13 @@ import SkillModalComponent from "./SkillModalComponent";
 
 const SkillCustomComponent = ({ skills }) => {
 
+    const [compareObj, setCompareObj] = useState({});
     const [skillObj, setSkillObj] = useState({});
     const [target, setTarget] = useState({});
     const [setting, setSetting] = useState(false);
     const [cList, setCList] = useState({});
     const [modalInfo, setModalInfo] = useState({ lvl: 0, type: "" });
     const [moreListModal, setMoreListModal] = useState(false);
-    const [addedMoreList, setAddedMoreList] = useState({});
 
     const handleTargetList = (skills) => {
         const result = {};
@@ -74,12 +74,14 @@ const SkillCustomComponent = ({ skills }) => {
         setSkillObj(JSON.parse(JSON.stringify(skills)));
         const handleCList = handleTargetList(skills);
         setCList(handleCList);
+        setCompareObj({ ...skills })
     }, [skills])
 
     console.log('skillObj ', skillObj)
-    console.log('cList: ', cList)
+    // console.log('cList: ', cList)
     console.log('target: ', target)
-    console.log('skills: ', skills)
+    // console.log('skills: ', skills)
+
 
     return (
         <div className="flex relative h-screen">
@@ -88,7 +90,7 @@ const SkillCustomComponent = ({ skills }) => {
             <div className="w-[45%] p-2 mb-10">
                 {
                     isEmptyObject(target) && (
-                        <>
+                        <div className="text-white">
                             <span className="text-[22px] font-bold">
                                 <span>
                                     {Object.keys(target)[0]}
@@ -107,6 +109,14 @@ const SkillCustomComponent = ({ skills }) => {
                                     {skills?.[Object.keys(target)[0]]?.maxCnt}
                                 </span>
                                 회
+                                {skills?.[Object.keys(target)[0]]?.maxCnt > target?.[Object.keys(target)[0]]?.count &&
+                                    <span className="ml-2">다음 횟수까지
+                                        {
+                                            ' ' + (((target?.[Object.keys(target)[0]]?.castingCoolTime - (40 / (target?.[Object.keys(target)[0]]?.count + Number.EPSILON))) / target?.[Object.keys(target)[0]]?.castingCoolTime * 100).toFixed(1) - parseFloat(((1 - new Function('return ' + target?.[Object.keys(target)[0]]?.cal?.calMath)()) * 100).toFixed(1))).toFixed(2)
+                                        }
+                                        %
+                                    </span>
+                                }
                             </div>
                             <div className="mt-2">
                                 {(skills?.[Object.keys(target)[0]]?.cal?.increase?.length > 0 ||
@@ -120,7 +130,7 @@ const SkillCustomComponent = ({ skills }) => {
                                                         onClick={() => { listModal(target.requiredLevel, 'inc') }}
                                                     >+</span>}
                                             </div>
-                                            {skills[Object.keys(target)[0]].cal.increase.map((item, index) => (
+                                            {target[Object.keys(target)[0]].cal.increase.map((item, index) => (
                                                 <div key={index} className="pl-2">
                                                     {item[3] * 100 > 0 && (
                                                         <>
@@ -131,7 +141,7 @@ const SkillCustomComponent = ({ skills }) => {
                                                             >
                                                                 {setting && JSON.stringify(skills[Object.keys(target)[0]].cal.increase).includes(JSON.stringify(item)) &&
                                                                     <input
-                                                                        className="mr-2"
+                                                                        className="mr-2 ml-1"
                                                                         type="checkbox"
                                                                         checked={cList[Object.keys(target)[0]]?.inc?.includes(item)}
                                                                         onChange={() => { }}
@@ -159,7 +169,7 @@ const SkillCustomComponent = ({ skills }) => {
                                                         onClick={() => { listModal(target.requiredLevel, 'rec') }}
                                                     >+</span>}
                                             </div>
-                                            {skills[Object.keys(target)[0]].cal.recovery.map((item, index) => (
+                                            {target[Object.keys(target)[0]].cal.recovery.map((item, index) => (
                                                 <div key={index} className="pl-2">
                                                     {item[3] * 100 > 0 && (
                                                         <>
@@ -170,7 +180,7 @@ const SkillCustomComponent = ({ skills }) => {
                                                             >
                                                                 {setting && JSON.stringify(skills[Object.keys(target)[0]].cal.recovery).includes(JSON.stringify(item)) &&
                                                                     <input
-                                                                        className="mr-2"
+                                                                        className="mr-2 ml-1"
                                                                         type="checkbox"
                                                                         checked={cList[Object.keys(target)[0]]?.rec?.includes(item)}
                                                                         onChange={() => { }}
@@ -199,7 +209,7 @@ const SkillCustomComponent = ({ skills }) => {
                                                         onClick={() => { listModal(target.requiredLevel, 'red') }}
                                                     >+</span>}
                                             </div>
-                                            {skills[Object.keys(target)[0]].cal.reduce.map((item, index) => (
+                                            {target[Object.keys(target)[0]].cal.reduce.map((item, index) => (
                                                 <div key={index} className="pl-2">
                                                     {item[3] * 100 > 0 && (
                                                         <>
@@ -210,7 +220,7 @@ const SkillCustomComponent = ({ skills }) => {
                                                             >
                                                                 {setting && JSON.stringify(skills[Object.keys(target)[0]].cal.reduce).includes(JSON.stringify(item)) &&
                                                                     <input
-                                                                        className="mr-2"
+                                                                        className="mr-2 ml-1"
                                                                         type="checkbox"
                                                                         checked={cList[Object.keys(target)[0]]?.red?.includes(item)}
                                                                         onChange={() => { }}
@@ -258,16 +268,17 @@ const SkillCustomComponent = ({ skills }) => {
                                                 setSetting(!setting)
                                                 const newObj = handleTargetCoolTime(Object.keys(target)[0], cList, skillObj, skills)
                                                 setSkillObj(newObj);
+                                                setTarget({ [Object.keys(target)[0]]: newObj[Object.keys(target)[0]] });
                                             }}>완료버튼</button>}
                                 </div>
                             </div>
-                        </>
+                        </div>
                     )
                 }
 
             </div>
             <div className="w-[45%] right-0 absolute text-white">
-                <span className="pb-2">스킬 정보</span>
+                <span className="pb-2 font-bold">스킬 정보</span>
                 <Tooltip text="횟수: 40초 동안 해당 스킬만 사용했을 때">
                     <button className='w-5 h-5 bg-gray-500 rounded-full flex items-center justify-center mx-1' type="button">
                         <span className="text-white text-sm">?</span>
@@ -279,13 +290,14 @@ const SkillCustomComponent = ({ skills }) => {
                         const skill = skillObj[skillName];
                         return (
                             <div
-                                className={`cursor-pointer hover:bg-[rgb(80,121,179)] bg-[rgb(35,41,50)] mb-1 p-1
-                                ${Object.keys(target).includes(skillName) && 'bg-[rgb(20,100,210)] font-bold'}
-                                ${index % 2 === 0 && 'bg-[rgb(40,50,57)]'}
+                                className={`cursor-pointer hover:bg-sky-600 mb-1 p-1
+                                ${index % 2 === 0 ? 'bg-[rgb(40,50,57)]' : 'bg-[rgb(35,41,50)]'}
+                                ${Object.keys(target).includes(skillName) && 'bg-sky-700 font-bold'}
                                 `}
                                 onClick={() => {
-                                    setTarget({ [skillName]: skill });
-                                    handleMoreCustom(skill);
+                                    setSetting(false);
+                                    const newTarget = JSON.parse(JSON.stringify({ [skillName]: { ...skill } }));
+                                    setTarget(newTarget);
                                 }}
                                 key={skill.skillId}
                             >
@@ -293,8 +305,6 @@ const SkillCustomComponent = ({ skills }) => {
                                     <span>
                                         <span>{skillName}</span>
                                         <span className="ml-[5px]">{skill.count}회</span>
-                                        {/* <span className="ml-[5px]">Lv{skill.skillLevel}</span> */}
-
                                     </span>
                                     <span>
                                         {<span className="ml-[5px]">{skill.skillCoolTime}초</span>}

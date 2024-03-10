@@ -64,8 +64,6 @@ export function handleTargetCoolTime(name, list, skillObj, skills) {
     const rec = obj.cal.recovery.filter(recItem => !list[name]?.rec?.some(listItem => JSON.stringify(listItem) === JSON.stringify(recItem)));
     const red = obj.cal.reduce.filter(redItem => !list[name]?.red?.some(listItem => JSON.stringify(listItem) === JSON.stringify(redItem)));
 
-    console.log(inc, rec, red)
-
     obj.cal.increase = inc
     obj.cal.recovery = rec
     obj.cal.reduce = red
@@ -84,7 +82,7 @@ export function handleTargetCoolTime(name, list, skillObj, skills) {
 // 스킬상세 추가옵션 추가
 export function handleAddElement(name, list, skillObj, type) {
 
-    const obj = skillObj[name];
+    const obj = { ...skillObj[name] };
 
     if (type === 'inc') {
         obj.cal.increase = [...obj.cal.increase, ...list];
@@ -105,9 +103,9 @@ export function handleAddElement(name, list, skillObj, type) {
 
 // 타겟 스킬레벨과 동일한 쿨증 쿨회 쿨감 가져오기
 export function handleMoreCustom(target, type) {
-    console.log('type: ', type)
+    // console.log('type: ', type)
     // type = 'inc' or 'rec' or 'red'
-    const result = {
+    let result = {
         inc: [],
         rec: [],
         red: []
@@ -120,7 +118,7 @@ export function handleMoreCustom(target, type) {
 
     function findMatchingElements(source, targetLevel, bannedItems) {
         return source.filter(item => {
-            // bannedItems에 포함되어 있지 않은 경우에만 필터링
+            // bannedItems에 포함되어 있지 않은 경우에만 필터링 ??
             if (Array.isArray(item[2])) {
                 return item[2].includes(targetLevel) && !bannedItems.includes(item);
             } else if (typeof item[2] === 'number') {
@@ -149,12 +147,32 @@ export function handleMoreCustom(target, type) {
         const matchingRed = findMatchingElements(coolTimeRed[key], target.requiredLevel, ban.red);
         if (matchingRed.length > 0) {
             result.red.push(...matchingRed);
+            // console.log('매치: ', matchingRed)
         }
     });
 
-    // console.log('result: ', result)
+
+    function removeBannedElements(result, ban) {
+        // 각 목록에 대해 반복
+        Object.keys(result).forEach(type => {
+            // 결과 목록에서 금지 목록과 같은 요소 제외
+            result[type] = result[type].filter(resultItem => {
+                // 금지 목록에 해당 요소와 동일한 요소가 없으면 유지
+                return !ban[type].some(bannedItem => isEqual(resultItem, bannedItem));
+            });
+        });
+        return result;
+    }
+
+    // 두 요소가 동일한지 확인하는 함수
+    function isEqual(item1, item2) {
+        return item1[0] === item2[0]; // 여기서는 요소의 첫 번째 값으로만 비교하도록 가정
+    }
+
+    // removeBannedElements 함수 사용 예시
+    result = removeBannedElements(result, ban);
+
     if (type === 'inc') {
-        console.log('result: ', result.inc)
         return result.inc;
     } else if (type === 'rec') {
         return result.rec;
