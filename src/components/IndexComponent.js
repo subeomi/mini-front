@@ -67,13 +67,15 @@ const IndexComponent = () => {
 
     return (
         <div className="flex justify-center">
-            <div className="w-[500px] h-[300px] bg-white">
-
-                <div className="flex justify-center">
+            <div className="w-[500px] h-[300px] mt-14 p-4">
+                <div
+                    className="flex justify-center items-center mt-6 px-4 py-5 border-2 
+                border-[rgb(35,41,50)] hover:border-[rgb(53,65,73)] rounded-md h-12 text-white">
                     <input
                         type="text"
-                        className="border-2 p-2"
+                        className="w-full focus:outline-none bg-transparent cursor-pointer"
                         value={search.keyword || ''}
+                        maxLength="14"
                         placeholder="캐릭터명"
                         onChange={e => {
                             setSearch({ ...search, keyword: e.target.value });
@@ -82,30 +84,30 @@ const IndexComponent = () => {
                     ></input>
                     <div id="searchButton">
                         <button
-                            className="border-2 p-2"
+                            className="h-9 w-9"
                             onClick={goSearch}
                         >버튼</button>
                     </div>
                 </div>
                 {recentSearch.length > 0 &&
-                    <div className="m-4 flex justify-center items-center">
+                    <div className="p-4 flex flex-wrap items-center content-start">
                         {recentSearch.map((item, index) => (
                             <div
-                                className="py-1 px-3 text-[14px] bg-gray-100 flex mx-2 relative cursor-pointer"
+                                className="py-1 px-3 text-[14px] flex mx-2 relative cursor-pointer text-white w-[200px]"
                                 key={index}
                                 onClick={() => goRecent(item)}
                             >
-                                <span>
+                                <span className="overflow-ellipsis">
                                     {item.keyword}
                                 </span>
                                 <button
-                                    className='w-4 h-4 bg-white rounded-full flex items-center justify-center absolute right-[-8px] top-[-9px]'
+                                    className='w-4 h-4 flex items-center justify-center absolute right-[-8px]'
                                     onClick={(e) => {
                                         deleteSearchHistory(index);
                                         e.stopPropagation();
                                     }}
                                 >
-                                    <span className="block text-gray-500 text-sm">×</span>
+                                    <span className="text-gray-100 text-sm">×</span>
                                 </button>
                             </div>
                         ))}

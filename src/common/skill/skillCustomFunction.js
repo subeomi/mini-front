@@ -98,6 +98,8 @@ export function handleAddElement(name, list, skillObj, type) {
         obj.skillCoolTime = obj.defaultCoolTime * 0.3
     }
 
+    obj.count = Math.ceil(40 / (obj.skillCoolTime + (skillCastingTime[name] || 0)));
+
     return skillObj
 }
 

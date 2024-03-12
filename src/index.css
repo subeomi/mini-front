@@ -12,3 +12,7 @@
 .tooltip:hover .tooltip-item {
   visibility: visible;
 }
+
+.body{
+  background-color: #171b24;
+}

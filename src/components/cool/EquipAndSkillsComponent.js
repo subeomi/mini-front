@@ -66,9 +66,9 @@ const EquipAndSkilsComponent = ({ skills, equipment }) => {
                             if (skillName === 'math') return;
                             const skill = skills[skillName];
                             return (
-                                <div key={skill.skillId} className={`bg-[rgb(35,41,50)] mb-1 p-1 ${index % 2 === 0 && 'bg-[rgb(40,50,57)]'}`}>
+                                <div key={skill.skillId} className={`bg-[rgb(35,41,50)] mb-1 p-1 `}>
                                     <div className="flex justify-between">
-                                        <span>
+                                        <span className={`${new Function('return ' + skill.cal.calMath)() <= 0.3 && 'border-b-4 border-[rgb(224,67,67)]'}`}>
                                             <span>{skillName}</span>
                                             <span className="ml-[5px]">{skill.count}회</span>
                                             {/* <span className="ml-[5px]">Lv{skill.skillLevel}</span> */}
@@ -78,14 +78,14 @@ const EquipAndSkilsComponent = ({ skills, equipment }) => {
                                             {<span className="ml-[5px]">{skill.skillCoolTime}초</span>}
                                         </span>
                                     </div>
-                                    {
+                                    {/* {
                                         new Function('return ' + skill.cal.calMath)() <= 0.3 &&
                                         <div>
                                             <span className="text-12 text-red-600 pl-2">
                                                 ! 쿨감 70% 이상
                                             </span>
                                         </div>
-                                    }
+                                    } */}
                                 </div>
                             )
                         })}

@@ -87,14 +87,16 @@ const ListComponent = () => {
     // console.log(charList);
 
     return (
-        <div className="flex justify-center">
-            <div className="w-[1000px] bg-white">
-
-                <div className="flex justify-center">
+        <div className="text-white">
+            <div className="w-[1000px] flex flex-col justify-center">
+                <div
+                    className="flex justify-center items-center mt-6 px-4 py-5 border-2 w-[468px] m-auto my-4
+                border-[rgb(35,41,50)] hover:border-[rgb(53,65,73)] rounded-md h-12 text-white">
                     <input
                         type="text"
-                        className="border-2 p-2"
+                        className="w-full focus:outline-none bg-transparent cursor-pointer"
                         value={search.keyword || ''}
+                        maxLength="14"
                         placeholder="캐릭터명"
                         onChange={e => {
                             setSearch({ ...search, keyword: e.target.value });
@@ -103,17 +105,18 @@ const ListComponent = () => {
                     ></input>
                     <div id="searchButton">
                         <button
-                            className="border-2 p-2"
+                            className="h-9 w-9"
                             onClick={goSearch}
                         >버튼</button>
                     </div>
                 </div>
 
                 <div className="p-2 flex flex-wrap gap-0 justify-center min-h-screen">
-                    {charList && charList.length > 0 && charList.map(char => (
+                    {charList && charList.length > 0 && charList.map((char, index) => (
                         <Link key={char.characterId}
-                            className="w-[220px] h-[340px] bg-white border-2 rounded-xl border-slate-600 m-1 py-[10px] flex flex-col 
-                        justify-center items-center hover:bg-slate-100 cursor-pointer"
+                            className={`bg-[rgb(35,41,50)] w-[210px] h-[340px] rounded-md m-1 py-[10px] flex flex-col 
+                            justify-center items-center hover:bg-[rgb(40,50,57)] cursor-pointer`}
+
                             to={`/character?serverId=${char.serverId}&characterId=${char.characterId}`}>
                             <div>
                                 <img

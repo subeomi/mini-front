@@ -46,7 +46,7 @@ const SkillModalComponent = ({ target, lvl, type, closeModal, addElement }) => {
     }
 
     return (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center backdrop-blur-sm z-50"
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center backdrop-blur-sm z-50 overflow-hidden"
             onClick={closeModal}
         >
             <div className="bg-[rgb(23,27,36)] bg-opacity-90 p-4 shadow-xl border-2 rounded-sm border-gray-950 text-white" onClick={(e) => e.stopPropagation()}>

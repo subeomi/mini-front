@@ -8,7 +8,6 @@ import SkillModalComponent from "./SkillModalComponent";
 
 const SkillCustomComponent = ({ skills }) => {
 
-    const [compareObj, setCompareObj] = useState({});
     const [skillObj, setSkillObj] = useState({});
     const [target, setTarget] = useState({});
     const [setting, setSetting] = useState(false);
@@ -47,6 +46,13 @@ const SkillCustomComponent = ({ skills }) => {
         setMoreListModal(true);
     }
 
+    // 모달 true = 스크롤 잠금, false = 스크롤 유지
+    if (moreListModal) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = 'auto';
+    }
+
     // 체크된 요소의 인덱스번호 추가 제거
     const handleCListOption = (target, type, list) => {
         if (setting) {
@@ -74,13 +80,20 @@ const SkillCustomComponent = ({ skills }) => {
         setSkillObj(JSON.parse(JSON.stringify(skills)));
         const handleCList = handleTargetList(skills);
         setCList(handleCList);
-        setCompareObj({ ...skills })
     }, [skills])
 
     console.log('skillObj ', skillObj)
     // console.log('cList: ', cList)
     console.log('target: ', target)
     // console.log('skills: ', skills)
+
+    const nextCT = () => {
+        const sk = target?.[Object.keys(target)[0]]
+        const skName = Object.keys(target)[0]
+        console.log(((40 / (sk.count + 1)) - 0.01))
+        // return ' ' + Math.ceil(((1 - (40 / sk.count - 0.01) / (sk.castingCoolTime)) * 100) * 100) / 100;
+        return ' ' + ((1 - ((40 / (sk.count + 1)) - 0.01) / (sk.defaultCoolTime + skillCastingTime[skName] * sk.count)) * 100)
+    }
 
 
     return (
@@ -95,24 +108,28 @@ const SkillCustomComponent = ({ skills }) => {
                                 <span>
                                     {Object.keys(target)[0]}
                                 </span>
-                                <span className="pl-1 text-[16px]">
-                                    {parseFloat(((1 - new Function('return ' + target?.[Object.keys(target)[0]]?.cal?.calMath)()) * 100).toFixed(1))}% 감소됨
+                                <span className={`pl-1 text-[16px] ${parseFloat(((1 - new Function('return ' + target?.[Object.keys(target)[0]]?.cal?.calMath)()) * 100).toFixed(1)) > 70 && 'text-red-600'}`}>
+                                    {parseFloat(((1 - new Function('return ' + target?.[Object.keys(target)[0]]?.cal?.calMath)()) * 100).toFixed(1))}%
+                                </span>
+                                <span className="text-[16px]">
+                                    {' 감소됨'}
                                 </span>
                             </span>
                             <div className="font-bold">
                                 횟수
-                                <span className={`${target?.[Object.keys(target)[0]]?.count === skills?.[Object.keys(target)[0]]?.maxCnt && 'text-red-600'}`}>
+                                <span className={`${target?.[Object.keys(target)[0]]?.count === skills?.[Object.keys(target)[0]]?.maxCnt && 'text-[rgb(224,67,67)]'}`}>
                                     {target?.[Object.keys(target)[0]]?.count}
                                 </span>
                                 /
-                                <span className="text-red-600">
+                                <span className="text-[rgb(224,67,67)]">
                                     {skills?.[Object.keys(target)[0]]?.maxCnt}
                                 </span>
                                 회
                                 {skills?.[Object.keys(target)[0]]?.maxCnt > target?.[Object.keys(target)[0]]?.count &&
                                     <span className="ml-2">다음 횟수까지
                                         {
-                                            ' ' + (((target?.[Object.keys(target)[0]]?.castingCoolTime - (40 / (target?.[Object.keys(target)[0]]?.count + Number.EPSILON))) / target?.[Object.keys(target)[0]]?.castingCoolTime * 100).toFixed(1) - parseFloat(((1 - new Function('return ' + target?.[Object.keys(target)[0]]?.cal?.calMath)()) * 100).toFixed(1))).toFixed(2)
+                                            // ' ' + (((target?.[Object.keys(target)[0]]?.castingCoolTime - (40 / (target?.[Object.keys(target)[0]]?.count + Number.EPSILON))) / target?.[Object.keys(target)[0]]?.castingCoolTime * 100).toFixed(1) - parseFloat(((1 - new Function('return ' + target?.[Object.keys(target)[0]]?.cal?.calMath)()) * 100).toFixed(1))).toFixed(2)
+                                            nextCT()
                                         }
                                         %
                                     </span>
@@ -123,7 +140,7 @@ const SkillCustomComponent = ({ skills }) => {
                                     target?.[Object.keys(target)[0]]?.cal?.increase?.length > 0) && (
                                         <>
                                             <div className="text-[18px] h-[39px] flex items-center">
-                                                <span className="font-bold text-red-700">쿨타임 증가</span>
+                                                <span className="font-bold text-[rgb(224,67,67)]">쿨타임 증가</span>
                                                 <span className="pl-1 font-bold">{getTargetIncrease(target, 'inc')}</span>
                                                 {setting &&
                                                     <span className="pl-1 text-[24px] font-bold cursor-pointer"
@@ -162,7 +179,7 @@ const SkillCustomComponent = ({ skills }) => {
                                     target?.[Object.keys(target)[0]]?.cal?.recovery?.length > 0) && (
                                         <>
                                             <div className="text-[18px] h-[39px] flex items-center">
-                                                <span className="font-bold text-lime-700">쿨타임 회복 속도 증가</span>
+                                                <span className="font-bold text-[rgb(147,184,95)]">쿨타임 회복 속도 증가</span>
                                                 <span className="pl-1 font-bold">{getTargetIncrease(target, 'rec')}</span>
                                                 {setting &&
                                                     <span className="pl-1 text-[26px] font-bold cursor-pointer"
@@ -202,7 +219,7 @@ const SkillCustomComponent = ({ skills }) => {
                                     target?.[Object.keys(target)[0]]?.cal?.reduce?.length > 0) && (
                                         <>
                                             <div className="text-[18px] h-[39px] flex items-center">
-                                                <span className="font-bold text-sky-700">쿨타임 감소</span>
+                                                <span className="font-bold text-[rgb(90,189,216)]">쿨타임 감소</span>
                                                 <span className="pl-1 font-bold">{getTargetIncrease(target, 'red')}</span>
                                                 {setting &&
                                                     <span className="pl-1 text-[26px] font-bold cursor-pointer"
@@ -290,9 +307,9 @@ const SkillCustomComponent = ({ skills }) => {
                         const skill = skillObj[skillName];
                         return (
                             <div
-                                className={`cursor-pointer hover:bg-sky-600 mb-1 p-1
+                                className={`cursor-pointer hover:bg-cyan-800 mb-1 p-1
                                 ${index % 2 === 0 ? 'bg-[rgb(40,50,57)]' : 'bg-[rgb(35,41,50)]'}
-                                ${Object.keys(target).includes(skillName) && 'bg-sky-700 font-bold'}
+                                ${Object.keys(target).includes(skillName) && 'bg-cyan-900 font-bold'}
                                 `}
                                 onClick={() => {
                                     setSetting(false);
@@ -302,7 +319,7 @@ const SkillCustomComponent = ({ skills }) => {
                                 key={skill.skillId}
                             >
                                 <div className="flex justify-between">
-                                    <span>
+                                    <span className={`${new Function('return ' + skill.cal.calMath)() <= 0.3 && 'border-b-4 border-[rgb(224,67,67)]'}`}>
                                         <span>{skillName}</span>
                                         <span className="ml-[5px]">{skill.count}회</span>
                                     </span>
@@ -310,14 +327,14 @@ const SkillCustomComponent = ({ skills }) => {
                                         {<span className="ml-[5px]">{skill.skillCoolTime}초</span>}
                                     </span>
                                 </div>
-                                {
+                                {/* {
                                     new Function('return ' + skill.cal.calMath)() <= 0.3 &&
                                     <div>
                                         <span className="text-12 text-red-600 pl-2">
                                             ! 쿨감 70% 이상
                                         </span>
                                     </div>
-                                }
+                                } */}
                             </div>
                         )
                     })}
