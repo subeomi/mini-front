@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { getCharProfile } from "../../api/dnfAPI";
 import { isBuffInList, transServerId } from "../../common/globalFunction";
 import { calOtherMath, checkAvatarSkillLvl, checkCommandCoolTime, checkCoolTimeNomalGear, checkCoolTimeOptions, checkCoolTimeRunes, checkCoolTimeTalisman, checkJobCoolTime, checkStackSkill, checkStackTalisman, checkTraitCoolTime, setCharMath, findWeaponCoolTime, isSummonerNotCommandSkill, calSkillCT, findCharSkill, } from "../../common/skill/coolTimeFunction";
@@ -14,6 +14,7 @@ const initState = {
 
 const CharInfoComponent = () => {
 
+    const nav = useNavigate();
     const location = useLocation();
     const [info, setInfo] = useState({});
     const [profile, setProfile] = useState(initState);
@@ -32,6 +33,10 @@ const CharInfoComponent = () => {
         setProfile({ serverId: serverId, characterId: characterId })
 
         getCharProfile(serverId, characterId).then(data => {
+            if (data.data.message === 'DNF_SYSTEM_INSPECT') {
+                nav('/server', { state: { message: 'DNF_SYSTEM_INSPECT' } });
+            }
+
             setInfo(data.data);
         })
     }, [location.search]);
