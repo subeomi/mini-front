@@ -53,8 +53,10 @@ const ListComponent = () => {
 
         setTimeout(() => {
             getCharList(k).then(data => {
-                if (data.data.massege === 'DNF_SYSTEM_INSPECT') {
+                console.log('data: ',data)
+                if (data.data.message === 'DNF_SYSTEM_INSPECT') {
                     nav('/server', { state: { message: 'DNF_SYSTEM_INSPECT' } });
+                    console.log('서버다운')
                 }
 
                 setCharList(data.data.rows);
