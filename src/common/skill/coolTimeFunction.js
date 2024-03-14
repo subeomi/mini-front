@@ -76,6 +76,10 @@ export function setCharMath(s) {
                 const result = checkCoolTimeOptions(equip.duskyIslandOption.options[0]?.explainDetail, "융합" + equip.slotName);
 
                 if (result) eArr.push(result);
+            } else if (equip.asrahanOption) {
+                const result = checkCoolTimeOptions(equip.asrahanOption.options[0]?.explainDetail, "융합" + equip.slotName);
+
+                if (result) eArr.push(result);
             }
         })
 
