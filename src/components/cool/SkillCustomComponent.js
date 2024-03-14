@@ -90,8 +90,8 @@ const SkillCustomComponent = ({ skills }) => {
     const nextCT = () => {
         const sk = target?.[Object.keys(target)[0]]
         const skName = Object.keys(target)[0]
-        console.log(((40 / (sk.count + 1)) - 0.01))
-        return ' ' + ((1 - ((40 / sk.count - 0.01) / (sk.defaultCoolTime + skillCastingTime[skName] * (sk.count + 1)))) * 100).toFixed(2)
+        console.log(((40 / (sk.count + 1)) - 0.01), (sk.defaultCoolTime + (skillCastingTime[skName] || 0) * (sk.count + 1)))
+        return ' ' + ((1 - ((40 / sk.count - 0.01) / (sk.defaultCoolTime + (skillCastingTime[skName] || 0) * (sk.count + 1)))) * 100).toFixed(2)
     }
 
 
