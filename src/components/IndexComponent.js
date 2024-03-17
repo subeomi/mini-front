@@ -60,6 +60,7 @@ const IndexComponent = () => {
 
     const goRecent = (item) => {
         const searchParams = createSearchParams({ type: item.type, keyword: item.keyword }).toString();
+        addSearchHistory(item);
         nav(`/search?${searchParams}`);
     }
 
@@ -90,7 +91,7 @@ const IndexComponent = () => {
                     </div>
                 </div>
                 {recentSearch.length > 0 &&
-                    <div className="p-4 flex flex-wrap items-center content-start">
+                    <div className="p-4 flex flex-wrap items-center content-start bg-[rgb(35,41,50)] mt-4 rounded-md">
                         {recentSearch.map((item, index) => (
                             <div
                                 className="py-1 px-3 text-[14px] flex mx-2 relative cursor-pointer text-white w-[200px]"

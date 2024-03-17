@@ -125,7 +125,7 @@ const SkillCustomComponent = ({ skills }) => {
                                 </span>
                                 회
                                 {skills?.[Object.keys(target)[0]]?.maxCnt > target?.[Object.keys(target)[0]]?.count &&
-                                    <span className="ml-2">다음 횟수까지
+                                    <span className="ml-2">다음 횟수
                                         {
                                             // ' ' + (((target?.[Object.keys(target)[0]]?.castingCoolTime - (40 / (target?.[Object.keys(target)[0]]?.count + Number.EPSILON))) / target?.[Object.keys(target)[0]]?.castingCoolTime * 100).toFixed(1) - parseFloat(((1 - new Function('return ' + target?.[Object.keys(target)[0]]?.cal?.calMath)()) * 100).toFixed(1))).toFixed(2)
                                             nextCT()
@@ -155,7 +155,8 @@ const SkillCustomComponent = ({ skills }) => {
                                                                     ? 'text-gray-500 line-through' : ''}`}
                                                                 onClick={() => { handleCListOption(Object.keys(target)[0], 'inc', item) }}
                                                             >
-                                                                {setting && JSON.stringify(skills[Object.keys(target)[0]].cal.increase).includes(JSON.stringify(item)) &&
+                                                                {setting && 
+                                                                // JSON.stringify(skills[Object.keys(target)[0]].cal.increase).includes(JSON.stringify(item)) &&
                                                                     <input
                                                                         className="mr-2 ml-1"
                                                                         type="checkbox"
@@ -194,7 +195,8 @@ const SkillCustomComponent = ({ skills }) => {
                                                                     ? 'text-gray-500 line-through' : ''}`}
                                                                 onClick={() => { handleCListOption(Object.keys(target)[0], 'rec', item) }}
                                                             >
-                                                                {setting && JSON.stringify(skills[Object.keys(target)[0]].cal.recovery).includes(JSON.stringify(item)) &&
+                                                                {setting && 
+                                                                // JSON.stringify(skills[Object.keys(target)[0]].cal.recovery).includes(JSON.stringify(item)) &&
                                                                     <input
                                                                         className="mr-2 ml-1"
                                                                         type="checkbox"
@@ -234,7 +236,8 @@ const SkillCustomComponent = ({ skills }) => {
                                                                     ? 'text-gray-500 line-through' : ''}`}
                                                                 onClick={() => { handleCListOption(Object.keys(target)[0], 'red', item) }}
                                                             >
-                                                                {setting && JSON.stringify(skills[Object.keys(target)[0]].cal.reduce).includes(JSON.stringify(item)) &&
+                                                                {setting && 
+                                                                // JSON.stringify(skills[Object.keys(target)[0]].cal.reduce).includes(JSON.stringify(item)) &&
                                                                     <input
                                                                         className="mr-2 ml-1"
                                                                         type="checkbox"
@@ -306,7 +309,7 @@ const SkillCustomComponent = ({ skills }) => {
                         const skill = skillObj[skillName];
                         return (
                             <div
-                                className={`cursor-pointer hover:bg-cyan-800 mb-1 p-1
+                                className={`cursor-pointer hover:bg-cyan-800 mb-1 py-1 px-3
                                 ${index % 2 === 0 ? 'bg-[rgb(40,50,57)]' : 'bg-[rgb(35,41,50)]'}
                                 ${Object.keys(target).includes(skillName) && 'bg-cyan-900 font-bold'}
                                 `}
@@ -318,9 +321,11 @@ const SkillCustomComponent = ({ skills }) => {
                                 key={skill.skillId}
                             >
                                 <div className="flex justify-between">
-                                    <span className={`${new Function('return ' + skill.cal.calMath)() <= 0.3 && 'border-b-4 border-[rgb(224,67,67)]'}`}>
+                                    <span 
+                                    // className={`${new Function('return ' + skill.cal.calMath)() <= 0.3 && 'border-b-4 border-[rgb(224,67,67)]'}`}
+                                    >
                                         <span>{skillName}</span>
-                                        <span className="ml-[5px]">{skill.count}회</span>
+                                        <span className={`ml-[5px] ${skill.count === skill.maxCnt && 'text-[rgb(224,67,67)] font-bold'}`}>{skill.count}</span>회
                                     </span>
                                     <span>
                                         {<span className="ml-[5px]">{skill.skillCoolTime}초</span>}

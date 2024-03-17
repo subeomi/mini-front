@@ -3,9 +3,11 @@ import { transServerId } from "../common/globalFunction";
 const CharProfileComponent = ({ data, serverId, custom, setCustom }) => {
     return (
         <div>
-            <div className="flex relative p-2 text-white">
+            <div className="flex relative text-white mb-10 p-2 overflow-hidden">
+
                 <img className="border-2 rounded-lg border-[rgb(23,27,36)]"
                     src={`https://img-api.neople.co.kr/df/servers/${serverId}/characters/${data.characterId}?zoom=1`} />
+
                 <div className="ml-2 flex flex-col">
                     <span className="font-bold text-[18px] my-2">{data.characterName}</span>
                     <span className="text-[14px]">{data.jobGrowName}</span>

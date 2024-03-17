@@ -4,7 +4,7 @@ const EquipAndSkilsComponent = ({ skills, equipment }) => {
     return (
         <>
             <div className="flex relative text-white">
-                <div className="w-[45%] border-4 border-[rgb(23,27,36)]">
+                <div className="w-[45%] p-2">
                     <p className="pb-2 font-bold">장착 장비</p>
                     {equipment.length > 0 && equipment.map((equip, index) => (
                         <div key={equip.itemId}
@@ -52,7 +52,7 @@ const EquipAndSkilsComponent = ({ skills, equipment }) => {
                         </div>
                     ))}
                 </div>
-                <div className="w-[45%] right-0 absolute text-white h-full">
+                <div className="w-[45%] p-2 right-0 absolute text-white h-full">
                     <div className="flex items-center">
                         <span className="font-bold">스킬 정보</span>
                         <Tooltip text="횟수: 40초 동안 해당 스킬만 사용했을 때">
@@ -66,11 +66,13 @@ const EquipAndSkilsComponent = ({ skills, equipment }) => {
                             if (skillName === 'math') return;
                             const skill = skills[skillName];
                             return (
-                                <div key={skill.skillId} className={`bg-[rgb(35,41,50)] mb-1 p-1 `}>
+                                <div key={skill.skillId} className={`bg-[rgb(35,41,50)] mb-1 py-1 px-3`}>
                                     <div className="flex justify-between">
-                                        <span className={`${new Function('return ' + skill.cal.calMath)() <= 0.3 && 'border-b-4 border-[rgb(224,67,67)]'}`}>
+                                        <span 
+                                        // className={`${new Function('return ' + skill.cal.calMath)() <= 0.3 && 'border-b-4 border-[rgb(224,67,67)]'}`}
+                                        >
                                             <span>{skillName}</span>
-                                            <span className="ml-[5px]">{skill.count}회</span>
+                                            <span className={`ml-[5px] ${skill.count === skill.maxCnt && 'text-[rgb(224,67,67)] font-bold'}`}>{skill.count}</span>회
                                             {/* <span className="ml-[5px]">Lv{skill.skillLevel}</span> */}
 
                                         </span>

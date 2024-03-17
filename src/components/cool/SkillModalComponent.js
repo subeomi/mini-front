@@ -46,36 +46,38 @@ const SkillModalComponent = ({ target, lvl, type, closeModal, addElement }) => {
     }
 
     return (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center backdrop-blur-sm z-50 overflow-hidden"
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center backdrop-blur-sm z-10"
             onClick={closeModal}
         >
             <div className="bg-[rgb(23,27,36)] bg-opacity-90 p-4 shadow-xl border-2 rounded-sm border-gray-950 text-white" onClick={(e) => e.stopPropagation()}>
                 <div className="text-6xl self-center mr-2 flex items-center">
                     <h2 className="text-2xl font-bold mb-2">{isType()} 옵션 추가</h2>
                 </div>
-                {moreList.length > 0 && moreList.map((item, index) => (
-                    <div
-                        className={`flex items-center justify-between w-[350px] p-2 text-white bg-[rgb(35,41,50)] 
+                <div className="overflow-y-auto max-h-[60vh]">
+                    {moreList.length > 0 && moreList.map((item, index) => (
+                        <div
+                            className={`flex items-center justify-between w-[350px] p-2 text-white bg-[rgb(35,41,50)]
                         ${index % 2 === 0 && 'bg-[rgb(40,50,57)]'}`}
-                        key={index}>
-                        <Tooltip text={item[0].split(/<br>/g).map(text => (<p key={text}>{text}</p>))}>
-                            <span>
-                                {item[1]} - {(item[3] * 100)}%
-                            </span>
-                        </Tooltip>
+                            key={index}>
+                            <Tooltip text={item[0].split(/<br>/g).map(text => (<p key={text}>{text}</p>))}>
+                                <span>
+                                    {item[1]} - {(item[3] * 100)}%
+                                </span>
+                            </Tooltip>
 
-                        <div>
-                            {addEle?.includes(item) &&
-                                <button className="mr-1" onClick={() => handleAddEle(item)}>
-                                    제거
+                            <div>
+                                {addEle?.includes(item) &&
+                                    <button className="mr-1" onClick={() => handleAddEle(item)}>
+                                        취소
+                                    </button>
+                                }
+                                <button className="" onClick={() => handleAddEle(item)}>
+                                    추가
                                 </button>
-                            }
-                            <button className="" onClick={() => handleAddEle(item)}>
-                                추가
-                            </button>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
                 <div className="flex justify-end">
                     <button
                         className="close-button mt-4 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
