@@ -56,7 +56,7 @@ const EquipAndSkilsComponent = ({ skills, equipment }) => {
                     <div className="flex items-center">
                         <span className="font-bold">스킬 정보</span>
                         <Tooltip text="횟수: 40초 동안 해당 스킬만 사용했을 때">
-                            <button className='w-5 h-5 bg-gray-500 rounded-full flex items-center justify-center mx-1' type="button">
+                            <button className='w-5 h-5 bg-[rgb(40,50,57)] rounded-full flex items-center justify-center mx-1' type="button">
                                 <span className="text-white text-sm">?</span>
                             </button>
                         </Tooltip>
