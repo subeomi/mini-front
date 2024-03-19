@@ -6,6 +6,7 @@ import { calOtherMath, checkAvatarSkillLvl, checkCommandCoolTime, checkCoolTimeN
 import CharProfileComponent from "../CharProfileComponent";
 import EquipAndSkilsComponent from "./EquipAndSkillsComponent";
 import SkillCustomComponent from "./SkillCustomComponent";
+import CharTitlecomponent from "../CharTitleComponent";
 
 const initState = {
     serverId: "",
@@ -64,7 +65,8 @@ const CharInfoComponent = () => {
                 <>
                     <div name="equip"
                         className="w-[1000px]">
-                        <CharProfileComponent custom={custom} setCustom={setCustom} serverId={profile.serverId} data={info.data}></CharProfileComponent>
+
+                        <CharProfileComponent title={info.title} custom={custom} setCustom={setCustom} serverId={profile.serverId} data={info.data}></CharProfileComponent>
                         {renderComponent()}
                     </div>
                 </>

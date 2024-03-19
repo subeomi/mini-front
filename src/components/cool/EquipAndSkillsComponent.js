@@ -18,19 +18,19 @@ const EquipAndSkilsComponent = ({ skills, equipment }) => {
                                         <img src={`https://img-api.neople.co.kr/df/items/${equip.upgradeInfo.itemId}`} />
                                     )}
                                     {!equip.upgradeInfo && (
-                                        <span className="w-[28px]"></span>
+                                        <span className="w-[28px] h-[21px]"></span>
                                     )}
                                 </span>
-                                <span className="flex items-center">
-                                    <p className={equip.amplificationName !== null ? 'text-[#FF00FF] flex justify-center w-[28px]' : ''}>+{equip.reinforce}</p>
+                                <span className="flex items-center justify-center">
+                                    <p className={`text-[14px] flex justify-center w-[28px] h-[21px] ${equip.amplificationName !== null ? 'text-[#FF00FF]' : ''}`}>+{equip.reinforce}</p>
                                     {equip.fixedOption && (
-                                        <span className="text-[#BE8700] text-[14px] justify-center flex w-[28px]">Lv{equip.fixedOption.level}</span>
+                                        <span className="text-[#df9f3f] text-[14px] justify-center flex w-[28px] h-[21px]">Lv{equip.fixedOption.level}</span>
                                     )}
                                     {equip.customOption && (
-                                        <span className="text-[#BE8700] text-[14px] justify-center flex w-[28px]">Lv{equip.customOption.level}</span>
+                                        <span className="text-[#df9f3f] text-[14px] justify-center flex w-[28px] h-[21px]">Lv{equip.customOption.level}</span>
                                     )}
                                     {!(equip.fixedOption || equip.customOption) && (
-                                        <span className="w-[28px]"></span>
+                                        <span className="w-[28px] h-[21px]"></span>
                                     )}
                                 </span>
                             </span>
@@ -66,7 +66,7 @@ const EquipAndSkilsComponent = ({ skills, equipment }) => {
                             if (skillName === 'math') return;
                             const skill = skills[skillName];
                             return (
-                                <div key={skill.skillId} className={`bg-[rgb(35,41,50)] mb-1 py-1 px-3`}>
+                                <div key={skill.skillId} className={`bg-[rgb(35,41,50)] border-[rgb(35,41,50)] border-2 mb-1 py-1 px-3`}>
                                     <div className="flex justify-between">
                                         <span 
                                         // className={`${new Function('return ' + skill.cal.calMath)() <= 0.3 && 'border-b-4 border-[rgb(224,67,67)]'}`}

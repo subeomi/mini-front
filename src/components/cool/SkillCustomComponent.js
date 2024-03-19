@@ -135,125 +135,116 @@ const SkillCustomComponent = ({ skills }) => {
                                 }
                             </div>
                             <div className="mt-2">
-                                {(skills?.[Object.keys(target)[0]]?.cal?.increase?.length > 0 ||
-                                    target?.[Object.keys(target)[0]]?.cal?.increase?.length > 0) && (
-                                        <>
-                                            <div className="text-[18px] h-[39px] flex items-center">
-                                                <span className="font-bold text-[rgb(224,67,67)]">쿨타임 증가</span>
-                                                <span className="pl-1 font-bold">{getTargetIncrease(target, 'inc')}</span>
-                                                {setting &&
-                                                    <span className="pl-1 text-[24px] font-bold cursor-pointer"
-                                                        onClick={() => { listModal(target.requiredLevel, 'inc') }}
-                                                    >+</span>}
-                                            </div>
-                                            {target[Object.keys(target)[0]].cal.increase.map((item, index) => (
-                                                <div key={index} className="pl-2">
-                                                    {item[3] * 100 > 0 && (
-                                                        <>
-                                                            <span
-                                                                className={`flex items-center ${cList[Object.keys(target)[0]]?.inc?.includes(item)
-                                                                    ? 'text-gray-500 line-through' : ''}`}
-                                                                onClick={() => { handleCListOption(Object.keys(target)[0], 'inc', item) }}
-                                                            >
-                                                                {setting && 
-                                                                // JSON.stringify(skills[Object.keys(target)[0]].cal.increase).includes(JSON.stringify(item)) &&
-                                                                    <input
-                                                                        className="mr-2 ml-1"
-                                                                        type="checkbox"
-                                                                        checked={cList[Object.keys(target)[0]]?.inc?.includes(item)}
-                                                                        onChange={() => { }}
-                                                                    />}
-                                                                <span className="ml-1">
-                                                                    {item[1]} - {(item[3] * 100)}%
-                                                                </span>
-                                                            </span>
-                                                        </>
-                                                    )}
-                                                </div>
-                                            ))}
-                                        </>
-                                    )}
+                                <>
+                                    <div className="text-[18px] h-[39px] flex items-center">
+                                        <span className="font-bold text-[rgb(224,67,67)]">쿨타임 증가</span>
+                                        <span className="pl-1 font-bold">{getTargetIncrease(target, 'inc')}</span>
+                                        {setting &&
+                                            <span className="pl-1 text-[24px] font-bold cursor-pointer"
+                                                onClick={() => { listModal(target.requiredLevel, 'inc') }}
+                                            >+</span>}
+                                    </div>
+                                    {target[Object.keys(target)[0]].cal.increase.map((item, index) => (
+                                        <div key={index} className="pl-2">
+                                            {item[3] * 100 > 0 && (
+                                                <>
+                                                    <span
+                                                        className={`flex items-center ${cList[Object.keys(target)[0]]?.inc?.includes(item)
+                                                            ? 'text-gray-500 line-through' : ''}`}
+                                                        onClick={() => { handleCListOption(Object.keys(target)[0], 'inc', item) }}
+                                                    >
+                                                        {setting &&
+                                                            // JSON.stringify(skills[Object.keys(target)[0]].cal.increase).includes(JSON.stringify(item)) &&
+                                                            <input
+                                                                className="mr-2 ml-1"
+                                                                type="checkbox"
+                                                                checked={cList[Object.keys(target)[0]]?.inc?.includes(item)}
+                                                                onChange={() => { }}
+                                                            />}
+                                                        <span className="ml-1">
+                                                            {item[1]} - {(item[3] * 100)}%
+                                                        </span>
+                                                    </span>
+                                                </>
+                                            )}
+                                        </div>
+                                    ))}
+                                </>
                             </div>
                             <div>
-                                {(skills?.[Object.keys(target)[0]]?.cal?.recovery?.length > 0 ||
-                                    target?.[Object.keys(target)[0]]?.cal?.recovery?.length > 0) && (
-                                        <>
-                                            <div className="text-[18px] h-[39px] flex items-center">
-                                                <span className="font-bold text-[rgb(147,184,95)]">쿨타임 회복 속도 증가</span>
-                                                <span className="pl-1 font-bold">{getTargetIncrease(target, 'rec')}</span>
-                                                {setting &&
-                                                    <span className="pl-1 text-[26px] font-bold cursor-pointer"
-                                                        onClick={() => { listModal(target.requiredLevel, 'rec') }}
-                                                    >+</span>}
-                                            </div>
-                                            {target[Object.keys(target)[0]].cal.recovery.map((item, index) => (
-                                                <div key={index} className="pl-2">
-                                                    {item[3] * 100 > 0 && (
-                                                        <>
-                                                            <span
-                                                                className={`flex items-center ${cList[Object.keys(target)[0]]?.rec?.includes(item)
-                                                                    ? 'text-gray-500 line-through' : ''}`}
-                                                                onClick={() => { handleCListOption(Object.keys(target)[0], 'rec', item) }}
-                                                            >
-                                                                {setting && 
-                                                                // JSON.stringify(skills[Object.keys(target)[0]].cal.recovery).includes(JSON.stringify(item)) &&
-                                                                    <input
-                                                                        className="mr-2 ml-1"
-                                                                        type="checkbox"
-                                                                        checked={cList[Object.keys(target)[0]]?.rec?.includes(item)}
-                                                                        onChange={() => { }}
-                                                                    />}
-                                                                <span className="ml-1">
-                                                                    {item[1]} - {(item[3] * 100)}%
-                                                                </span>
-                                                            </span>
-                                                        </>
-                                                    )}
-                                                </div>
-                                            ))}
-                                            { }
-                                        </>
-                                    )}
+                                <>
+                                    <div className="text-[18px] h-[39px] flex items-center">
+                                        <span className="font-bold text-[rgb(147,184,95)]">쿨타임 회복 속도 증가</span>
+                                        <span className="pl-1 font-bold">{getTargetIncrease(target, 'rec')}</span>
+                                        {setting &&
+                                            <span className="pl-1 text-[26px] font-bold cursor-pointer"
+                                                onClick={() => { listModal(target.requiredLevel, 'rec') }}
+                                            >+</span>}
+                                    </div>
+                                    {target[Object.keys(target)[0]].cal.recovery.map((item, index) => (
+                                        <div key={index} className="pl-2">
+                                            {item[3] * 100 > 0 && (
+                                                <>
+                                                    <span
+                                                        className={`flex items-center ${cList[Object.keys(target)[0]]?.rec?.includes(item)
+                                                            ? 'text-gray-500 line-through' : ''}`}
+                                                        onClick={() => { handleCListOption(Object.keys(target)[0], 'rec', item) }}
+                                                    >
+                                                        {setting &&
+                                                            // JSON.stringify(skills[Object.keys(target)[0]].cal.recovery).includes(JSON.stringify(item)) &&
+                                                            <input
+                                                                className="mr-2 ml-1"
+                                                                type="checkbox"
+                                                                checked={cList[Object.keys(target)[0]]?.rec?.includes(item)}
+                                                                onChange={() => { }}
+                                                            />}
+                                                        <span className="ml-1">
+                                                            {item[1]} - {(item[3] * 100)}%
+                                                        </span>
+                                                    </span>
+                                                </>
+                                            )}
+                                        </div>
+                                    ))}
+                                    { }
+                                </>
                             </div>
                             <div>
-                                {(skills?.[Object.keys(target)[0]]?.cal?.reduce?.length > 0 ||
-                                    target?.[Object.keys(target)[0]]?.cal?.reduce?.length > 0) && (
-                                        <>
-                                            <div className="text-[18px] h-[39px] flex items-center">
-                                                <span className="font-bold text-[rgb(90,189,216)]">쿨타임 감소</span>
-                                                <span className="pl-1 font-bold">{getTargetIncrease(target, 'red')}</span>
-                                                {setting &&
-                                                    <span className="pl-1 text-[26px] font-bold cursor-pointer"
-                                                        onClick={() => { listModal(target.requiredLevel, 'red') }}
-                                                    >+</span>}
-                                            </div>
-                                            {target[Object.keys(target)[0]].cal.reduce.map((item, index) => (
-                                                <div key={index} className="pl-2">
-                                                    {item[3] * 100 > 0 && (
-                                                        <>
-                                                            <span
-                                                                className={`flex items-center ${cList[Object.keys(target)[0]]?.red?.includes(item)
-                                                                    ? 'text-gray-500 line-through' : ''}`}
-                                                                onClick={() => { handleCListOption(Object.keys(target)[0], 'red', item) }}
-                                                            >
-                                                                {setting && 
-                                                                // JSON.stringify(skills[Object.keys(target)[0]].cal.reduce).includes(JSON.stringify(item)) &&
-                                                                    <input
-                                                                        className="mr-2 ml-1"
-                                                                        type="checkbox"
-                                                                        checked={cList[Object.keys(target)[0]]?.red?.includes(item)}
-                                                                        onChange={() => { }}
-                                                                    />}
-                                                                <span className="ml-1">
-                                                                    {item[1]} - {(item[3] * 100)}%
-                                                                </span>
-                                                            </span>
-                                                        </>
-                                                    )}
-                                                </div>
-                                            ))}
-                                        </>
-                                    )}
+                                <>
+                                    <div className="text-[18px] h-[39px] flex items-center">
+                                        <span className="font-bold text-[rgb(90,189,216)]">쿨타임 감소</span>
+                                        <span className="pl-1 font-bold">{getTargetIncrease(target, 'red')}</span>
+                                        {setting &&
+                                            <span className="pl-1 text-[26px] font-bold cursor-pointer"
+                                                onClick={() => { listModal(target.requiredLevel, 'red') }}
+                                            >+</span>}
+                                    </div>
+                                    {target[Object.keys(target)[0]].cal.reduce.map((item, index) => (
+                                        <div key={index} className="pl-2">
+                                            {item[3] * 100 > 0 && (
+                                                <>
+                                                    <span
+                                                        className={`flex items-center ${cList[Object.keys(target)[0]]?.red?.includes(item)
+                                                            ? 'text-gray-500 line-through' : ''}`}
+                                                        onClick={() => { handleCListOption(Object.keys(target)[0], 'red', item) }}
+                                                    >
+                                                        {setting &&
+                                                            // JSON.stringify(skills[Object.keys(target)[0]].cal.reduce).includes(JSON.stringify(item)) &&
+                                                            <input
+                                                                className="mr-2 ml-1"
+                                                                type="checkbox"
+                                                                checked={cList[Object.keys(target)[0]]?.red?.includes(item)}
+                                                                onChange={() => { }}
+                                                            />}
+                                                        <span className="ml-1">
+                                                            {item[1]} - {(item[3] * 100)}%
+                                                        </span>
+                                                    </span>
+                                                </>
+                                            )}
+                                        </div>
+                                    ))}
+                                </>
                             </div>
                             <div className="flex justify-between w-full">
                                 <div></div>
@@ -309,9 +300,9 @@ const SkillCustomComponent = ({ skills }) => {
                         const skill = skillObj[skillName];
                         return (
                             <div
-                                className={`cursor-pointer hover:bg-cyan-800 mb-1 py-1 px-3
-                                ${index % 2 === 0 ? 'bg-[rgb(40,50,57)]' : 'bg-[rgb(35,41,50)]'}
-                                ${Object.keys(target).includes(skillName) && 'bg-cyan-900 font-bold'}
+                                className={`cursor-pointer hover:bg-[rgb(23,27,36)] mb-1 py-1 px-3 border-2
+                                ${index % 2 === 0 ? 'bg-[rgb(40,50,57)] border-[rgb(40,50,57)]' : 'bg-[rgb(35,41,50)] border-[rgb(35,41,50)]'}
+                                ${Object.keys(target).includes(skillName) && 'bg-[#171b24] font-bold'}
                                 `}
                                 onClick={() => {
                                     setSetting(false);
@@ -321,7 +312,7 @@ const SkillCustomComponent = ({ skills }) => {
                                 key={skill.skillId}
                             >
                                 <div className="flex justify-between">
-                                    <span 
+                                    <span
                                     // className={`${new Function('return ' + skill.cal.calMath)() <= 0.3 && 'border-b-4 border-[rgb(224,67,67)]'}`}
                                     >
                                         <span>{skillName}</span>

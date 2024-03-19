@@ -11,7 +11,7 @@ const BaseNav = () => {
                     <span className="text-[24px]">
                         DFCOOL
                     </span>
-                    <span className="text-[12px] ml-2">BETA</span>
+                    <span className="text-[12px] ml-2">TEST</span>
                 </Link>
             </div>
         </div>
