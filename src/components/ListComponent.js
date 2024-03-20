@@ -135,7 +135,7 @@ const ListComponent = () => {
                             </span>
                             <span className="flex items-center">
                                 <p className="text-[14px]">명성</p>
-                                <p className="text-[#3392ff] ml-[5px]">{char.fame}</p>
+                                <p className="text-[#3392ff] ml-[5px]">{char.fame || 0}</p>
                             </span>
                         </Link>
                     ))}
