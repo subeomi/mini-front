@@ -16,3 +16,8 @@
 .body{
   background-color: #171b24;
 }
+
+.grid {
+  grid-template-columns: repeat(14, 30px);
+  grid-template-rows: repeat(16, 50px);
+}

@@ -53,6 +53,9 @@ const EquipAndSkilsComponent = ({ skills, equipment }) => {
                     ))}
                 </div>
                 <div className="w-[45%] p-2 right-0 absolute text-white h-full">
+                    <div>
+
+                    </div>
                     <div className="flex items-center">
                         <span className="font-bold">스킬 정보</span>
                         <Tooltip text="횟수: 40초 동안 해당 스킬만 사용했을 때">
@@ -68,7 +71,7 @@ const EquipAndSkilsComponent = ({ skills, equipment }) => {
                             return (
                                 <div key={skill.skillId} className={`bg-[rgb(35,41,50)] border-[rgb(35,41,50)] border-2 mb-1 py-1 px-3`}>
                                     <div className="flex justify-between">
-                                        <span 
+                                        <span
                                         // className={`${new Function('return ' + skill.cal.calMath)() <= 0.3 && 'border-b-4 border-[rgb(224,67,67)]'}`}
                                         >
                                             <span>{skillName}</span>

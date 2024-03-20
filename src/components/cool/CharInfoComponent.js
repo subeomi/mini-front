@@ -7,6 +7,7 @@ import CharProfileComponent from "../CharProfileComponent";
 import EquipAndSkilsComponent from "./EquipAndSkillsComponent";
 import SkillCustomComponent from "./SkillCustomComponent";
 import CharTitlecomponent from "../CharTitleComponent";
+import SkilltreeComponent from "./SkilltreeComponent";
 
 const initState = {
     serverId: "",
@@ -20,7 +21,7 @@ const CharInfoComponent = () => {
     const [info, setInfo] = useState({});
     const [profile, setProfile] = useState(initState);
     const [skills, setSkills] = useState({});
-    const [custom, setCustom] = useState(false);
+    const [custom, setCustom] = useState('equip');
 
     useEffect(() => {
 
@@ -52,10 +53,12 @@ const CharInfoComponent = () => {
     console.log('skills: ', skills);
 
     const renderComponent = () => {
-        if (custom) {
+        if (custom === 'custom') {
             return <SkillCustomComponent skills={skills}></SkillCustomComponent>;
-        } else {
+        } else if(custom === 'equip') {
             return <EquipAndSkilsComponent equipment={info.equipment.equipment} skills={skills}></EquipAndSkilsComponent>;
+        } else if(custom === 'skilltree'){
+            return <SkilltreeComponent skills={info.originSkill}></SkilltreeComponent>;
         }
     };
 

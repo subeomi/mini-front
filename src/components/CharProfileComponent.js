@@ -27,7 +27,7 @@ const CharProfileComponent = ({ data, serverId, custom, setCustom, title }) => {
                 </div>
                 <div className="absolute bottom-3 left-[220px] bg-[rgb(40,50,57)] p-1 rounded-3xl text-gray-600">
                     <button
-                        onClick={() => setCustom(false)}
+                        onClick={() => setCustom('equip')}
                         className={`inline-flex items-center py-2 px-3 rounded-3xl
                     ${custom ? '' : 'bg-[rgb(35,41,50)] text-white'}
                     `}
@@ -36,7 +36,16 @@ const CharProfileComponent = ({ data, serverId, custom, setCustom, title }) => {
                     </button>
 
                     <button
-                        onClick={() => setCustom(true)}
+                        onClick={() => setCustom('skilltree')}
+                        className={`inline-flex items-center py-2 px-3 rounded-3xl
+                    ${custom ? 'bg-[rgb(35,41,50)] text-white' : ''}
+                    `}
+                    >
+                        스킬트리
+                    </button>
+
+                    <button
+                        onClick={() => setCustom('custom')}
                         className={`inline-flex items-center py-2 px-3 rounded-3xl
                     ${custom ? 'bg-[rgb(35,41,50)] text-white' : ''}
                     `}
