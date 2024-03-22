@@ -5,8 +5,9 @@ import Tooltip from "../../common/item/ToolTip";
 import { lv105ItemId } from "../../common/itemInfo";
 import { skillCastingTime } from "../../common/skillInfo";
 import SkillModalComponent from "./SkillModalComponent";
+import { coolTimeRed } from "../../common/skill/itemCoolTimeInfo";
 
-const SkillCustomComponent = ({ skills }) => {
+const SkillCustomComponent = ({ skills, jobName }) => {
 
     const [skillObj, setSkillObj] = useState({});
     const [target, setTarget] = useState({});
@@ -90,7 +91,7 @@ const SkillCustomComponent = ({ skills }) => {
     const nextCT = () => {
         const sk = target?.[Object.keys(target)[0]]
         const skName = Object.keys(target)[0]
-        console.log(((40 / (sk.count + 1)) - 0.01), (sk.defaultCoolTime + (skillCastingTime[skName] || 0) * (sk.count + 1)))
+        // console.log(((40 / (sk.count + 1)) - 0.01), (sk.defaultCoolTime + (skillCastingTime[skName] || 0) * (sk.count + 1)))
         return ' ' + ((1 - ((40 / sk.count - 0.01) / (sk.defaultCoolTime + (skillCastingTime[skName] || 0) * (sk.count + 1)))) * 100).toFixed(2)
     }
 
@@ -98,7 +99,9 @@ const SkillCustomComponent = ({ skills }) => {
     return (
         <div className="flex relative h-screen">
             {moreListModal &&
-                <SkillModalComponent target={target} lvl={modalInfo.lvl} type={modalInfo.type} closeModal={closeModal} addElement={addElement} />}
+                <SkillModalComponent
+                    target={target} lvl={modalInfo.lvl} type={modalInfo.type} closeModal={closeModal}
+                    addElement={addElement} jobName={jobName} />}
             <div className="w-[45%] p-2 mb-10">
                 {
                     isEmptyObject(target) && (
@@ -237,7 +240,7 @@ const SkillCustomComponent = ({ skills }) => {
                                                                 onChange={() => { }}
                                                             />}
                                                         <span className="ml-1">
-                                                            {item[1]} - {(item[3] * 100)}%
+                                                            {item[1]} - {Math.floor((item[3] * 100))}%
                                                         </span>
                                                     </span>
                                                 </>
@@ -302,8 +305,8 @@ const SkillCustomComponent = ({ skills }) => {
                             <div
                                 className={`cursor-pointer hover:bg-[rgb(23,27,36)] mb-1 py-1 px-3 border-2
                                 ${index % 2 === 0 ? 'bg-[rgb(40,50,57)] border-[rgb(40,50,57)]' : 'bg-[rgb(35,41,50)] border-[rgb(35,41,50)]'}
-                                ${Object.keys(target).includes(skillName) && 'bg-[#171b24] font-bold'}
                                 `}
+                                style={Object.keys(target).includes(skillName) ? { backgroundColor: '#171b24', fontWeight: 'bold' } : {}}
                                 onClick={() => {
                                     setSetting(false);
                                     const newTarget = JSON.parse(JSON.stringify({ [skillName]: { ...skill } }));

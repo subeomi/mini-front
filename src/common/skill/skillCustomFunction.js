@@ -1,5 +1,5 @@
 import { skillCastingTime } from "../skillInfo";
-import { coolTimeInc, coolTimeRec, coolTimeRed } from "./itemCoolTimeInfo";
+import { coolTimeInc, coolTimeRec, coolTimeRed, coolTimeRedJob } from "./itemCoolTimeInfo";
 
 
 export function getTargetIncrease(t, type) {
@@ -104,9 +104,8 @@ export function handleAddElement(name, list, skillObj, type) {
 }
 
 // 타겟 스킬레벨과 동일한 쿨증 쿨회 쿨감 가져오기
-export function handleMoreCustom(target, type) {
-    // console.log('type: ', type)
-    // type = 'inc' or 'rec' or 'red'
+export function handleMoreCustom(target, type, jobName) {
+
     let result = {
         inc: [],
         rec: [],
@@ -149,9 +148,17 @@ export function handleMoreCustom(target, type) {
         const matchingRed = findMatchingElements(coolTimeRed[key], target.requiredLevel, ban.red);
         if (matchingRed.length > 0) {
             result.red.push(...matchingRed);
-            // console.log('매치: ', matchingRed)
         }
     });
+
+    if (coolTimeRedJob[jobName]) {
+        const matchingRed = findMatchingElements(coolTimeRedJob[jobName], target.requiredLevel, ban.red);
+        if (matchingRed.length > 0) {
+            result.red.push(...matchingRed);
+        }
+    }
+
+    console.log(result.red)
 
 
     function removeBannedElements(result, ban) {
@@ -168,7 +175,7 @@ export function handleMoreCustom(target, type) {
 
     // 두 요소가 동일한지 확인하는 함수
     function isEqual(item1, item2) {
-        return item1[0] === item2[0]; // 여기서는 요소의 첫 번째 값으로만 비교하도록 가정
+        return item1[0] === item2[0] && item1[1] === item2[1];
     }
 
     // removeBannedElements 함수 사용 예시

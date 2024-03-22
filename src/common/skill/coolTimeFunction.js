@@ -960,12 +960,12 @@ const jobCoolTimeMap = {
     '아처': {
         '眞 뮤즈': (i) => { },
         '眞 트래블러': (i) => {
-            return i.skill?.passive?.map(s => {
-                if (s.name === "셋 업 : 섬공") {
-                    // return { 'reduce': ['쿨타임 10% 감소', s.name, '헤이즈 스톰', 0.1] }
-                    return { 'reduce': ['쿨타임 10% 감소', s.name, '셋 업 : 불꽃놀이', 0.1] }
-                }
-            }).filter(Boolean);
+            // return i.skill?.passive?.map(s => {
+            //     if (s.name === "셋 업 : 섬공") {
+            //         // return { 'reduce': ['쿨타임 10% 감소', s.name, '헤이즈 스톰', 0.1] }
+            //         return { 'reduce': ['쿨타임 10% 감소', s.name, '셋 업 : 불꽃놀이', 0.1] }
+            //     }
+            // }).filter(Boolean);
         },
         '眞 헌터': (i) => { },
         '眞 비질란테': (i) => { }

@@ -54,11 +54,11 @@ const CharInfoComponent = () => {
 
     const renderComponent = () => {
         if (custom === 'custom') {
-            return <SkillCustomComponent skills={skills}></SkillCustomComponent>;
-        } else if(custom === 'equip') {
+            return <SkillCustomComponent skills={skills} jobName={info.data.jobGrowName}></SkillCustomComponent>;
+        } else if (custom === 'equip') {
             return <EquipAndSkilsComponent equipment={info.equipment.equipment} skills={skills}></EquipAndSkilsComponent>;
-        } else if(custom === 'skilltree'){
-            return <SkilltreeComponent skills={info.originSkill}></SkilltreeComponent>;
+        } else if (custom === 'skilltree') {
+            return <SkilltreeComponent skills={info.originSkill} jobSkill={info.jobSkill.skills} jobName={info.data.jobGrowName}></SkilltreeComponent>;
         }
     };
 

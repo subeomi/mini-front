@@ -20,6 +20,8 @@ const coolTimeIncTalisman = {};
 const coolTimeRedTrait = {};
 const coolTimeIncTrait = {};
 
+const coolTimeRedJob = {};
+
 // 쿨타임 감소
 coolTimeRed['상의'] = [
     ['95Lv 스킬 쿨타임 20% 감소', '딥 다이버 슈트', 95, 0.2],
@@ -597,8 +599,13 @@ coolTimeRedTalisman['태풍의 눈'] = ['스택형 탈리스만', '탈리스만'
 // 장비 특성
 coolTimeRedTrait['[명상]'] = ['스킬 쿨타임 10% 감소', '장비특성', 'all', 0.1];
 
+// 직업별 선택쿨감
+coolTimeRedJob['眞 트래블러'] = [
+    ['스킬 쿨타임 10% 감소', '셋 업 : 섬공', 'all', 0.1]
+];
+
 export {
     coolTimeRed, coolTimeRec, coolTimeInc, nomalGearCoolTimeRed, nomalGearCoolTimeRec, nomalGearCoolTimeInc,
     coolTimeRedRunes, coolTimeIncRunes, coolTimeRedWeapons, coolTimeIncWeapons, coolTimeRedTalisman, coolTimeIncTalisman,
-    coolTimeRecTalisman, coolTimeRedTrait
+    coolTimeRecTalisman, coolTimeRedTrait, coolTimeRedJob
 }

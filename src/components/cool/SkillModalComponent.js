@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { handleMoreCustom } from "../../common/skill/skillCustomFunction";
 import Tooltip from "../../common/item/ToolTip";
 
-const SkillModalComponent = ({ target, lvl, type, closeModal, addElement }) => {
+const SkillModalComponent = ({ target, lvl, type, closeModal, addElement, jobName }) => {
 
 
     const [moreList, setMoerList] = useState([]);
@@ -25,7 +25,7 @@ const SkillModalComponent = ({ target, lvl, type, closeModal, addElement }) => {
 
     useEffect(() => {
         if (target) {
-            const list = handleMoreCustom(target, type);
+            const list = handleMoreCustom(target, type, jobName);
             setMoerList(list);
             console.log(target, "target")
         }
