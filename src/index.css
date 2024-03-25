@@ -13,11 +13,34 @@
   visibility: visible;
 }
 
-.body{
+.body {
   background-color: #171b24;
 }
 
-.grid {
-  grid-template-columns: repeat(14, 30px);
+/* .grid {
+  grid-template-columns: repeat(14, 32px);
   grid-template-rows: repeat(16, 50px);
+} */
+
+:root {
+  --cat1: rgb(40, 50, 57);
+  --cat2: rgb(35, 41, 50);
+  --cat3: rgb(29, 34, 43);
+  --cat4: rgb(23, 27, 36);
+}
+
+.bg-cat1 {
+  background-color: var(--cat1);
+}
+
+.bg-cat2 {
+  background-color: var(--cat2);
+}
+
+.bg-cat3 {
+  background-color: var(--cat3);
+}
+
+.bg-cat4 {
+  background-color: var(--cat4);
 }

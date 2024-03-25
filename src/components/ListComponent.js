@@ -84,7 +84,7 @@ const ListComponent = () => {
     }, [location.search])
 
     // console.log('search: ', search);
-    // console.log(charList);
+    console.log(charList);
 
     return (
         <div className="text-white">

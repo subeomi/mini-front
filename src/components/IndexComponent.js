@@ -94,7 +94,7 @@ const IndexComponent = () => {
                     <div className="p-4 flex flex-wrap items-center content-start bg-[rgb(35,41,50)] mt-4 rounded-md">
                         {recentSearch.map((item, index) => (
                             <div
-                                className="py-1 px-3 text-[14px] flex mx-2 relative cursor-pointer text-white w-[200px]"
+                                className="py-2 px-3 text-[14px] flex mx-2 relative cursor-pointer text-white w-[200px]"
                                 key={index}
                                 onClick={() => goRecent(item)}
                             >

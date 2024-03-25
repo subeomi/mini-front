@@ -58,12 +58,13 @@ const CharInfoComponent = () => {
         } else if (custom === 'equip') {
             return <EquipAndSkilsComponent equipment={info.equipment.equipment} skills={skills}></EquipAndSkilsComponent>;
         } else if (custom === 'skilltree') {
-            return <SkilltreeComponent skills={info.originSkill} jobSkill={info.jobSkill.skills} jobName={info.data.jobGrowName}></SkilltreeComponent>;
+            return <SkilltreeComponent skills={info.originSkill} jobSkill={info.jobSkill.skills}
+                jobName={info.data.jobName} jobGrowName={info.data.jobGrowName} jobId={info.data.jobGrowId}></SkilltreeComponent>;
         }
     };
 
     return (
-        <div className="flex justify-center">
+        <div className="flex justify-center h-screen mb-20">
             {info.equipment && (
                 <>
                     <div name="equip"

@@ -2,7 +2,7 @@ import Tooltip from "../../common/item/ToolTip";
 
 const EquipAndSkilsComponent = ({ skills, equipment }) => {
     return (
-        <>
+        <div>
             <div className="flex relative text-white">
                 <div className="w-[45%] p-2">
                     <p className="pb-2 font-bold">장착 장비</p>
@@ -64,7 +64,7 @@ const EquipAndSkilsComponent = ({ skills, equipment }) => {
                             </button>
                         </Tooltip>
                     </div>
-                    <div className="my-2">
+                    <div className="mt-2">
                         {skills && Object.keys(skills).reverse().map((skillName, index) => {
                             if (skillName === 'math') return;
                             const skill = skills[skillName];
@@ -97,7 +97,7 @@ const EquipAndSkilsComponent = ({ skills, equipment }) => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 

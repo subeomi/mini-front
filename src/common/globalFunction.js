@@ -12,6 +12,90 @@ export function transServerId(serverId) {
   }
 }
 
+// 캐릭터종류, 전직명으로 2차전직 추출 jobName, jobGrowName
+export function getJob(baseJob, jobGrowName) {
+  let job = '';
+  switch (jobGrowName) {
+    case "眞 소드마스터": job = "마제스티"; break;
+    case "眞 데몬슬레이어": job = "디어사이드"; break;
+    case "眞 베가본드": job = "검제"; break;
+    case "眞 다크템플러": job = "네메시스"; break;
+    case "眞 블레이드": job = "벤데타"; break;
+
+    case "眞 넨마스터": if (baseJob.indexOf("(여)") != -1) job = "염제 폐월수화"; else job = "염황 광풍제월"; break;
+    case "眞 그래플러": if (baseJob.indexOf("(여)") != -1) job = "얼티밋 디바"; else job = "그랜드 마스터"; break;
+    case "眞 스트리트파이터": if (baseJob.indexOf("(여)") != -1) job = "용독문주"; else job = "명왕"; break;
+    case "眞 스트라이커": if (baseJob.indexOf("(여)") != -1) job = "카이저"; else job = "패황"; break;
+
+    case "眞 웨펀마스터": job = "검신"; break;
+    case "眞 버서커": job = "블러드 이블"; break;
+    case "眞 아수라": job = "인다라천"; break;
+    case "眞 소울브링어": job = "다크로드"; break;
+    case "眞 검귀": job = "악귀나찰"; break;
+
+
+    case "眞 레인저": if (baseJob.indexOf("(여)") != -1) job = "크림슨 로제"; else job = "레이븐"; break;
+    case "眞 런처": if (baseJob.indexOf("(여)") != -1) job = "스톰 트루퍼"; else job = "디스트로이어"; break;
+    case "眞 메카닉": if (baseJob.indexOf("(여)") != -1) job = "옵티머스"; else job = "프라임"; break;
+    case "眞 스핏파이어": if (baseJob.indexOf("(여)") != -1) job = "프레이야"; else job = "커맨더"; break;
+    case "眞 어썰트": job = "엑스마키나"; break;
+
+
+    case "眞 크루세이더": if (baseJob.indexOf("(여)") != -1) job = "세라핌"; else job = "세인트"; break;
+    case "眞 인파이터": job = "저스티스"; break;
+    case "眞 퇴마사": job = "태을선인"; break;
+    case "眞 어벤저": job = "이모탈"; break;
+
+    case "眞 엘레멘탈마스터": job = "오버마인드"; break;
+    case "眞 배틀메이지": job = "아슈타르테"; break;
+    case "眞 마도학자": job = "지니위즈"; break;
+    case "眞 소환사": job = "이클립스"; break;
+    case "眞 인챈트리스": job = "헤카테"; break;
+    case "블랙 메이든": job = "헤카테"; break;
+
+    case "眞 미스트리스": job = "리디머"; break;
+    case "眞 무녀": job = "천선낭랑"; break;
+    case "眞 이단심판관": job = "인페르노"; break;
+
+    case "眞 로그": job = "알키오네"; break;
+    case "眞 사령술사": job = "타나토스"; break;
+    case "眞 섀도우댄서": job = "그림리퍼"; break;
+    case "眞 쿠노이치": job = "시라누이"; break;
+
+    case "眞 스위프트 마스터": job = "아이올로스"; break;
+    case "眞 블러드 메이지": job = "뱀파이어 로드"; break;
+    case "眞 엘레멘탈 바머": job = "오블리비언"; break;
+    case "眞 디멘션워커": job = "어센션"; break;
+    case "眞 빙결사": job = "이터널"; break;
+
+
+    case "眞 팔라딘": job = "세이비어"; break;
+    case "眞 엘븐나이트": job = "가이아"; break;
+    case "眞 드래곤나이트": job = "드레드노트"; break;
+    case "眞 카오스": job = "마신"; break;
+
+
+    case "眞 뱅가드": job = "워로드"; break;
+    case "眞 듀얼리스트": job = "듀란달"; break;
+    case "眞 다크 랜서": job = "에레보스"; break;
+    case "眞 드래고니안 랜서": job = "제노사이더"; break;
+
+    case "眞 요원": job = "레퀴엠"; break;
+    case "眞 트러블 슈터": job = "언터처블"; break;
+    case "眞 스페셜리스트": job = "패스파인더"; break;
+    case "眞 히트맨": job = "갓파더"; break;
+
+    case "眞 다크나이트": job = "다크나이트(자각2)"; break;
+    case "眞 크리에이터": job = "크리에이터(자각2)"; break;
+
+    case "眞 뮤즈": job = "트렌드세터"; break;
+    case "眞 트래블러": job = "셀레스티얼"; break;
+    case "眞 헌터": job = "메이븐"; break;
+    case "眞 비질란테": job = "프레데터"; break;
+  }
+  return job;
+}
+
 export function transformStatusArray(status) {
   const result = [];
 
@@ -159,7 +243,18 @@ export function isBuffInList(b) {
     "카리스마",
     "류심",
     "멸!",
-    "갈!"
+    "갈!",
+    "운명",
+    "탄생",
+    "창조",
+    "왜곡",
+    "조율",
+    "소멸",
+    "바람",
+    "수호",
+    "방해",
+    "냉기",
+    "화염",
   ]
 
   return buffs.includes(b);
