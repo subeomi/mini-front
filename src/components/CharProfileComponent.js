@@ -1,7 +1,7 @@
 import { transServerId } from "../common/globalFunction";
 import CharTitlecomponent from "./CharTitleComponent";
 
-const CharProfileComponent = ({ data, serverId, custom, setCustom, title }) => {
+const CharProfileComponent = ({ data, serverId, title }) => {
     return (
         <div className="flex justify-between">
             <div className="flex relative text-white mb-10 mt-2 p-2 w-[45%]">
@@ -24,35 +24,6 @@ const CharProfileComponent = ({ data, serverId, custom, setCustom, title }) => {
                         }
 
                     </span>
-                </div>
-                <div className="absolute bottom-3 left-[220px] bg-[rgb(40,50,57)] p-1 rounded-3xl text-gray-600">
-                    <button
-                        onClick={() => setCustom('equip')}
-                        className={`inline-flex items-center py-2 px-3 rounded-3xl
-                    ${custom ? '' : 'bg-[rgb(35,41,50)] text-white'}
-                    `}
-                    >
-                        장비정보
-                    </button>
-
-                    <button
-                        onClick={() => setCustom('skilltree')}
-                        className={`inline-flex items-center py-2 px-3 rounded-3xl
-                    ${custom ? 'bg-[rgb(35,41,50)] text-white' : ''}
-                    `}
-                    >
-                        스킬트리
-                    </button>
-
-                    <button
-                        onClick={() => setCustom('custom')}
-                        className={`inline-flex items-center py-2 px-3 rounded-3xl
-                    ${custom ? 'bg-[rgb(35,41,50)] text-white' : ''}
-                    `}
-                    >
-                        스킬상세
-                    </button>
-
                 </div>
             </div>
             <CharTitlecomponent title={title} />

@@ -18,9 +18,10 @@ const SkilltreeComponent = ({ skills, jobSkill, jobName, jobGrowName, jobId }) =
         }
     }
 
-    const renderGridCell = (rowStart, colStart, colEnd, content) => (
+    const renderGridCell = (rowStart, colStart, colEnd, content, index) => (
         <div
             style={{ gridArea: `${rowStart} / ${colStart} / span 1 / span ${colEnd - colStart + 1}` }}
+            key={index}
             className={`flex justify-center items-center text-[12px] p-[1px] w-full h-full ${rowStart % 2 === 0 && 'bg-cat3'}`}
         >
             {content}
@@ -29,9 +30,9 @@ const SkilltreeComponent = ({ skills, jobSkill, jobName, jobGrowName, jobId }) =
 
     const myJob = getJob(jobName, jobGrowName);
     const jobRow = () => {
-        switch(myJob){
-            case '다크나이트(자각2)' : return 13;
-            case '크리에이터(자각2)' : return 6;
+        switch (myJob) {
+            case '다크나이트(자각2)': return 13;
+            case '크리에이터(자각2)': return 6;
             default: return 17;
         }
     }
@@ -58,7 +59,7 @@ const SkilltreeComponent = ({ skills, jobSkill, jobName, jobGrowName, jobId }) =
                     {Array.from({ length: jobRow() * 12 }, (_, i) => i + 1).map(index => {
                         const row = Math.ceil(index / 12);
                         const col = index % 12 || 12;
-                        return renderGridCell(row, col, col, <div className="" />);
+                        return renderGridCell(row, col, col, <div className="" />, index);
                     })}
 
                     {renderGridCell(1, 1, 1, <span>공용<br />스킬</span>)}
@@ -126,7 +127,7 @@ const SkilltreeComponent = ({ skills, jobSkill, jobName, jobGrowName, jobId }) =
                     {Array.from({ length: 5 * 12 }, (_, i) => i + 1).map(index => {
                         const row = Math.ceil(index / 12);
                         const col = index % 12 || 12;
-                        return renderGridCell(row, col, col, <div className="" />);
+                        return renderGridCell(row, col, col, <div className="" />, index);
                     })}
                     {renderGridCell(1, 1, 1, <span>TP</span>)}
                     {jobSkill?.filter(item => !basicSkills.includes(item.name))

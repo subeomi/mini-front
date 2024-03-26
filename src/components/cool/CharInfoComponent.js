@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getCharProfile } from "../../api/dnfAPI";
-import { isBuffInList, transServerId } from "../../common/globalFunction";
-import { calOtherMath, checkAvatarSkillLvl, checkCommandCoolTime, checkCoolTimeNomalGear, checkCoolTimeOptions, checkCoolTimeRunes, checkCoolTimeTalisman, checkJobCoolTime, checkStackSkill, checkStackTalisman, checkTraitCoolTime, setCharMath, findWeaponCoolTime, isSummonerNotCommandSkill, calSkillCT, findCharSkill, } from "../../common/skill/coolTimeFunction";
+import { findCharSkill, } from "../../common/skill/coolTimeFunction";
 import CharProfileComponent from "../CharProfileComponent";
 import EquipAndSkilsComponent from "./EquipAndSkillsComponent";
 import SkillCustomComponent from "./SkillCustomComponent";
-import CharTitlecomponent from "../CharTitleComponent";
 import SkilltreeComponent from "./SkilltreeComponent";
+import MenuNav from "../../layouts/MenuNav";
 
 const initState = {
     serverId: "",
@@ -21,7 +20,7 @@ const CharInfoComponent = () => {
     const [info, setInfo] = useState({});
     const [profile, setProfile] = useState(initState);
     const [skills, setSkills] = useState({});
-    const [custom, setCustom] = useState('equip');
+    const [menu, setMenu] = useState('equip');
 
     useEffect(() => {
 
@@ -53,11 +52,11 @@ const CharInfoComponent = () => {
     console.log('skills: ', skills);
 
     const renderComponent = () => {
-        if (custom === 'custom') {
+        if (menu === 'skillCustom') {
             return <SkillCustomComponent skills={skills} jobName={info.data.jobGrowName}></SkillCustomComponent>;
-        } else if (custom === 'equip') {
+        } else if (menu === 'equip') {
             return <EquipAndSkilsComponent equipment={info.equipment.equipment} skills={skills}></EquipAndSkilsComponent>;
-        } else if (custom === 'skilltree') {
+        } else if (menu === 'skilltree') {
             return <SkilltreeComponent skills={info.originSkill} jobSkill={info.jobSkill.skills}
                 jobName={info.data.jobName} jobGrowName={info.data.jobGrowName} jobId={info.data.jobGrowId}></SkilltreeComponent>;
         }
@@ -70,7 +69,8 @@ const CharInfoComponent = () => {
                     <div name="equip"
                         className="w-[1000px]">
 
-                        <CharProfileComponent title={info.title} custom={custom} setCustom={setCustom} serverId={profile.serverId} data={info.data}></CharProfileComponent>
+                        <CharProfileComponent title={info.title} serverId={profile.serverId} data={info.data}></CharProfileComponent>
+                        <MenuNav menu={menu} setMenu={setMenu} />
                         {renderComponent()}
                     </div>
                 </>
