@@ -108,6 +108,62 @@ skillImage['역죄단멸'] = require('../assets/images/icon/skill/역죄단멸.p
 skillImage['슈퍼 체이서'] = require('../assets/images/icon/skill/슈퍼 체이서.png');
 skillImage['황룡강림'] = require('../assets/images/icon/skill/황룡강림.png');
 
+// 장비특성
+skillImage['구현'] = require('../assets/images/icon/trait/구현/logo.png');
+skillImage['구현1/2'] = require('../assets/images/icon/trait/구현/1-2.png');
+skillImage['구현1/4'] = require('../assets/images/icon/trait/구현/1-4.png');
+skillImage['구현2/1'] = require('../assets/images/icon/trait/구현/2-1.png');
+skillImage['구현2/2'] = require('../assets/images/icon/trait/구현/2-2.png');
+skillImage['구현2/3'] = require('../assets/images/icon/trait/구현/2-3.png');
+skillImage['구현2/4'] = require('../assets/images/icon/trait/구현/2-4.png');
+skillImage['구현3/1'] = require('../assets/images/icon/trait/구현/3-1.png');
+skillImage['구현3/2'] = require('../assets/images/icon/trait/구현/3-2.png');
+skillImage['구현3/3'] = require('../assets/images/icon/trait/구현/3-3.png');
+skillImage['구현4/2'] = require('../assets/images/icon/trait/구현/4-2.png');
+skillImage['구현5/1'] = require('../assets/images/icon/trait/구현/5-1.png');
+skillImage['구현5/2'] = require('../assets/images/icon/trait/구현/5-2.png');
+skillImage['구현5/3'] = require('../assets/images/icon/trait/구현/5-3.png');
+
+skillImage['규율'] = require('../assets/images/icon/trait/규율/logo.png');
+skillImage['규율1/1'] = require('../assets/images/icon/trait/규율/1-1.png');
+skillImage['규율1/2'] = require('../assets/images/icon/trait/규율/1-2.png');
+skillImage['규율1/3'] = require('../assets/images/icon/trait/규율/1-3.png');
+skillImage['규율1/4'] = require('../assets/images/icon/trait/규율/1-4.png');
+skillImage['규율2/1'] = require('../assets/images/icon/trait/규율/2-1.png');
+skillImage['규율2/2'] = require('../assets/images/icon/trait/규율/2-2.png');
+skillImage['규율2/3'] = require('../assets/images/icon/trait/규율/2-3.png');
+skillImage['규율2/4'] = require('../assets/images/icon/trait/규율/2-4.png');
+skillImage['규율3/1'] = require('../assets/images/icon/trait/규율/3-1.png');
+skillImage['규율3/2'] = require('../assets/images/icon/trait/규율/3-2.png');
+skillImage['규율3/3'] = require('../assets/images/icon/trait/규율/3-3.png');
+skillImage['규율4/1'] = require('../assets/images/icon/trait/규율/4-1.png');
+skillImage['규율4/2'] = require('../assets/images/icon/trait/규율/4-2.png');
+skillImage['규율4/3'] = require('../assets/images/icon/trait/규율/4-3.png');
+
+skillImage['맹공'] = require('../assets/images/icon/trait/맹공/logo.png');
+skillImage['맹공1/1'] = require('../assets/images/icon/trait/맹공/1-1.png');
+skillImage['맹공1/2'] = require('../assets/images/icon/trait/맹공/1-2.png');
+skillImage['맹공1/4'] = require('../assets/images/icon/trait/맹공/1-4.png');
+skillImage['맹공2/1'] = require('../assets/images/icon/trait/맹공/2-1.png');
+skillImage['맹공2/2'] = require('../assets/images/icon/trait/맹공/2-2.png');
+skillImage['맹공2/4'] = require('../assets/images/icon/trait/맹공/2-4.png');
+skillImage['맹공4/1'] = require('../assets/images/icon/trait/맹공/4-1.png');
+skillImage['맹공4/2'] = require('../assets/images/icon/trait/맹공/4-2.png');
+skillImage['맹공5/1'] = require('../assets/images/icon/trait/맹공/5-1.png');
+skillImage['맹공5/2'] = require('../assets/images/icon/trait/맹공/5-2.png');
+
+skillImage['보호'] = require('../assets/images/icon/trait/보호/logo.png');
+skillImage['보호1/2'] = require('../assets/images/icon/trait/보호/1-2.png');
+skillImage['보호1/4'] = require('../assets/images/icon/trait/보호/1-4.png');
+skillImage['보호2/1'] = require('../assets/images/icon/trait/보호/2-1.png');
+skillImage['보호2/3'] = require('../assets/images/icon/trait/보호/2-3.png');
+skillImage['보호2/4'] = require('../assets/images/icon/trait/보호/2-4.png');
+skillImage['보호3/2'] = require('../assets/images/icon/trait/보호/3-2.png');
+skillImage['보호4/1'] = require('../assets/images/icon/trait/보호/4-1.png');
+skillImage['보호4/3'] = require('../assets/images/icon/trait/보호/4-3.png');
+skillImage['보호5/1'] = require('../assets/images/icon/trait/보호/5-1.png');
+skillImage['보호5/3'] = require('../assets/images/icon/trait/보호/5-3.png');
+
 skillImage['APG-63'] = 'https://d-fighter.dn.nexoncdn.co.kr/samsungdnf/neople/swf/2019/skill/5/icon/572.png';
 skillImage['B.C 트레이닝'] = 'https://d-fighter.dn.nexoncdn.co.kr/samsungdnf/neople/swf/2019/skill/15/icon/266.png';
 skillImage['B.G 파이어툴'] = 'https://d-fighter.dn.nexoncdn.co.kr/samsungdnf/neople/swf/2019/skill/15/icon/258.png';

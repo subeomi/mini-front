@@ -7,6 +7,7 @@ import EquipAndSkilsComponent from "./EquipAndSkillsComponent";
 import SkillCustomComponent from "./SkillCustomComponent";
 import SkilltreeComponent from "./SkilltreeComponent";
 import MenuNav from "../../layouts/MenuNav";
+import TraitComponent from "../TraitComponent";
 
 const initState = {
     serverId: "",
@@ -59,6 +60,8 @@ const CharInfoComponent = () => {
         } else if (menu === 'skilltree') {
             return <SkilltreeComponent skills={info.originSkill} jobSkill={info.jobSkill.skills}
                 jobName={info.data.jobName} jobGrowName={info.data.jobGrowName} jobId={info.data.jobGrowId}></SkilltreeComponent>;
+        } else if (menu === 'trait') {
+            return <TraitComponent trait={info.trait.equipmentTrait}></TraitComponent>;
         }
     };
 

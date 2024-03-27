@@ -43,7 +43,7 @@ const SkilltreeComponent = ({ skills, jobSkill, jobName, jobGrowName, jobId }) =
 
     return (
         <div className="text-white flex justify-center">
-            <div className="flex flex-col w-[576px]">
+            <div className="flex flex-col w-[576px] p-2">
                 <div className="pb-2">
                     <span className="font-bold">
                         스킬트리
@@ -123,7 +123,7 @@ const SkilltreeComponent = ({ skills, jobSkill, jobName, jobGrowName, jobId }) =
                 <span className="font-bold pb-2">
                     TP
                 </span>
-                <div className="relative grid grid-cols-[repeat(12,48px)] grid-rows-[repeat(5,48px)] place-items-center mb-20">
+                <div className="relative grid grid-cols-[repeat(12,48px)] grid-rows-[repeat(5,48px)] place-items-center mb-20 p-2">
                     {Array.from({ length: 5 * 12 }, (_, i) => i + 1).map(index => {
                         const row = Math.ceil(index / 12);
                         const col = index % 12 || 12;

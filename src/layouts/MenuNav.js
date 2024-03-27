@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const menuList = ['equip', 'skilltree', 'skillCustom'];
+const menuList = ['equip', 'trait', 'skilltree', 'skillCustom'];
 
 const MenuNav = ({ menu, setMenu }) => {
 
@@ -9,11 +9,10 @@ const MenuNav = ({ menu, setMenu }) => {
             case 'equip': return '장비정보';
             case 'skilltree': return '스킬트리';
             case 'skillCustom': return '스킬상세';
+            case 'trait': return '보조특성';
             default: return item;
         }
     }
-
-    console.log(menu)
 
     return (
         <div className="flex items-center justify-center text-white mb-4">
