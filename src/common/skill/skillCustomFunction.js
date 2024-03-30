@@ -1,5 +1,6 @@
 import { skillCastingTime } from "../skillInfo";
-import { coolTimeInc, coolTimeRec, coolTimeRed, coolTimeRedJob } from "./itemCoolTimeInfo";
+import { checkStackTalisman } from "./coolTimeFunction";
+import { coolTimeInc, coolTimeRec, coolTimeRecTalisman, coolTimeRed, coolTimeRedJob, coolTimeRedTalisman } from "./itemCoolTimeInfo";
 
 
 export function getTargetIncrease(t, type) {
@@ -59,6 +60,11 @@ function calSkillCustomCT(cal) {
 export function handleTargetCoolTime(name, list, skillObj, skills) {
 
     const obj = skillObj[name];
+    const skillsObj = skills[name];
+
+    console.log('obj: ', obj)
+    // console.log('obj.cal.reduce: ', obj.cal.reduce)
+    // console.log('list: ', list)
 
     const inc = obj.cal.increase.filter(incItem => !list[name]?.inc?.some(listItem => JSON.stringify(listItem) === JSON.stringify(incItem)));
     const rec = obj.cal.recovery.filter(recItem => !list[name]?.rec?.some(listItem => JSON.stringify(listItem) === JSON.stringify(recItem)));
@@ -68,11 +74,37 @@ export function handleTargetCoolTime(name, list, skillObj, skills) {
     obj.cal.recovery = rec
     obj.cal.reduce = red
 
+    // console.log('inc: ', inc)
+    // console.log('rec: ', rec)
+    // console.log('red: ', red)
+
+    const recItems = rec.map(item => item[1]);
+    const redItems = red.map(item => item[1]);
+    const itemNames = [...recItems, ...redItems];
+
+    // console.log(itemNames)
+
+    const stackName = checkStackTalisman(itemNames);
+
+
+    // console.log('stackName: ', stackName)
+
     obj.cal = calSkillCustomCT(obj.cal);
-    obj.skillCoolTime = parseFloat((new Function('return ' + obj.cal.calMath)() * obj.defaultCoolTime).toFixed(2));
-    if (obj.skillCoolTime < obj.defaultCoolTime * 0.3) {
-        obj.skillCoolTime = obj.defaultCoolTime * 0.3
+
+    if (Object.keys(stackName).length > 0) {
+        obj.stack = stackName[name];
+    } else {
+        obj.stack = 1;
     }
+
+    obj.maxCnt = Math.ceil(40 / (obj.defaultCoolTime / obj.stack * 0.3 + (skillCastingTime[name] || 0)))
+    obj.skillCoolTime = parseFloat((new Function('return ' + obj.cal.calMath)() * obj.defaultCoolTime / obj.stack).toFixed(2));
+    if (obj.skillCoolTime < obj.defaultCoolTime / obj.stack * 0.3) {
+        obj.skillCoolTime = obj.defaultCoolTime / obj.stack * 0.3
+    }
+
+    // console.log('obj: ', obj)
+    // console.log('maxCnt cal: ', obj.skillCoolTime, skillCastingTime[name] || 0)
 
     obj.count = Math.ceil(40 / (obj.skillCoolTime + (skillCastingTime[name] || 0)));
 
@@ -84,21 +116,41 @@ export function handleAddElement(name, list, skillObj, type) {
 
     const obj = { ...skillObj[name] };
 
+    console.log('list: ', list)
+
     if (type === 'inc') {
-        obj.cal.increase = [...obj.cal.increase, ...list];
+        const modifiedList = list.map(item => [item[0] + ' ', ...item.slice(1)]);
+        obj.cal.increase = [...obj.cal.increase, ...modifiedList];
     } else if (type === 'rec') {
-        obj.cal.recovery = [...obj.cal.recovery, ...list];
+        const modifiedList = list.map(item => [item[0] + ' ', ...item.slice(1)]);
+        obj.cal.recovery = [...obj.cal.recovery, ...modifiedList];
     } else if (type === 'red') {
-        obj.cal.reduce = [...obj.cal.reduce, ...list];
+        const modifiedList = list.map(item => [item[0] + ' ', ...item.slice(1)]);
+        obj.cal.reduce = [...obj.cal.reduce, ...modifiedList];
     }
 
-    obj.cal = calSkillCustomCT(obj.cal);
-    obj.skillCoolTime = parseFloat((new Function('return ' + obj.cal.calMath)() * obj.defaultCoolTime).toFixed(2));
-    if (obj.skillCoolTime < obj.defaultCoolTime * 0.3) {
-        obj.skillCoolTime = obj.defaultCoolTime * 0.3
-    }
 
-    obj.count = Math.ceil(40 / (obj.skillCoolTime + (skillCastingTime[name] || 0)));
+    // obj.cal = calSkillCustomCT(obj.cal);
+    // obj.skillCoolTime = parseFloat((new Function('return ' + obj.cal.calMath)() * obj.defaultCoolTime).toFixed(2));
+    // if (obj.skillCoolTime < obj.defaultCoolTime * 0.3) {
+    //     obj.skillCoolTime = obj.defaultCoolTime * 0.3
+    // }
+
+    // console.log(obj.skillCoolTime)
+
+    // const itemNames = list.map(item => item[1]);
+
+    // const stackName = checkStackTalisman(itemNames);
+    // console.log('name?', stackName)
+
+    // if (stackName) {
+    //     obj.skillCoolTime = obj.skillCoolTime / stackName[name];
+    //     obj.maxCnt = Math.ceil(40 / (obj.skillCoolTime * 0.3 + (skillCastingTime[name] || 0)))
+    // }
+
+    // console.log(obj.skillCoolTime)
+
+    // obj.count = Math.ceil(40 / (obj.skillCoolTime + (skillCastingTime[name] || 0)));
 
     return skillObj
 }
@@ -120,14 +172,23 @@ export function handleMoreCustom(target, type, jobName) {
     function findMatchingElements(source, targetLevel, bannedItems) {
         return source.filter(item => {
             // bannedItems에 포함되어 있지 않은 경우에만 필터링 ??
+            // console.log('item: ', item)
+
             if (Array.isArray(item[2])) {
-                return item[2].includes(targetLevel) && !bannedItems.includes(item);
+                return (item[2].includes(targetLevel) && !bannedItems.includes(item)) || (item[2].includes(Object.keys(target)[0]) && !bannedItems.includes(item));
             } else if (typeof item[2] === 'number') {
                 return item[2] === targetLevel && !bannedItems.includes(item);
+            } else if (item[2] !== 'all') {
+                return item[2] === Object.keys(target)[0] && !bannedItems.includes(item);
             } else {
                 return item[2] === 'all' && !bannedItems.includes(item);
             }
         });
+    }
+
+
+    function wrapInArray(arr) {
+        return [arr];
     }
 
     Object.keys(coolTimeInc).forEach(key => {
@@ -144,8 +205,22 @@ export function handleMoreCustom(target, type, jobName) {
         }
     });
 
+    Object.keys(coolTimeRecTalisman).forEach(key => {
+        const matchingRec = findMatchingElements(wrapInArray(coolTimeRecTalisman[key]), target.requiredLevel, ban.rec);
+        if (matchingRec.length > 0) {
+            result.rec.push(...matchingRec);
+        }
+    });
+
     Object.keys(coolTimeRed).forEach(key => {
         const matchingRed = findMatchingElements(coolTimeRed[key], target.requiredLevel, ban.red);
+        if (matchingRed.length > 0) {
+            result.red.push(...matchingRed);
+        }
+    });
+
+    Object.keys(coolTimeRedTalisman).forEach(key => {
+        const matchingRed = findMatchingElements(wrapInArray(coolTimeRedTalisman[key]), target.requiredLevel, ban.red);
         if (matchingRed.length > 0) {
             result.red.push(...matchingRed);
         }
@@ -158,7 +233,7 @@ export function handleMoreCustom(target, type, jobName) {
         }
     }
 
-    console.log(result.red)
+    // console.log(result.red)
 
 
     function removeBannedElements(result, ban) {

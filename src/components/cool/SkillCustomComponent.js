@@ -56,6 +56,8 @@ const SkillCustomComponent = ({ skills, jobName }) => {
 
     // 체크된 요소의 인덱스번호 추가 제거
     const handleCListOption = (target, type, list) => {
+
+        list[0] = list[0].trim();
         if (setting) {
             setCList(prevCList => {
                 const updatedCList = { ...prevCList };
@@ -86,12 +88,11 @@ const SkillCustomComponent = ({ skills, jobName }) => {
     console.log('skillObj ', skillObj)
     // console.log('cList: ', cList)
     console.log('target: ', target)
-    // console.log('skills: ', skills)
+    console.log('skills: ', skills)
 
     const nextCT = () => {
         const sk = target?.[Object.keys(target)[0]]
         const skName = Object.keys(target)[0]
-        // console.log(((40 / (sk.count + 1)) - 0.01), (sk.defaultCoolTime + (skillCastingTime[skName] || 0) * (sk.count + 1)))
         return ' ' + ((1 - ((40 / sk.count - 0.01) / (sk.defaultCoolTime + (skillCastingTime[skName] || 0) * (sk.count + 1)))) * 100).toFixed(2)
     }
 
@@ -124,10 +125,10 @@ const SkillCustomComponent = ({ skills, jobName }) => {
                                 </span>
                                 /
                                 <span className="text-[rgb(224,67,67)]">
-                                    {skills?.[Object.keys(target)[0]]?.maxCnt}
+                                    {target?.[Object.keys(target)[0]]?.maxCnt}
                                 </span>
                                 회
-                                {skills?.[Object.keys(target)[0]]?.maxCnt > target?.[Object.keys(target)[0]]?.count &&
+                                {skills?.[Object.keys(target)[0]]?.maxCnt > target?.[Object.keys(target)[0]]?.count && !(target?.[Object.keys(target)[0]]?.stack > 1) &&
                                     <span className="ml-2">다음 횟수
                                         {
                                             // ' ' + (((target?.[Object.keys(target)[0]]?.castingCoolTime - (40 / (target?.[Object.keys(target)[0]]?.count + Number.EPSILON))) / target?.[Object.keys(target)[0]]?.castingCoolTime * 100).toFixed(1) - parseFloat(((1 - new Function('return ' + target?.[Object.keys(target)[0]]?.cal?.calMath)()) * 100).toFixed(1))).toFixed(2)

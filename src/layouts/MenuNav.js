@@ -1,4 +1,3 @@
-import { useState } from "react";
 
 const menuList = ['equip', 'trait', 'skilltree', 'skillCustom'];
 

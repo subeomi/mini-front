@@ -219,7 +219,8 @@ export function findCharSkill(s) {
                                 'cal': {},
                                 'defaultCoolTime': skill.coolTime,
                                 'castingCoolTime': skill.coolTime + (skillCastingTime[skill.name] || 0),
-                                'maxCnt': Math.ceil(40 / (skill.coolTime / stackName[s] * 0.3 + (skillCastingTime[skill.name] || 0)))
+                                'maxCnt': Math.ceil(40 / (skill.coolTime / stackName[s] * 0.3 + (skillCastingTime[skill.name] || 0))),
+                                'stack': stackName[s]
                             };
                             return;
                         }
@@ -236,7 +237,8 @@ export function findCharSkill(s) {
                     'cal': {},
                     'defaultCoolTime': skill.coolTime,
                     'castingCoolTime': skill.coolTime + (skillCastingTime[skill.name] || 0),
-                    'maxCnt': Math.ceil(40 / (skill.coolTime * 0.3 + (skillCastingTime[skill.name] || 0)))
+                    'maxCnt': Math.ceil(40 / (skill.coolTime * 0.3 + (skillCastingTime[skill.name] || 0))),
+                    'stack': 1
                 };
 
                 // creator가 true이고 skill에 type 속성이 없을 때만 type 속성을 추가합니다.
@@ -368,23 +370,7 @@ function calSkillCT(k, s, coolTimeMath) {
             }
 
             // 소숫점 2자리에서 반올림
-            let result = parseFloat((k[skill].skillCoolTime * calMath).toFixed(2));
-
-            // if (coolTimeMath['other'] &&
-            //     coolTimeMath['other'].some(item => {
-            //         const type = typeof item.교감[2];
-            //         if (type === 'number') {
-            //             return item.교감[2] === skillValue.requiredLevel;
-            //         } else if (type === 'string' || Array.isArray(item.교감[2])) {
-            //             return item.교감[2].includes(skillValue.type);
-            //         }
-            //         return false;
-            //     })
-            // ) {
-            //     const z = calOtherMath(coolTimeMath['other'], k[skill].skillCoolTime, skillValue.requiredLevel, calRed, calInc, calRec, skillValue.type);
-            //     result = parseFloat(z[0].toFixed(2));
-            //     cal['other'].push(z[1].교감);
-            // }
+            let result = parseFloat((skillValue.skillCoolTime * calMath).toFixed(2));
 
             if (skill === 'AT-SO Walker') {
                 result = 30;
@@ -401,13 +387,13 @@ function calSkillCT(k, s, coolTimeMath) {
 
             count += Math.ceil(40 / (result + (skillCastingTime[skill] || 0)));
 
-            // 스택형 탈리스만 {스킬명 : 쿨타임을 나눌 수}
-            const stackName = checkStackTalisman(tal);
-            for (const s in stackName) {
-                if (s === skill) {
-                    count += (stackName[s] - 1);
-                }
-            }
+            // // 스택형 탈리스만 {스킬명 : 쿨타임을 나눌 수}
+            // const stackName = checkStackTalisman(tal);
+            // for (const s in stackName) {
+            //     if (s === skill) {
+            //         count += (stackName[s] - 1);
+            //     }
+            // }
 
             updateSkills[skill] = { ...k[skill], skillCoolTime: result, count: count, cal: cal };
         }
