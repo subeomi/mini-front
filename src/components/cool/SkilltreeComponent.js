@@ -40,6 +40,7 @@ const SkilltreeComponent = ({ skills, jobSkill, jobName, jobGrowName, jobId }) =
     console.log('jobskill: ', jobSkill)
     console.log('jobId: ', jobId)
     console.log('jobName: ', jobName)
+    console.log('skills: ', skills)
 
     return (
         <div className="text-white flex justify-center">
@@ -81,10 +82,15 @@ const SkilltreeComponent = ({ skills, jobSkill, jobName, jobGrowName, jobId }) =
 
                     {/* 공용 스킬 */}
                     {basicSkills.map((item, idx) => (
-                        <div key={idx} style={{ gridArea: skillGrid['공용 스킬'][item] }} className="text-[10px] p-[1px]">
+                        <div key={idx} style={{ gridArea: skillGrid['공용 스킬'][item] }} className="text-[11px] p-[2px]">
                             <img
                                 src={skillImage[item]}
                                 className={`${lvl(item) === 0 ? 'filter grayscale' : ''} `}
+                                style={{
+                                    filter: item === '방어구 마스터리' || item === '배틀메이지의 무기 마스터리' || item === '실전형 위상변화'
+                                        ? 'grayscale(100%) invert(3%) sepia(17%) saturate(961%) hue-rotate(65deg) brightness(103%) contrast(105%)'
+                                        : ''
+                                }}
                             />
                             <span className="flex justify-center">
                                 {/* {skillGrid[item.name]?.name || ''} */}
@@ -102,7 +108,7 @@ const SkilltreeComponent = ({ skills, jobSkill, jobName, jobGrowName, jobId }) =
                             <div
                                 key={idx}
                                 style={{ gridArea: skillGrid[myJob]?.[item.name] }}
-                                className={`text-[10px] p-[1px]`}
+                                className={`text-[11px] p-[2px]`}
                             >
                                 <img src={skillImage[item.name]}
                                     className={`${lvl(item.name) === 0 ? 'filter grayscale' : ''} `}
@@ -113,7 +119,7 @@ const SkilltreeComponent = ({ skills, jobSkill, jobName, jobGrowName, jobId }) =
                                     }}
                                 />
                                 <span className="flex justify-center">
-                                    Lv {item.level || 0}
+                                    Lv {lvl(item.name)}
                                 </span>
                             </div>
                         ))}
@@ -133,7 +139,7 @@ const SkilltreeComponent = ({ skills, jobSkill, jobName, jobGrowName, jobId }) =
                     {jobSkill?.filter(item => !basicSkills.includes(item.name))
                         .filter(item => item.costType === 'TP')
                         .map((item, idx) => (
-                            <div key={idx} style={{ gridArea: skillGrid[myJob]?.[item.name] }} className="text-[10px] p-[1px]">
+                            <div key={idx} style={{ gridArea: skillGrid[myJob]?.[item.name] }} className="text-[11px] p-[2px]">
                                 <img
                                     src={skillImage[item.name.replace(' 강화', '')]}
                                     style={{
@@ -144,7 +150,7 @@ const SkilltreeComponent = ({ skills, jobSkill, jobName, jobGrowName, jobId }) =
                                     className={`${lvl(item.name) === 0 ? 'filter grayscale' : ''}`}
                                 />
                                 <span className="flex justify-center">
-                                    Lv {item.level || 0}
+                                Lv {lvl(item.name)}
                                 </span>
                             </div>
                         ))}

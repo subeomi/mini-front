@@ -6,9 +6,9 @@ import IndexComponent from "../components/IndexComponent";
 const IndexPage = () => {
 
     return (
-        <div className="bg-[rgb(23,27,36)] overflow-auto">
+        <div className="bg-[rgb(23,27,36)]">
             <BaseNav></BaseNav>
-            <div className="flex justify-center h-screen">
+            <div className="flex justify-center pt-[60px]">
                 <div className="w-[1000px]">
                     <IndexComponent />
                 </div>

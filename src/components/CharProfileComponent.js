@@ -1,7 +1,17 @@
 import { transServerId } from "../common/globalFunction";
 import CharTitlecomponent from "./CharTitleComponent";
 
-const CharProfileComponent = ({ data, serverId, title }) => {
+const CharProfileComponent = ({ info, serverId }) => {
+
+    const data = info.data;
+    const price = {
+        avatar: info.avatar.sumPrice,
+        creature: info.creature.sumPrice,
+        switching: info.switching.sumPrice,
+        enchant: info.equipment.sumEnchantPrice,
+        equip: info.equipment.sumPrice
+    }
+
     return (
         <div className="flex justify-between">
             <div className="flex relative text-white mb-10 mt-2 p-2 w-[45%]">
@@ -14,19 +24,17 @@ const CharProfileComponent = ({ data, serverId, title }) => {
                     <span className="text-[14px]">{data.jobGrowName}</span>
                     <span>{transServerId(serverId)}</span>
                     <span className="flex items-center">
-                        <span>{data.adventureName}</span>
-                        {
-                            data.guildName &&
-                            <>
-                                <i id="v-s"></i>
-                                <span>{data.guildName}</span>
-                            </>
-                        }
-
+                        <span className="text-[#3e965b]">
+                            {data.adventureName || ''}
+                        </span>
+                        {data.adventureName && (<div className="v-s"></div>)}
+                        <span>
+                            {data.guildName || '-'}
+                        </span>
                     </span>
                 </div>
             </div>
-            <CharTitlecomponent title={title} />
+            <CharTitlecomponent price={price} />
         </div>
     );
 }

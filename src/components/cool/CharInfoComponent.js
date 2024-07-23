@@ -8,6 +8,10 @@ import SkillCustomComponent from "./SkillCustomComponent";
 import SkilltreeComponent from "./SkilltreeComponent";
 import MenuNav from "../../layouts/MenuNav";
 import TraitComponent from "../TraitComponent";
+import SwitchingComponent from "../SwitchingComponent";
+import AvatarComponent from "../AvatarComponent";
+import CreatureComponent from "../CreatureComponent";
+import CheckInfoComponent from "../CheckInfoComponent";
 
 const initState = {
     serverId: "",
@@ -45,23 +49,36 @@ const CharInfoComponent = () => {
 
     useEffect(() => {
         if (info) {
-            setSkills(findCharSkill(info));
+            // setSkills(findCharSkill(info));
+            console.log('info: ', info)
         }
     }, [info])
 
-    console.log('coolTimeMath: ', skills?.math)
-    console.log('skills: ', skills);
+    // console.log('coolTimeMath: ', skills?.math)
+    // console.log('skills: ', skills);
+
 
     const renderComponent = () => {
         if (menu === 'skillCustom') {
             return <SkillCustomComponent skills={skills} jobName={info.data.jobGrowName}></SkillCustomComponent>;
         } else if (menu === 'equip') {
-            return <EquipAndSkilsComponent equipment={info.equipment.equipment} skills={skills}></EquipAndSkilsComponent>;
+            return <EquipAndSkilsComponent equipment={info.equipment} skills={skills}></EquipAndSkilsComponent>;
         } else if (menu === 'skilltree') {
-            return <SkilltreeComponent skills={info.originSkill} jobSkill={info.jobSkill.skills}
+            return <SkilltreeComponent skills={info.skill} jobSkill={info.jobSkill.skills}
                 jobName={info.data.jobName} jobGrowName={info.data.jobGrowName} jobId={info.data.jobGrowId}></SkilltreeComponent>;
         } else if (menu === 'trait') {
             return <TraitComponent trait={info.trait.equipmentTrait}></TraitComponent>;
+        } else if (menu === 'switching') {
+            return <SwitchingComponent switching={info.switching}></SwitchingComponent>
+        } else if (menu === 'avatar') {
+            return <AvatarComponent avatar={info.avatar}></AvatarComponent>
+        } else if (menu === 'creature') {
+            return <CreatureComponent creature={info.creature}></CreatureComponent>
+        } else if (menu === 'check') {
+            return <CheckInfoComponent 
+            creature={info.creature} avatar={info.avatar} equipment={info.equipment} switching={info.switching}
+            jobGrowName={info.data.jobGrowName} jobName={info.data.jobName}
+            ></CheckInfoComponent>
         }
     };
 
@@ -72,7 +89,10 @@ const CharInfoComponent = () => {
                     <div name="equip"
                         className="w-[1000px]">
 
-                        <CharProfileComponent title={info.title} serverId={profile.serverId} data={info.data}></CharProfileComponent>
+                        <CharProfileComponent
+                            serverId={profile.serverId} info={info}
+
+                        ></CharProfileComponent>
                         <MenuNav menu={menu} setMenu={setMenu} />
                         {renderComponent()}
                     </div>

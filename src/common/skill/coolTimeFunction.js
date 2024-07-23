@@ -3,17 +3,6 @@ import { isBuffInList } from "../globalFunction";
 import { skillCastingTime } from "../skillInfo";
 import { coolTimeInc, coolTimeIncRunes, coolTimeIncTalisman, coolTimeIncWeapons, coolTimeRec, coolTimeRed, coolTimeRedRunes, coolTimeRedTalisman, coolTimeRedTrait, coolTimeRedWeapons, nomalGearCoolTimeInc, nomalGearCoolTimeRec, nomalGearCoolTimeRed } from "./itemCoolTimeInfo";
 
-// const stackDivisionList = {
-//     교감: [
-//         // 설명 이름 렙제 쿨회수치 최대스택
-//         ['95Lv 스킬 시전 시 95Lv 스킬 쿨타임 회복 속도 +20%', '교감 : 동행하는 대지', 95, 0.2, 2],
-//         ['45, 80Lv 스킬 시전 시 해당 레벨대 스킬 쿨타임 회복 속도 +15%', '교감 : 내려앉는 이슬', [45, 80, '바람', '왜곡'], 0.15, 3],
-//         ['40, 75Lv 스킬 시전 시 해당 레벨대 스킬 쿨타임 회복 속도 +15%', '교감 : 감싸안는 햇살', [40, 75, '수호', '조율'], 0.15, 3],
-//         ['30, 60Lv 스킬 시전 시 해당 레벨대 스킬 쿨타임 회복 속도 +10%', '교감 : 공존하는 생명', [30, 60, '냉기', '소멸'], 0.1, 4],
-//         ['35, 70Lv 스킬 시전 시 해당 레벨대 스킬 쿨타임 회복 속도 +10%', '교감 : 보호하는 온기', [35, 70, '방해', '재현'], 0.1, 4]
-//     ]
-// }
-
 // info를 받음
 export function setCharMath(s) {
     console.log(s)

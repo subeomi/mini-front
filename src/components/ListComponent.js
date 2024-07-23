@@ -38,7 +38,7 @@ const ListComponent = () => {
     }
 
     const goSearch = () => {
-        const searchParams = createSearchParams({ type: search.type, keyword: search.keyword }).toString();
+        const searchParams = createSearchParams({ type: search.type, keyword: search.keyword.trim() }).toString();
         addSearchHistory(search);
         nav(`/search?${searchParams}`);
     }
@@ -57,7 +57,7 @@ const ListComponent = () => {
                     nav('/server', { state: { message: 'DNF_SYSTEM_INSPECT' } });
                 }
 
-                setCharList(data.data.rows);
+                setCharList(data.data);
             }).catch(err => {
                 console.log("캐릭터 검색 에러: " + err);
             }).finally(() => {
@@ -76,10 +76,10 @@ const ListComponent = () => {
 
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
-        const characterId = searchParams.get("keyword");
+        const keyword = searchParams.get("keyword");
+        const type = searchParams.get("type");
 
-        setSearch({ characterName: characterId });
-        searchCool({ characterName: characterId });
+        searchCool({ type: type, keyword: keyword });
 
     }, [location.search])
 
@@ -118,25 +118,36 @@ const ListComponent = () => {
                             justify-center items-center hover:bg-[rgb(40,50,57)] cursor-pointer`}
 
                             to={`/character?serverId=${char.serverId}&characterId=${char.characterId}`}>
-                            <div>
+                            <div className="">
+                                <span className="flex w-[180px] justify-between items-center">
+                                    <p className="text-[12px]">{char.jobGrowName}</p>
+                                    <p className="text-[14px]">{transServerId(char.serverId)}</p>
+                                </span>
+                            </div>
+                            <div className="h-[70%]">
                                 <img
                                     src={`https://img-api.neople.co.kr/df/servers/${char.serverId}/characters/${char.characterId}?zoom=1`} />
                             </div>
-                            <p>
-                                Lv.{char.level}
-                            </p>
-                            <p className="font-bold">
-                                {char.characterName}
-                            </p>
-                            <span className="flex w-[180px] justify-center items-center">
-                                <p className="text-[12px]">{char.jobGrowName}</p>
-                                <i id="v-s"></i>
-                                <p className="text-[14px]">{transServerId(char.serverId)}</p>
-                            </span>
-                            <span className="flex items-center">
-                                <p className="text-[14px]">명성</p>
-                                <p className="text-[#3392ff] ml-[5px]">{char.fame || 0}</p>
-                            </span>
+                            <div className="flex flex-col justify-center items-center">
+
+                                <div className="text-[14px] flex items-center">
+                                    <span className="text-[#3e965b]">
+                                        {char.adventureName || ''}
+                                    </span>
+                                    {char.adventureName && (<div className="v-s"></div>)}
+                                    <span>
+                                        {char.guildName !== null && char.guildName !== 'null' ? char.guildName : '-'}
+                                    </span>
+                                </div>
+
+                                <p className="font-bold py-[1px]">
+                                    {char.characterName}
+                                </p>
+                                <span className="flex items-center">
+                                    <p className="text-[14px]">명성</p>
+                                    <p className="text-[#3392ff] ml-[5px]">{char.fame || 0}</p>
+                                </span>
+                            </div>
                         </Link>
                     ))}
 

@@ -2,55 +2,41 @@ import ispinsImage from '../assets/images/icon/monster/Ispins.png';
 import myreImage from '../assets/images/icon/monster/Myre.png';
 import duskyImage from '../assets/images/icon/monster/Largo.png';
 import bakalImage from '../assets/images/icon/monster/Bakal.png';
+import { commaGold } from '../common/globalFunction';
 
-const CharTitlecomponent = ({ title }) => {
+const CharTitlecomponent = ({ price }) => {
+
+
+    const title = Object.entries(price)
+    const totalPrice = title.reduce((acc, [key, value]) => acc + Number(value), 0);
+    const titleName = (n) => {
+        switch (n) {
+            case 'switching': return '버프강화';
+            case 'avatar': return '아바타';
+            case 'creature': return '크리쳐';
+            case 'enchant': return '마법부여';
+            case 'equip': return '장비';
+            default: return n;
+        }
+    }
     return (
         <div className="w-[45%] text-white mb-10 mt-2 p-2">
-            <div>
-                {title["바칼 레이드"] &&
-                    <div>
-                        <span className="font-bold text-[16px]">레이드</span>
-                        <div className='my-4 flex gap-x-[22px]'>
-                            <div className='relative w-[42px] h-[42px] rounded-sm border-2 border-[rgb(40,50,57)] flex justify-center items-center'>
-                                <img src={bakalImage} alt="Ispins" className='h-[30px] w-[30px] flex-shrink-0' />
-                                <div className='absolute text-[14px] px-[5px] h-6 flex items-center justify-center -right-5 -top-3 bg-[rgb(23,27,36)] rounded'>
-                                    {title["바칼 레이드"]}x
-                                </div>
-                            </div>
-                        </div>
+            <div className='w-[300px]'>
+                {title && title.map(([key,value], index) => (
+                    <div key={index} className='flex justify-between text-[14px]'>
+                        <span className=''>
+                            {titleName(key)}
+                        </span>
+                        <span className=''>
+                            {commaGold(value)}
+                        </span>
                     </div>
-                }
-                {(title["어둑섬"] || title["차원회랑"] || title["이스핀즈"]) &&
-                    <div>
-                        <span className="font-bold text-[16px]">레기온</span>
-                        <div className="mt-4 flex gap-x-[22px]">
-                            {title["어둑섬"] &&
-                                <div className='relative w-[42px] h-[42px] rounded-sm border-2 border-[rgb(40,50,57)] flex justify-center items-center'>
-                                    <img src={duskyImage} alt="Ispins" className='h-[30px] w-[30px] flex-shrink-0' />
-                                    <div className='absolute text-[14px] px-[5px] h-6 flex items-center justify-center -right-5 -top-3 bg-[rgb(23,27,36)] rounded'>
-                                        {title["어둑섬"]}x
-                                    </div>
-                                </div>
-                            }
-                            {title["차원회랑"] &&
-                                <div className='relative w-[42px] h-[42px] rounded-sm border-2 border-[rgb(40,50,57)] flex justify-center items-center'>
-                                    <img src={myreImage} alt="Ispins" className='h-[30px] w-[30px] flex-shrink-0' />
-                                    <div className='absolute text-[14px] px-[5px] h-6 flex items-center justify-center -right-5 -top-3 bg-[rgb(23,27,36)] rounded'>
-                                        {title["차원회랑"]}x
-                                    </div>
-                                </div>
-                            }
-                            {title["이스핀즈"] &&
-                                <div className='relative w-[42px] h-[42px] rounded-sm border-2 border-[rgb(40,50,57)] flex justify-center items-center'>
-                                    <img src={ispinsImage} alt="Ispins" className='h-[30px] w-[30px] flex-shrink-0' />
-                                    <div className='absolute text-[14px] px-[5px] h-6 flex items-center justify-center -right-5 -top-3 bg-[rgb(23,27,36)] rounded'>
-                                        {title["이스핀즈"]}x
-                                    </div>
-                                </div>
-                            }
-                        </div>
-                    </div>
-                }
+                ))}
+                <div className='mt-2 font-bold'>
+                    <span>
+                        합계 {commaGold(totalPrice)}
+                    </span>
+                </div>
             </div>
         </div>
     );

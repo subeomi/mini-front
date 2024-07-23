@@ -97,15 +97,35 @@ export function getJob(baseJob, jobGrowName) {
 }
 
 export function transformStatusArray(status) {
-  const result = [];
+  const result = {};
 
-  function getStatCategory(statName) {
-    switch (statName) {
+  // map은 새로운 배열을 반환, forEach는 반환하지 않음
+  status.forEach(item => {
+    const category = getCategory(item.name);
+    if (!result[category]) {
+      // result[스탯]이 없으면 스탯 : [] 이렇게 값을 담은 빈 배열을 만듦.
+      result[category] = [];
+    }
+    // result[스탯]에 값을 담음. 힘지체정 전부 값이 있으면 스탯[40, 40, 40, 40] 이런 식.
+    result[category].push(item.value);
+  });
+
+  // entries는 객체를 배열[키,값]로 바꿔 출력함 {a:1} => ["a",1], [['스텟', [40, 40, 40, 40]]
+  const transformedArray = Object.entries(result).map(([key, values]) => {
+    // Set은 JS 내장객체, 배열 내 고유값을 저장 -> 중복값은 자동제거 후 객체형태로 반환 [1,1,2,2,3,3] -> {1,2,3}
+    const uniqueValue = [...new Set(values)][0]; // Set은 전개연산자 ... 사용 시 배열로 반환
+    return `${key}: ${uniqueValue}`;
+  });
+
+  return transformedArray;
+
+  function getCategory(name) {
+    switch (name) {
       case '힘':
       case '지능':
       case '체력':
       case '정신력':
-        return '스탯';
+        return '스텟';
       case '물리 공격력':
       case '마법 공격력':
       case '독립 공격력':
@@ -114,26 +134,11 @@ export function transformStatusArray(status) {
       case '마법 크리티컬 히트':
         return '크리티컬 히트';
       default:
-        return statName;
+        return name;
     }
   }
-
-  const categorizedStats = status.reduce((acc, stat) => {
-    const statCategory = getStatCategory(stat.name);
-    if (!acc[statCategory]) {
-      acc[statCategory] = { name: statCategory, value: stat.value };
-    } else {
-      acc[statCategory].value = stat.value;
-    }
-    return acc;
-  }, {});
-
-  for (const key in categorizedStats) {
-    result.push(categorizedStats[key]);
-  }
-
-  return result;
 }
+
 
 export function isBuffInList(b) {
   const buffs = [
@@ -260,4 +265,77 @@ export function isBuffInList(b) {
   return buffs.includes(b);
 }
 
+export function commaGold(price) {
+  price = price ? price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " 골드" : ""
 
+  return (<span className="text-[rgb(255,180,0)]">{price}</span>)
+}
+
+export function emblemColors(em) {
+  if (em.itemName.includes('다색')) {
+    return (
+      <p className="text-[rgb(54,151,80)]">{em.itemName}</p>
+    )
+  } else if (em.itemName.includes('노란') || em.itemName.includes('옐로우')) {
+    return (
+      <p className="text-[rgb(255,244,104)]">{em.itemName}</p>
+    )
+  } else if (em.itemName.includes('푸른')) {
+    return (
+      <p className="text-[rgb(63,143,235)]">{em.itemName}</p>
+    )
+  } else if (em.itemName.includes('붉은')) {
+    return (
+      <p className="text-red-500">{em.itemName}</p>
+    )
+  } else if (em.itemName.includes('플래티넘')) {
+    return (
+      <p className="text-[rgb(255,120,0)]">{em.itemName}</p>
+    )
+  } else if (em.itemName.includes('녹색')) {
+    return (
+      <p className="text-[rgb(105,209,96)]">{em.itemName}</p>
+    )
+  } else if (em.itemName.includes('듀얼')) {
+    return (
+      <p className="text-[rgb(226,139,238)]">{em.itemName}</p>
+    )
+  }
+}
+
+export function emblemGrade(em) {
+  if (em?.itemName?.includes('빛나는')) {
+    return (
+      <span className="text-[rgb(104,213,237)] mr-2">■</span>
+    )
+  } else if (em?.itemName?.includes('화려한')) {
+    return (
+      <span className="text-[rgb(179,107,255)] mr-2">■</span>
+    )
+  } else if (em?.itemName?.includes('찬란한')) {
+    return (
+      <span className="text-[rgb(255,100,255)] mr-2">◆</span>
+    )
+  }  else if (em?.itemName?.startsWith('플래티넘 엠블렘[') && em?.itemName?.endsWith(']')) {
+    // "플래티넘 엠블렘[skillName]" 형식
+    const skillName = em.itemName.slice(9, -1); // "플래티넘 엠블렘["를 잘라내고 뒤에 "]"를 제거
+    return (
+      <span className="text-[rgb(255,120,0)] mr-2">{skillName}</span>
+    );
+  } else if (em?.itemName?.includes('의 플래티넘 엠블렘')) {
+    // "jobName의 플래티넘 엠블렘" 형식
+    const jobName = em.itemName.split('의 플래티넘 엠블렘')[0]; // "의 플래티넘 엠블렘" 앞부분 추출
+    return (
+      <span className="text-[rgb(104,213,237)] mr-2">플엠(직업: {jobName})</span>
+    );
+  } else {
+    return (<span className="text-red-500 mr-2">X</span>)
+  }
+}
+
+export function transAvatarSlotName(slotName) {
+  slotName = slotName ? slotName.includes('아바타')
+    ? slotName == '스킨 아바타' ? slotName.replace('스킨 아바타', '피부')
+      : slotName.replace(' 아바타', '') : slotName : "크리쳐"
+  return slotName
+}
