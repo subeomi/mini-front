@@ -1,3 +1,4 @@
+import { checkCreature } from "./creatureFunction"
 import { checkEquip } from "./equipFunction"
 
 export function transFameRank(r) {
@@ -23,5 +24,7 @@ export function checkInfo (type, obj) {
 
     if(type === 'equip'){
         checkEquip(obj.equip)
+    } else if(type === 'creature'){
+        checkCreature(obj.creature)
     }
 }

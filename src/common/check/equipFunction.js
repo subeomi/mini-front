@@ -8,7 +8,7 @@ export function checkEquip(equip) {
     // 장비 탐색
     if (equip?.equipment?.length > 0) {
         for (const item of equip.equipment) {
-            console.log(item)
+            // console.log(item)
             equipSet.delete(item.slotName)
 
 
@@ -16,7 +16,7 @@ export function checkEquip(equip) {
             if (!item.enchant) {
                 missingEnchantSet.add(item.slotName)
             }
-            // 마법부여 체크 (인챈트랭크, 칭호제외)
+            // 마법부여 체크 (인챈트랭크, 칭호제외) + 칭호 등급 체크
             if(item.slotName !== '칭호'){
                 if(item.enchantRank === 1){
                     checkEnchantRank.r1.push(item.slotName)
@@ -24,6 +24,14 @@ export function checkEquip(equip) {
                     checkEnchantRank.r2.push(item.slotName)
                 } else if(item.enchantRank >= 3){
                     checkEnchantRank.r3.push(item.slotName)
+                }
+            } else if(item.slotName === '칭호'){
+                if(item.rank === 1){
+                    checkEquipList.push({ lvl: 4, msg: `종결 칭호를 보유하고 있습니다.` })
+                } else if(item.rank === 2){
+                    checkEquipList.push({ lvl: 3, msg: `준종결 칭호를 보유하고 있습니다.` })
+                } else if(item.rank >= 3){
+                    checkEquipList.push({ lvl: 2, msg: `하급 칭호를 보유하고 있습니다.` })
                 }
             }
         }
@@ -54,7 +62,7 @@ export function checkEquip(equip) {
     } else if(checkEnchantRank.r3.length === 0 && checkEnchantRank.r2.length === 0 && checkEnchantRank.r1.length === 0){
         checkEquipList.push({lvl:1, msg:'모든 장비에 마법부여가 누락됐거나, 지난 시즌 마법부여가 적용되어 있습니다.'})
     }
+    checkEquipList.push(checkEnchantRank)
 
     console.log(checkEquipList)
-    console.log(checkEnchantRank)
 }
