@@ -1,3 +1,4 @@
+import { checkAvatar } from "./avatarFunction"
 import { checkCreature } from "./creatureFunction"
 import { checkEquip } from "./equipFunction"
 
@@ -26,5 +27,7 @@ export function checkInfo (type, obj) {
         checkEquip(obj.equip)
     } else if(type === 'creature'){
         checkCreature(obj.creature)
+    } else if(type === 'avatar'){
+        checkAvatar(obj.avatar)
     }
 }
