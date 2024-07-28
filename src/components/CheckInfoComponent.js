@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { avatarSlot, checkInfo, checkNameList, switchingSlot, transFameRank } from "../common/check/checkFunction";
-import { transSwitchingEquip } from "../common/check/switchingFunction";
+import { findBuff, transSwitchingEquip } from "../common/check/switchingFunction";
 import { transAvatarSlotName } from "../common/globalFunction";
 import { checkEmblems } from "../common/check/avatarFunction";
 
@@ -9,21 +9,22 @@ const CheckInfoComponent = ({ avatar, creature, equipment, switching, jobGrowNam
     const [checkEquip, setCheckEquip] = useState([]);
     const [checkAvatar, setCheckAvatar] = useState([]);
 
-    console.log('check avatar: ', avatar)
-    console.log('check creature: ', creature)
-    console.log('check equipment: ', equipment)
-    console.log('check switching: ', switching)
-
+    
     const combinedArray = [
         ...(switching.equip || []),
         ...(switching.avatar || []),
         ...(switching.creature || [])
     ];
+    
+    console.log('check avatar: ', avatar)
+    console.log('check creature: ', creature)
+    console.log('check equipment: ', equipment)
+    console.log('check switching: ', combinedArray)
 
     const checkObj = {
         equip: equipment,
         creature: creature,
-        switching: switching,
+        switching: combinedArray,
         avatar: avatar
     }
 
@@ -56,7 +57,7 @@ const CheckInfoComponent = ({ avatar, creature, equipment, switching, jobGrowNam
                 <div>
                     {checkNameList.map((chk, index) => (
                         <div key={index + 'chk'}>
-                            {checkInfo(chk, checkObj)}
+                            {checkInfo(chk, checkObj, findBuff(jobGrowName, jobName), jobName)}
                         </div>
                     ))}
                 </div>

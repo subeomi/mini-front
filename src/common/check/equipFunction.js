@@ -1,6 +1,8 @@
+import { equipSlot } from "./checkFunction";
+
 export function checkEquip(equip) {
     const checkEquipList = [];
-    const equipSlot = ["무기", "칭호", "상의", "하의", "머리어깨", "신발", "벨트", "팔찌", "목걸이", "반지", "보조장비", "마법석", "귀걸이"];
+    // export const equipSlot = ["무기", "칭호", "상의", "하의", "머리어깨", "신발", "벨트", "팔찌", "목걸이", "반지", "보조장비", "마법석", "귀걸이"];
     const equipSet = new Set(equipSlot);
     const missingEnchantSet = new Set();
     const checkEnchantRank = {r1:[], r2:[], r3:[]}

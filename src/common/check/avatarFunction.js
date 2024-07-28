@@ -42,7 +42,7 @@ export function checkAvatar(avatar) {
     const missingAvatar = Array.from(avatarSet);
     if (missingAvatar?.length > 0) {
         const missingAvatarStr = missingAvatar.map(transSkinToPibu).join(', ');
-        checkAvatarList.push({ lvl: 1, msg: `누락된 아바타 있습니다: ${missingAvatarStr}` })
+        checkAvatarList.push({ lvl: 1, msg: `누락된 아바타가 있습니다: ${missingAvatarStr}` })
     }
 
     // 엠블렘 확인
