@@ -38,13 +38,6 @@ export function checkAvatar(avatar) {
         }
     }
 
-    // 아바타 누락 확인
-    const missingAvatar = Array.from(avatarSet);
-    if (missingAvatar?.length > 0) {
-        const missingAvatarStr = missingAvatar.map(transSkinToPibu).join(', ');
-        checkAvatarList.push({ lvl: 1, msg: `누락된 아바타가 있습니다: ${missingAvatarStr}` })
-    }
-
     // 엠블렘 확인
     if (Object.keys(emblems).length === 0) {
         checkAvatarList.push({ lvl: 1, msg: `모든 아바타에 엠블렘이 누락되어 있습니다.` })
@@ -68,6 +61,13 @@ export function checkAvatar(avatar) {
             }
         }
 
+        // 아바타 누락 확인
+        const missingAvatar = Array.from(avatarSet);
+        if (missingAvatar?.length > 0) {
+            const missingAvatarStr = missingAvatar.map(transSkinToPibu).join(', ');
+            checkAvatarList.push({ lvl: 1, msg: `누락된 아바타가 있습니다: ${missingAvatarStr}` })
+        }
+
         // 엠블렘 누락 확인
         if (missingEmblems.length > 0) {
             const missingEmblemStr = missingEmblems.join(', ');
@@ -81,7 +81,7 @@ export function checkAvatar(avatar) {
         checkAvatarList.push(emblems)
     }
 
-    console.log(checkAvatarList)
+    return checkAvatarList;
 }
 
 function transSkinToPibu(n) {

@@ -38,6 +38,7 @@ export function checkEquip(equip) {
             }
         }
     }
+    checkEquipList.push(checkEnchantRank)
 
     // 장비 누락 확인
     const missingEquipment = Array.from(equipSet);
@@ -64,7 +65,6 @@ export function checkEquip(equip) {
     } else if(checkEnchantRank.r3.length === 0 && checkEnchantRank.r2.length === 0 && checkEnchantRank.r1.length === 0){
         checkEquipList.push({lvl:1, msg:'모든 장비에 마법부여가 누락됐거나, 지난 시즌 마법부여가 적용되어 있습니다.'})
     }
-    checkEquipList.push(checkEnchantRank)
 
-    console.log(checkEquipList)
+    return checkEquipList;
 }

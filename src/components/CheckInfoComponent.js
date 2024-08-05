@@ -6,16 +6,24 @@ import { checkEmblems } from "../common/check/avatarFunction";
 
 const CheckInfoComponent = ({ avatar, creature, equipment, switching, jobGrowName, jobName }) => {
 
-    const [checkEquip, setCheckEquip] = useState([]);
-    const [checkAvatar, setCheckAvatar] = useState([]);
+    const [accordion, setAccordion] = useState([])
 
-    
+    const handleAccordionIndex = (i) => {
+        const checkIndex = accordion.includes(i)
+
+        if (checkIndex) {
+            setAccordion(accordion.filter((index) => index !== i))
+        } else {
+            setAccordion([...accordion, i])
+        }
+    }
+
     const combinedArray = [
         ...(switching.equip || []),
         ...(switching.avatar || []),
         ...(switching.creature || [])
     ];
-    
+
     console.log('check avatar: ', avatar)
     console.log('check creature: ', creature)
     console.log('check equipment: ', equipment)
@@ -44,7 +52,23 @@ const CheckInfoComponent = ({ avatar, creature, equipment, switching, jobGrowNam
     const auraObj = avatar.avatar
         ?.filter((item) => item.slotName === '오라 아바타')[0]
 
-    // console.log(titleObj)
+    const transChk = (chk) => {
+        switch (chk) {
+            case "equip": return "장비";
+            case "switching": return "버프강화";
+            case "avatar": return "아바타";
+            case "creature": return "크리쳐";
+        }
+    }
+
+    const liColors = (lvl) => {
+        switch (lvl) {
+            case 1: return 'text-red-500';
+            case 2: return 'text-yellow-400';
+            case 3: return 'text-emerald-400';
+            case 4: return 'text-sky-400';
+        }
+    }
 
     return (
         <div className="text-white flex justify-center">
@@ -55,11 +79,38 @@ const CheckInfoComponent = ({ avatar, creature, equipment, switching, jobGrowNam
                     </span>
                 </div>
                 <div>
-                    {checkNameList.map((chk, index) => (
-                        <div key={index + 'chk'}>
-                            {checkInfo(chk, checkObj, findBuff(jobGrowName, jobName), jobName)}
-                        </div>
-                    ))}
+                    {checkNameList.map((chk, index) => {
+                        const chkData = checkInfo(chk, checkObj, findBuff(jobGrowName, jobName), jobName);
+                        const barData = chkData?.filter(li => !(li.hasOwnProperty('lvl') && li.hasOwnProperty('msg')))
+                        const liData = chkData?.filter(li => (li.hasOwnProperty('lvl') && li.hasOwnProperty('msg')))
+                        console.log('barData:', barData); // barData를 로그로 출력
+                        return (
+                            <div key={index + 'chk'} onClick={() => handleAccordionIndex(index)}>
+                                <div className={`h-min-[50px] mb-1 p-2 hover:bg-[rgb(35,41,50)] cursor-pointer
+                            ${!accordion.includes(index) ? 'bg-[rgb(35,41,50)]' : 'bg-[rgb(40,50,57)]'}`}>
+                                    <span className="text-[18px] font-bold">
+                                        {transChk(chk)}
+                                    </span>
+                                    {/* 아코디언 */}
+                                    <div className={`overflow-hidden ease-in-out transition-all duration-300 bg-[rgb(35,41,50)] 
+                                cursor-pointer
+                                    ${!accordion.includes(index)
+                                            ? 'opacity-100 h-auto'
+                                            : 'opacity-0 h-0'
+                                        }`}
+                                    >
+                                        {Array.isArray(liData) && liData.length > 0 && liData.map((item, liIndex) => (
+                                            <div key={index + 'chk' + liIndex}>
+                                                <span className={`${liColors(item.lvl)}`}>
+                                                    {item.msg}
+                                                </span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    })}
                 </div>
                 <div className="h-[200px] bg-cat2 w-full mb-2 p-2 flex items-center">
                     <div className="">

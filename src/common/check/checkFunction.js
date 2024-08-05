@@ -25,13 +25,18 @@ export const checkNameList = ['equip', 'switching', 'avatar', 'creature'];
 
 export function checkInfo (type, obj, buff, jobName) {
 
+    let result;
+
     if(type === 'equip'){
-        checkEquip(obj.equip)
+        result = checkEquip(obj.equip)
     } else if(type === 'creature'){
-        checkCreature(obj.creature)
+        result = checkCreature(obj.creature)
     } else if(type === 'avatar'){
-        checkAvatar(obj.avatar)
+        result = checkAvatar(obj.avatar)
     } else if(type === 'switching'){
-        checkSwitching(obj.switching, buff, jobName)
+        result = checkSwitching(obj.switching, buff, jobName)
     }
+
+    console.log(result)
+    return result
 }

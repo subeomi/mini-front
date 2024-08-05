@@ -78,7 +78,7 @@ export function checkSwitching(switching, buff, jobName) {
     }
 
 
-    console.log(checkSwitchingList)
+    return checkSwitchingList;
 }
 
 // 캐릭터의 버프 {name: 버프명, level: 습득레벨}

@@ -26,11 +26,11 @@ export function checkCreature(creature) {
             artifactSet.delete(transArtifactColors(arti.slotColor))
 
             if(arti.rank === 1){
-                checkArtifactRank.r1.push(arti.slotColor)
+                checkArtifactRank.r3.push(arti.slotColor)
             } else if(arti.rank === 2){
                 checkArtifactRank.r2.push(arti.slotColor)
             } else if(arti.rank >= 3){
-                checkArtifactRank.r3.push(arti.slotColor)
+                checkArtifactRank.r1.push(arti.slotColor)
             }
         }
     }
@@ -42,9 +42,9 @@ export function checkCreature(creature) {
         checkCreatureList.push({ lvl: 1, msg: `누락된 아티팩트가 있습니다: ${missingArtifactStr}` })
     }
 
-    checkCreatureList.push(checkArtifactRank)
+    checkCreatureList.push(checkArtifactRank);
 
-    console.log(checkCreatureList)
+    return checkCreatureList;
 }
 
 function transArtifactColors(c) {
