@@ -1,17 +1,32 @@
+import CheckAvatarComponent from "../../components/check/CheckAvatarComponent"
+import CheckCreatureComponent from "../../components/check/CheckCreatureComponent"
+import CheckEquipComponent from "../../components/check/CheckEquipComponent"
+import EquipCheckComponent from "../../components/check/CheckEquipComponent"
+import EquipCheck from "../../components/check/CheckEquipComponent"
+import CheckSwitchingComponent from "../../components/check/CheckSwitchingComponent"
 import { checkAvatar } from "./avatarFunction"
 import { checkCreature } from "./creatureFunction"
 import { checkEquip } from "./equipFunction"
 import { checkSwitching } from "./switchingFunction"
 
+export const chkLiColors = (lvl) => {
+    switch (lvl) {
+        case 1: return 'text-red-500';
+        case 2: return 'text-yellow-400';
+        case 3: return 'text-emerald-400';
+        case 4: return 'text-sky-400';
+    }
+}
+
 export function transFameRank(r) {
     if (r === 1) {
-        return (<span className="text-emerald-400 ">종결</span>)
-    } else if (r === 2){
-        return (<span className="text-sky-400">준종결</span>)
+        return "border-b-blue-400"
+    } else if (r === 2) {
+        return "border-b-sky-400"
     } else if (r >= 3) {
-        return (<span className="text-yellow-400">가성비/하급</span>)
+        return "border-b-yellow-400"
     } else {
-        return (<span className="text-red-500">없음</span>)
+        return "border-b-red-500"
     }
 }
 
@@ -23,20 +38,19 @@ export const equipSlot = ["무기", "칭호", "상의", "하의", "머리어깨"
 
 export const checkNameList = ['equip', 'switching', 'avatar', 'creature'];
 
-export function checkInfo (type, obj, buff, jobName) {
+export function checkInfo(type, obj, buff, jobName) {
 
     let result;
 
-    if(type === 'equip'){
-        result = checkEquip(obj.equip)
-    } else if(type === 'creature'){
-        result = checkCreature(obj.creature)
-    } else if(type === 'avatar'){
-        result = checkAvatar(obj.avatar)
-    } else if(type === 'switching'){
-        result = checkSwitching(obj.switching, buff, jobName)
+    if (type === 'equip') {
+        result = CheckEquipComponent(obj.equip)
+    } else if (type === 'switching') {
+        result = CheckSwitchingComponent(obj.switching, buff, jobName)
+    } else if (type === 'avatar') {
+        result = CheckAvatarComponent(obj.avatar)
+    } else if (type === 'creature') {
+        result = CheckCreatureComponent(obj.creature)
     }
 
-    console.log(result)
     return result
 }
