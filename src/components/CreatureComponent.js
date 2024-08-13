@@ -44,20 +44,20 @@ const CreatureComponent = ({ creature }) => {
 
     return (
         <div className="flex justify-center text-white">
-            <div className="p-2 w-[70%]">
+            <div className="p-2 md:w-[90%] w-[60%]">
                 <div className="pb-2 font-bold flex justify-between">
                     <span>
                         크리쳐
                     </span>
-                    <span>
+                    {/* <span>
                         {commaGold(creature.sumPrice)}
-                    </span>
+                    </span> */}
                 </div>
                 {creature.creature && (
                     <div>
                         {combinedArray && combinedArray.map((item, index) => (
                             <div key={index}
-                                className={`h-min-[50px] mb-1 p-2 hover:bg-[rgb(35,41,50)] cursor-pointer
+                                className={`min-h-[63px] mb-1 p-2 hover:bg-[rgb(35,41,50)]
                             ${accordion.includes(index) ? 'bg-[rgb(35,41,50)]' : 'bg-[rgb(40,50,57)]'}`}
                                 onClick={() => handleAccordionIndex(index)}
                                 style={{
@@ -75,7 +75,7 @@ const CreatureComponent = ({ creature }) => {
                                     </span>
                                     <span className="px-2 text-[14px]">
                                         <p>{item.itemName}</p>
-                                        <p>{commaGold(item.price)}</p>
+                                        {/* <p>{commaGold(item.price)}</p> */}
                                     </span>
                                 </div>
                                 {/* 아코디언 */}

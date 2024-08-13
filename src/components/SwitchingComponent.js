@@ -29,9 +29,9 @@ const SwitchingComponent = ({ switching }) => {
                     <span>
                         버프강화
                     </span>
-                    <span>
+                    {/* <span>
                         {commaGold(switching.sumPrice)}
-                    </span>
+                    </span> */}
                 </div>
                 {combinedArray.length > 0 && combinedArray.map((item, index) => (
                     <div key={index + '번'}

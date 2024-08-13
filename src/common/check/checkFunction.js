@@ -9,22 +9,13 @@ import { checkCreature } from "./creatureFunction"
 import { checkEquip } from "./equipFunction"
 import { checkSwitching } from "./switchingFunction"
 
-export const chkLiColors = (lvl) => {
-    switch (lvl) {
-        case 1: return 'text-red-500';
-        case 2: return 'text-yellow-400';
-        case 3: return 'text-emerald-400';
-        case 4: return 'text-sky-400';
-    }
-}
-
 export function transFameRank(r) {
     if (r === 1) {
-        return "border-b-blue-400"
+        return "border-b-sky-500"
     } else if (r === 2) {
-        return "border-b-sky-400"
+        return "border-b-green-500"
     } else if (r >= 3) {
-        return "border-b-yellow-400"
+        return "border-b-yellow-500"
     } else {
         return "border-b-red-500"
     }

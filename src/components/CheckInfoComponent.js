@@ -75,7 +75,7 @@ const CheckInfoComponent = ({ avatar, creature, equipment, switching, jobGrowNam
                     {checkNameList.map((chk, index) => {
                         return (
                             <div key={index + 'chk'} onClick={() => handleAccordionIndex(index)} className="mb-1">
-                                <div className={`h-min-[50px] p-2 cursor-pointer bg-[rgb(40,50,57)]`}>
+                                <div className={`min-h-[50px] p-2 cursor-pointer bg-[rgb(40,50,57)] flex items-center`}>
                                     <span className="text-[18px] font-bold">
                                         {transChk(chk)}
                                     </span>
@@ -83,7 +83,7 @@ const CheckInfoComponent = ({ avatar, creature, equipment, switching, jobGrowNam
                                 </div>
                                 <div
                                     ref={(el) => (contentRefs.current[index] = el)}
-                                    className={`overflow-hidden ease-in-out transition-all duration-300 bg-[rgb(35,41,50)] 
+                                    className={`overflow-hidden ease-in-out transition-all duration-300 bg-cat3
                                 cursor-pointer`}
                                 >
                                     <div className="p-2">

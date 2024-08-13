@@ -1,10 +1,11 @@
 import { transFameRank } from "../../common/check/checkFunction";
 import { checkEquip } from "../../common/check/equipFunction";
+import CheckBlock from "../../common/item/CheckBlock";
 
 const CheckEquipComponent = (equip) => {
 
     const equipGridSlot = {};
-    const chkList = checkEquip(equip.equip)
+    const chkList = checkEquip(equip)
 
     equipGridSlot['left'] = {
         '머리어깨': '1/1',
@@ -25,12 +26,12 @@ const CheckEquipComponent = (equip) => {
         '마법석': '4/2',
     }
 
-    console.log(equip)
+    console.log(chkList)
 
     return (
         <div className="flex">
-            <div className="flex">
-
+            {/* 장비 이미지 슬롯 */}
+            <div className="flex w-[50%]">
                 <div className="grid grid-cols-[repeat(2,42px)] grid-rows-[repeat(3,46px)]">
                     {equip?.equipment?.map((item, index) => {
                         const gridItem = equipGridSlot['left'][item.slotName];
@@ -45,7 +46,8 @@ const CheckEquipComponent = (equip) => {
                         )
                     })}
                 </div>
-                <div className="w-[100px]"></div>
+                {/* 거리두기 */}
+                <div className="w-[100px]"></div> 
                 <div className="grid grid-cols-[repeat(2,42px)] grid-rows-[repeat(4,46px)]">
                     {equip?.equipment?.map((item, index) => {
                         const gridItem = equipGridSlot['right'][item.slotName];
@@ -62,8 +64,16 @@ const CheckEquipComponent = (equip) => {
                     })}
                 </div>
             </div>
-            <div>
-                
+            {/* 설명 */}
+            <div className="w-[50%]">
+                {chkList.map(item => {
+                    if (!item.hasOwnProperty('msg')) {
+                        return null;
+                    } else {
+                        // 반복문에서 key는 해당 컴포넌트 내부가 아니라 반복문으로 쪼갠 그 자리에서 지정해야한다
+                        return <CheckBlock key={item.msg} chk={item}></CheckBlock>
+                    }
+                })}
             </div>
         </div>
     );

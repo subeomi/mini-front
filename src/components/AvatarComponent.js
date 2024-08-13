@@ -32,9 +32,9 @@ const AvatarComponent = ({ avatar }) => {
                     <span>
                         아바타
                     </span>
-                    <span>
+                    {/* <span>
                         {commaGold(avatar.sumPrice)}
-                    </span>
+                    </span> */}
                 </div>
                 <div className="text-[14px]">
                     {avatar.avatar.length > 0 && sortedAvatars.map((item, index) => (

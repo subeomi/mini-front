@@ -34,7 +34,7 @@ const CharProfileComponent = ({ info, serverId }) => {
                     </span>
                 </div>
             </div>
-            <CharTitlecomponent price={price} />
+            {/* <CharTitlecomponent price={price} /> */}
         </div>
     );
 }

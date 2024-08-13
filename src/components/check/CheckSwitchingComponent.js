@@ -1,5 +1,6 @@
 import { transFameRank } from "../../common/check/checkFunction";
 import { checkSwitching } from "../../common/check/switchingFunction";
+import CheckBlock from "../../common/item/CheckBlock";
 
 const CheckSwitchingComponent = (switching, buff, jobName) => {
 
@@ -25,11 +26,8 @@ const CheckSwitchingComponent = (switching, buff, jobName) => {
     }
 
     return (
-        <div>
-            <div>
-
-            </div>
-            <div className="grid grid-cols-[repeat(9,42px)] grid-rows-[repeat(4,46px)]">
+        <div className="flex">
+            <div className="grid grid-cols-[repeat(9,42px)] grid-rows-[repeat(4,46px)] w-[50%]">
                 {switching?.map((item, index) => {
                     const gridItem = switchingGridSlot[item.slotName];
                     if (!gridItem) return null;
@@ -37,10 +35,19 @@ const CheckSwitchingComponent = (switching, buff, jobName) => {
                         <div
                             key={item.itemId}
                             style={{ gridArea: gridItem }}
-                            className={`${transFameRank(item?.enchantRank)} border-b-4 m-[2px]`}>
+                            className={`m-[2px]`}>
                             <img width={`42px`} src={`https://img-api.neople.co.kr/df/items/${item.itemId}`} />
                         </div>
                     )
+                })}
+            </div>
+            <div className="w-[50%]">
+                {chkList.map(item => {
+                    if (!item.hasOwnProperty('msg')) {
+                        return null;
+                    } else {
+                        return <CheckBlock key={item.msg} chk={item}></CheckBlock>
+                    }
                 })}
             </div>
         </div>

@@ -24,14 +24,14 @@ const EquipAndSkilsComponent = ({ skills, equipment }) => {
                         <span>
                             장착 장비
                         </span>
-                        <div className="flex flex-col">
+                        {/* <div className="flex flex-col">
                             <span>
                                 마법부여 {commaGold(equipment.sumEnchantPrice)}
                             </span>
                             <span>
                                 장비 {commaGold(equipment.sumPrice)}
                             </span>
-                        </div>
+                        </div> */}
                     </div>
                     <div>
                         {equipment.equipment.length > 0 && equipment.equipment.map((equip, index) => (
