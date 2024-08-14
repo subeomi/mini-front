@@ -5,8 +5,8 @@ import LoadingPage from "../pages/LoadingPage";
 const Loading = <LoadingPage></LoadingPage>
 
 const Index = lazy(() => import("../pages/IndexPage"));
-const Search = lazy(() => import("../pages/cool/SearchPage"));
-const Character = lazy(() => import("../pages/cool/CharInfoPage"));
+const Search = lazy(() => import("../pages/SearchPage"));
+const Character = lazy(() => import("../pages/CharInfoPage"));
 const ServerStatus = lazy(() => import("../pages/ServerStatusPage"));
 
 const router = createBrowserRouter([

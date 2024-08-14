@@ -1,13 +1,7 @@
 import CheckAvatarComponent from "../../components/check/CheckAvatarComponent"
 import CheckCreatureComponent from "../../components/check/CheckCreatureComponent"
 import CheckEquipComponent from "../../components/check/CheckEquipComponent"
-import EquipCheckComponent from "../../components/check/CheckEquipComponent"
-import EquipCheck from "../../components/check/CheckEquipComponent"
 import CheckSwitchingComponent from "../../components/check/CheckSwitchingComponent"
-import { checkAvatar } from "./avatarFunction"
-import { checkCreature } from "./creatureFunction"
-import { checkEquip } from "./equipFunction"
-import { checkSwitching } from "./switchingFunction"
 
 export function transFameRank(r) {
     if (r === 1) {

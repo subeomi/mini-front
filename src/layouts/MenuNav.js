@@ -7,9 +7,6 @@ const MenuNav = ({ menu, setMenu }) => {
     const translationMenu = (item) => {
         switch (item) {
             case 'equip': return '장비정보';
-            case 'skilltree': return '스킬트리';
-            case 'skillCustom': return '스킬상세';
-            case 'trait': return '보조특성';
             case 'switching': return '버프강화';
             case 'avatar': return '아바타';
             case 'creature': return '크리쳐';
