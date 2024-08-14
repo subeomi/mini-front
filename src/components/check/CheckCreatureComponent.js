@@ -7,19 +7,19 @@ const CheckCreatureComponent = (creature) => {
     const chkList = checkCreature(creature)
 
     const creatureArtiGridSlot = {
-        RED: '1/1',
-        BLUE: '2/1',
-        GREEN: '3/1'
+        RED: '1/5',
+        BLUE: '2/5',
+        GREEN: '3/5'
     }
 
     console.log(chkList)
 
     return (
         <div className="flex">
-            <div className="m-[50px]">
-                <img width={`42px`} src={`https://img-api.neople.co.kr/df/items/${creature?.creature?.itemId}`} />
-            </div>
-            <div className="grid grid-cols-[repeat(1,42px)] grid-rows-[repeat(3,46px)] w-[50%]">
+            <div className="grid grid-cols-[repeat(5,42px)] grid-rows-[repeat(3,46px)] w-[50%]">
+                <div style={{ gridArea: '2 / 2' }} className={`m-[2px]`}>
+                    <img width={`42px`} src={`https://img-api.neople.co.kr/df/items/${creature?.creature?.itemId}`} />
+                </div>
                 {creature?.creature?.artifact?.map((item, index) => {
                     const gridItem = creatureArtiGridSlot[item.slotColor];
                     if (!gridItem) return null;

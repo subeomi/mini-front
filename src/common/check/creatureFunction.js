@@ -2,17 +2,17 @@ export function checkCreature(creature) {
     const checkCreatureList = [];
     const artifactSlot = ['레드', '블루', '그린'];
     const artifactSet = new Set(artifactSlot);
-    const checkArtifactRank = {r1:[], r2:[], r3:[]}
+    const checkArtifactRank = { unique: [], rare: [], uncommon: [] }
 
     // 크리쳐 탐색 + 수준 확인
     if (!creature?.creature) {
         checkCreatureList.push({ lvl: 1, msg: '크리쳐가 존재하지 않습니다.' })
     } else {
-        if(creature?.creature?.rank === 1){
+        if (creature?.creature?.rank === 1) {
             checkCreatureList.push({ lvl: 4, msg: `종결 크리쳐를 보유하고 있습니다.` })
-        } else if(creature?.creature?.rank === 2){
+        } else if (creature?.creature?.rank === 2) {
             checkCreatureList.push({ lvl: 3, msg: `준종결 크리쳐를 보유하고 있습니다.` })
-        } else if(creature?.creature?.rank >= 3){
+        } else if (creature?.creature?.rank >= 3) {
             checkCreatureList.push({ lvl: 2, msg: `하급 크리쳐를 보유하고 있습니다.` })
         }
     }
@@ -25,12 +25,12 @@ export function checkCreature(creature) {
         for (const arti of artifacts) {
             artifactSet.delete(transArtifactColors(arti.slotColor))
 
-            if(arti.rank === 1){
-                checkArtifactRank.r3.push(arti.slotColor)
-            } else if(arti.rank === 2){
-                checkArtifactRank.r2.push(arti.slotColor)
-            } else if(arti.rank >= 3){
-                checkArtifactRank.r1.push(arti.slotColor)
+            if (arti.itemRarity === '유니크') {
+                checkArtifactRank.unique.push(arti.slotColor)
+            } else if (arti.itemRarity === '레어') {
+                checkArtifactRank.rare.push(arti.slotColor)
+            } else if (arti.itemRarity === '언커먼') {
+                checkArtifactRank.uncommon.push(arti.slotColor)
             }
         }
     }
@@ -42,8 +42,20 @@ export function checkCreature(creature) {
         checkCreatureList.push({ lvl: 1, msg: `누락된 아티팩트가 있습니다: ${missingArtifactStr}` })
     }
 
-    checkCreatureList.push(checkArtifactRank);
+    // 아티팩트 수준 확인
+    if (checkArtifactRank.unique.length >= 3) {
+        checkCreatureList.push({ lvl: 4, msg: `모든 아티팩트가 유니크 등급입니다.` })
+    } else if (checkArtifactRank.rare.length >= 3) {
+        checkCreatureList.push({ lvl: 3, msg: `모든 아티팩트가 레어 등급입니다.` })
+    } else if (checkArtifactRank.uncommon.length >= 3) {
+        checkCreatureList.push({ lvl: 2, msg: `모든 아티팩트가 언커먼 등급입니다.` })
 
+    }
+
+
+    console.log('creature: ', checkCreatureList)
+
+    checkCreatureList.push(checkArtifactRank);
     return checkCreatureList;
 }
 
