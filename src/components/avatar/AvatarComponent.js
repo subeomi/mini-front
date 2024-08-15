@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { commaGold, emblemColors, transAvatarSlotName } from "../../common/globalFunction";
 import { avatarSlot } from "../../common/check/checkFunction";
+import Tooltip from "../../common/item/Tooltip";
 
 const AvatarComponent = ({ avatar }) => {
 
@@ -90,7 +91,7 @@ const AvatarComponent = ({ avatar }) => {
                                 </div>
                             </div>
                             {/* 아코디언 */}
-                            <div className={`overflow-hidden flex items-center ease-in-out transition-all duration-300 
+                            <div className={`flex items-center ease-in-out transition-all duration-300 
                             bg-[rgb(35,41,50)] cursor-pointer
                             ${accordion.includes(index)
                                     ? 'opacity-100 h-[170px]'
@@ -113,8 +114,13 @@ const AvatarComponent = ({ avatar }) => {
                                                 <p>
                                                     최근 평균 거래가 : {commaGold(item.price)}
                                                 </p>
-                                                <div>
-                                                    최근 거래내역 : {item.history ? (<span className="text-blue-400">[거래내역]</span>
+                                                <div className="flex">
+                                                    최근 거래내역 : {item.history ? (
+                                                        <Tooltip text={item.history}>
+                                                            <span className="text-blue-400">
+                                                                [거래내역]
+                                                            </span>
+                                                        </Tooltip>
                                                     ) : (<span className="text-gray-400">거래 내역 없음</span>)}
                                                 </div>
                                             </div>)
@@ -137,8 +143,13 @@ const AvatarComponent = ({ avatar }) => {
                                                     <p>
                                                         최근 평균 거래가 : {commaGold(item.clone.price)}
                                                     </p>
-                                                    <div>
-                                                        최근 거래내역 : {item.clone.history ? (<span className="text-blue-400">[거래내역]</span>
+                                                    <div className="flex">
+                                                        최근 거래내역 : {item.clone.history ? (
+                                                            <Tooltip text={item.clone.history}>
+                                                                <span className="text-blue-400">
+                                                                    [거래내역]
+                                                                </span>
+                                                            </Tooltip>
                                                         ) : (<span className="text-gray-400">거래 내역 없음</span>)}
                                                     </div>
                                                 </div>)
@@ -165,8 +176,13 @@ const AvatarComponent = ({ avatar }) => {
                                                         <p>
                                                             최근 평균 거래가 : {commaGold(em.price)}
                                                         </p>
-                                                        <div>
-                                                            최근 거래내역 : {em.history ? (<span className="text-blue-400">[거래내역]</span>
+                                                        <div className="flex">
+                                                            최근 거래내역 : {em.history ? (
+                                                                <Tooltip text={em.history}>
+                                                                    <span className="text-blue-400">
+                                                                        [거래내역]
+                                                                    </span>
+                                                                </Tooltip>
                                                             ) : (<span className="text-gray-400">거래 내역 없음</span>)}
                                                         </div>
                                                     </div>)

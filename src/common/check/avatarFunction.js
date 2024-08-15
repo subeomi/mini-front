@@ -5,6 +5,7 @@ export function checkAvatar(avatar) {
     const checkAvatarList = [];
     // export const avatarSlot = ['오라', '무기', '모자', '머리', '얼굴', '목가슴', '상의', '하의', '허리', '신발', '스킨']
     const avatarSet = new Set(avatarSlot);
+    const avatarRarity = {rare:[], common:[]};
     const emblems = {};
 
     // 아바타 탐색 + 수준 확인
@@ -33,6 +34,15 @@ export function checkAvatar(avatar) {
                     checkAvatarList.push({ lvl: 3, msg: `준종결 오라를 보유하고 있습니다.` })
                 } else if (av.rank >= 3) {
                     checkAvatarList.push({ lvl: 2, msg: `하급 오라를 보유하고 있습니다.` })
+                }
+            }
+
+            // 아바타 등급 확인
+            if(slot !== '오라' && slot !== '무기'){
+                if(av.itemRarity === '레어'){
+                    avatarRarity.rare.push(slot);
+                } else if (av.itemRarity === '커먼'){
+                    avatarRarity.common.push(slot);
                 }
             }
         }
@@ -66,6 +76,13 @@ export function checkAvatar(avatar) {
         if (missingAvatar?.length > 0) {
             const missingAvatarStr = missingAvatar.map(transSkinToPibu).join(', ');
             checkAvatarList.push({ lvl: 1, msg: `누락된 아바타가 있습니다: ${missingAvatarStr}` })
+        }
+        // 아바타 등급 평가
+        if(avatarRarity.rare.length >= 8){
+            checkAvatarList.push({ lvl: 4, msg: `레어 아바타 풀세트를 보유하고 있습니다.` })
+        } else if(avatarRarity.common.length >= 8){
+            checkAvatarList.push({ lvl: 2, msg: `상급 아바타 풀세트를 보유하고 있습니다.` })
+
         }
 
         // 엠블렘 누락 확인

@@ -5,7 +5,7 @@ const BaseNav = () => {
     return (
         <div
             className="fixed z-50 w-full h-[60px] flex items-center justify-center 
-            bg-black opacity-80 border-[2px] border-[rgb(35,41,50)]"
+            bg-black opacity-80"
         >
             <Link to="/" className="text-white font-extrabold flex items-center">
                 <span className="text-[24px]">
