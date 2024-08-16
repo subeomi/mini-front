@@ -19,9 +19,7 @@ export function checkCreature(creature) {
 
     const artifacts = creature?.creature?.artifact
     // 아티팩트 탐색
-    if (!artifacts || artifacts.length === 0) {
-        checkCreatureList.push({ lvl: 1, msg: '누락된 아티팩트가 있습니다: 레드, 블루, 그린' })
-    } else {
+    if (artifacts && artifacts.length > 0) {
         for (const arti of artifacts) {
             artifactSet.delete(transArtifactColors(arti.slotColor))
 

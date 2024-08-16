@@ -1,39 +1,23 @@
+import { Link } from 'react-router-dom';
 import { commaGold } from '../../common/globalFunction';
 
-const CharTitlecomponent = ({ price }) => {
+const CharTitlecomponent = ({ data }) => {
 
+    const altList = Array.isArray(data?.alt) && data.alt
 
-    const title = Object.entries(price)
-    const totalPrice = title.reduce((acc, [key, value]) => acc + Number(value), 0);
-    const titleName = (n) => {
-        switch (n) {
-            case 'switching': return '버프강화';
-            case 'avatar': return '아바타';
-            case 'creature': return '크리쳐';
-            case 'enchant': return '마법부여';
-            case 'equip': return '장비';
-            default: return n;
-        }
-    }
     return (
-        <div className="w-[45%] text-white mb-10 mt-2 p-2">
-            <div className='w-[300px]'>
-                {title && title.map(([key,value], index) => (
-                    <div key={index} className='flex justify-between text-[14px]'>
-                        <span className=''>
-                            {titleName(key)}
-                        </span>
-                        <span className=''>
-                            {commaGold(value)}
-                        </span>
-                    </div>
-                ))}
-                <div className='mt-2 font-bold'>
-                    <span>
-                        합계 {commaGold(totalPrice)}
-                    </span>
-                </div>
-            </div>
+        <div className="w-[45%] overflow-scroll">
+            {altList?.filter(item => item.characterId !== data.characterId).map((item, index) => (
+                <Link key={item?.characterId} 
+                className='h-[35px] mb-1 hover:bg-[rgb(35,41,50)] p-2 text-[13px] flex items-center cursor-pointer'
+                to={`/character?serverId=${item.serverId}&characterId=${item.characterId}`}>
+                    <img className="w-[20px] h-[20px]"
+                    src={`https://img-api.neople.co.kr/df/servers/${item.serverId}/characters/${item.characterId}?zoom=1`} />
+                    <div className='w-[140px]'>{item.characterName}</div>
+                    <div className='text-[#3392ff] w-[40px]'>{item.fame}</div>
+                    <div className='ml-2'>{item.jobGrowName}</div>
+                </Link>
+            ))}
         </div>
     );
 }

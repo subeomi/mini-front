@@ -13,8 +13,8 @@ const CharProfileComponent = ({ info, serverId }) => {
     }
 
     return (
-        <div className="flex justify-between">
-            <div className="flex relative text-white mb-10 mt-2 p-2 w-[45%]">
+        <div className="flex justify-between p-2 pt-4 text-white">
+            <div className="flex relative mb-10 w-[45%]">
 
                 <img className="border-2 rounded-lg border-[rgb(23,27,36)]"
                     src={`https://img-api.neople.co.kr/df/servers/${serverId}/characters/${data.characterId}?zoom=1`} />
@@ -34,7 +34,7 @@ const CharProfileComponent = ({ info, serverId }) => {
                     </span>
                 </div>
             </div>
-            {/* <CharTitlecomponent price={price} /> */}
+            <CharTitlecomponent data={data} />
         </div>
     );
 }
