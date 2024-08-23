@@ -64,28 +64,25 @@ const CharInfoComponent = () => {
         } else if (menu === 'creature') {
             return <CreatureComponent creature={info.creature}></CreatureComponent>
         } else if (menu === 'check') {
-            return <CheckInfoComponent 
-            creature={info.creature} avatar={info.avatar} equipment={info.equipment} switching={info.switching}
-            jobGrowName={info.data.jobGrowName} jobName={info.data.jobName}
+            return <CheckInfoComponent
+                creature={info.creature} avatar={info.avatar} equipment={info.equipment} switching={info.switching}
+                jobGrowName={info.data.jobGrowName} jobName={info.data.jobName}
             ></CheckInfoComponent>
         }
     };
 
     return (
-        <div className="flex justify-center h-screen mb-20">
+        <div className="mb-20">
             {info.equipment && (
-                <>
-                    <div name="equip"
-                        className="w-[1000px]">
+                <div name="equip"
+                    className="w-[1000px]">
 
-                        <CharProfileComponent
-                            serverId={profile.serverId} info={info}
-
-                        ></CharProfileComponent>
-                        <MenuNav menu={menu} setMenu={setMenu} />
-                        {renderComponent()}
-                    </div>
-                </>
+                    <CharProfileComponent
+                        serverId={profile.serverId} info={info}
+                    ></CharProfileComponent>
+                    <MenuNav menu={menu} setMenu={setMenu} />
+                    {renderComponent()}
+                </div>
             )}
         </div>
     );

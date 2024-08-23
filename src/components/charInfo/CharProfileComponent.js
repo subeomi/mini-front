@@ -13,7 +13,7 @@ const CharProfileComponent = ({ info, serverId }) => {
     }
 
     return (
-        <div className="flex justify-between p-2 pt-4 text-white">
+        <div className="flex justify-center p-2 pt-4 text-white">
             <div className="flex relative mb-10 w-[45%]">
 
                 <img className="border-2 rounded-lg border-[rgb(23,27,36)]"

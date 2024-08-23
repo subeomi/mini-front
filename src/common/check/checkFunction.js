@@ -8,10 +8,8 @@ export function transFameRank(r) {
         return "border-b-sky-500"
     } else if (r === 2) {
         return "border-b-green-500"
-    } else if (r >= 3) {
-        return "border-b-yellow-500"
     } else {
-        return "border-b-red-500"
+        return "border-b-yellow-500"
     }
 }
 

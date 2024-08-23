@@ -40,7 +40,7 @@ const CheckEquipComponent = (equip) => {
                             <div
                                 key={item.itemId}
                                 style={{ gridArea: gridItem }}
-                                className={`${transFameRank(item?.enchantRank)} border-b-4 m-[2px]`}>
+                                className={`${item.enchant ? transFameRank(item?.enchantRank) : 'border-red-500'} border-b-4 m-[2px]`}>
                                 <img width={`42px`} src={`https://img-api.neople.co.kr/df/items/${item.itemId}`} />
                             </div>
                         )

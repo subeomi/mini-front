@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { commaGold, emblemColors } from "../../common/globalFunction";
+import Tooltip from "../../common/item/Tooltip";
 
 const SwitchingComponent = ({ switching }) => {
     console.log('switching: ', switching)
@@ -118,10 +119,15 @@ const SwitchingComponent = ({ switching }) => {
                                                     <p>
                                                         최근 평균 거래가 : {commaGold(em.price)}
                                                     </p>
-                                                    <div>
-                                                        최근 거래내역 : {em.history ? (<span className="text-blue-400">[거래내역]</span>
-                                                        ) : (<span className="text-gray-400">거래 내역 없음</span>)}
-                                                    </div>
+                                                    <div className="flex">
+                                                            최근 거래내역 : {em.history ? (
+                                                                <Tooltip text={em.history}>
+                                                                    <span className="text-blue-400">
+                                                                        [거래내역]
+                                                                    </span>
+                                                                </Tooltip>
+                                                            ) : (<span className="text-gray-400">거래 내역 없음</span>)}
+                                                        </div>
                                                 </div>)
                                                 :
                                                 (<span className="text-gray-400">
