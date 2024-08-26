@@ -26,14 +26,14 @@ const CheckEquipComponent = (equip) => {
         '마법석': '4/2',
     }
 
-    console.log(chkList)
+    // console.log(chkList)
 
     return (
         <div className="flex">
             {/* 장비 이미지 슬롯 */}
             <div className="flex w-[50%]">
                 <div className="grid grid-cols-[repeat(2,42px)] grid-rows-[repeat(3,46px)]">
-                    {equip?.equipment?.map((item, index) => {
+                    {equip?.map((item, index) => {
                         const gridItem = equipGridSlot['left'][item.slotName];
                         if (!gridItem) return null;
                         return (
@@ -49,7 +49,7 @@ const CheckEquipComponent = (equip) => {
                 {/* 거리두기 */}
                 <div className="w-[100px]"></div> 
                 <div className="grid grid-cols-[repeat(2,42px)] grid-rows-[repeat(4,46px)]">
-                    {equip?.equipment?.map((item, index) => {
+                    {equip?.map((item, index) => {
                         const gridItem = equipGridSlot['right'][item.slotName];
 
                         if (!gridItem) return null;

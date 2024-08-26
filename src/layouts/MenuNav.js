@@ -10,7 +10,7 @@ const MenuNav = ({ menu, setMenu }) => {
             case 'switching': return '버프강화';
             case 'avatar': return '아바타';
             case 'creature': return '크리쳐';
-            case 'check': return '진단';
+            case 'check': return '요약';
             default: return item;
         }
     }

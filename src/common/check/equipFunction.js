@@ -8,8 +8,8 @@ export function checkEquip(equip) {
     const checkEnchantRank = {r1:[], r2:[], r3:[]}
 
     // 장비 탐색
-    if (equip?.equipment?.length > 0) {
-        for (const item of equip.equipment) {
+    if (equip?.length > 0) {
+        for (const item of equip) {
             // console.log(item)
             equipSet.delete(item.slotName)
 

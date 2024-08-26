@@ -23,7 +23,7 @@ const CheckAvatarComponent = (avatar) => {
     return (
         <div className="flex">
             <div className="grid grid-cols-[repeat(9,42px)] grid-rows-[repeat(4,46px)] w-[50%]">
-                {avatar?.avatar?.map((item, index) => {
+                {avatar?.map((item, index) => {
                     const gridItem = avatarGridSlot[item.slotName];
                     if (!gridItem) return null;
                     return (

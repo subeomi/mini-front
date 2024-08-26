@@ -9,10 +9,10 @@ export function checkAvatar(avatar) {
     const emblems = {};
 
     // 아바타 탐색 + 수준 확인
-    if (!avatar?.avatar) {
+    if (!avatar) {
         checkAvatarList.push({ lvl: 1, msg: '아바타가 존재하지 않습니다.' })
     } else {
-        for (const av of avatar.avatar) {
+        for (const av of avatar) {
             const slot = av.slotName.replace(' 아바타', '');
             avatarSet.delete(slot)
 

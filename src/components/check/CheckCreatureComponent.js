@@ -17,12 +17,12 @@ const CheckCreatureComponent = (creature) => {
     return (
         <div className="flex">
             <div className="grid grid-cols-[repeat(5,42px)] grid-rows-[repeat(3,46px)] w-[50%]">
-                {creature?.creature?.itemId && (
+                {creature?.itemId && (
                     <div style={{ gridArea: '2 / 2' }} className={`m-[2px]`}>
-                        <img width={`42px`} src={`https://img-api.neople.co.kr/df/items/${creature?.creature?.itemId}`} />
+                        <img width={`42px`} src={`https://img-api.neople.co.kr/df/items/${creature?.itemId}`} />
                     </div>
                 )}
-                {creature?.creature?.artifact?.map((item, index) => {
+                {creature?.artifact?.map((item, index) => {
                     const gridItem = creatureArtiGridSlot[item.slotColor];
                     if (!gridItem) return null;
                     return (

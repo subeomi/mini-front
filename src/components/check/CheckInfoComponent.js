@@ -4,6 +4,7 @@ import { findBuff, transSwitchingEquip } from "../../common/check/switchingFunct
 import { transAvatarSlotName } from "../../common/globalFunction";
 import { checkEmblems } from "../../common/check/avatarFunction";
 import EquipCheck from "./CheckEquipComponent";
+import Accordion from "../../common/item/Accordion";
 
 const CheckInfoComponent = ({ avatar, creature, equipment, switching, jobGrowName, jobName }) => {
 
@@ -74,23 +75,18 @@ const CheckInfoComponent = ({ avatar, creature, equipment, switching, jobGrowNam
                     {/* ['equip', 'switching', 'avatar', 'creature'] */}
                     {checkNameList.map((chk, index) => {
                         return (
-                            <div key={index + 'chk'} onClick={() => handleAccordionIndex(index)} className="mb-1">
-                                <div className={`min-h-[50px] p-2 cursor-pointer bg-[rgb(40,50,57)] flex items-center`}>
-                                    <span className="text-[18px] font-bold">
-                                        {transChk(chk)}
-                                    </span>
-                                    {/* 아코디언 */}
-                                </div>
-                                <div
-                                    ref={(el) => (contentRefs.current[index] = el)}
-                                    className={`overflow-hidden ease-in-out transition-all duration-300 bg-cat3
-                                cursor-pointer`}
-                                >
-                                    <div className="p-2">
-                                        {checkInfo(chk, checkObj, findBuff(jobGrowName, jobName), jobName)}
+                            <Accordion
+                                key={index + 'chk'}
+                                isInitOpen={true}
+                                headerContent={
+                                    <div className={`min-h-[50px] p-2 cursor-pointer bg-[rgb(40,50,57)] flex items-center`}>
+                                        <span className="text-[18px] font-bold">
+                                            {transChk(chk)}
+                                        </span>
                                     </div>
-                                </div>
-                            </div>
+                                }>
+                                {checkInfo(chk, checkObj, findBuff(jobGrowName, jobName), jobName)}
+                            </Accordion>
                         )
                     })}
                 </div>
