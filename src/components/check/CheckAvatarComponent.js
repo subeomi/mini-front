@@ -21,22 +21,24 @@ const CheckAvatarComponent = (avatar) => {
     }
 
     return (
-        <div className="flex">
-            <div className="grid grid-cols-[repeat(9,42px)] grid-rows-[repeat(4,46px)] w-[50%]">
-                {avatar?.map((item, index) => {
-                    const gridItem = avatarGridSlot[item.slotName];
-                    if (!gridItem) return null;
-                    return (
-                        <div
-                            key={item.itemId}
-                            style={{ gridArea: gridItem }}
-                            className={`m-[2px]`}>
-                            <img width={`42px`} src={`https://img-api.neople.co.kr/df/items/${item.itemId}`} />
-                        </div>
-                    )
-                })}
+        <div className="flex md:flex-row flex-col">
+            <div className="flex justify-center">
+                <div className="grid grid-cols-[repeat(4,42px)] grid-rows-[repeat(3,46px)] md:w-[50%]">
+                    {avatar?.map((item, index) => {
+                        const gridItem = avatarGridSlot[item.slotName];
+                        if (!gridItem) return null;
+                        return (
+                            <div
+                                key={item.itemId}
+                                style={{ gridArea: gridItem }}
+                                className={`m-[2px]`}>
+                                <img width={`42px`} src={`https://img-api.neople.co.kr/df/items/${item.itemId}`} />
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
-            <div className="w-[50%]">
+            <div className="md:w-[50%] md:mt-0 mt-4">
                 {chkList.map(item => {
                     if (!item.hasOwnProperty('msg')) {
                         return null;

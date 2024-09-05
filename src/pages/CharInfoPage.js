@@ -7,7 +7,7 @@ const CharInfoPage = () => {
         <div className="bg-[rgb(23,27,36)]">
             <BaseNav></BaseNav>
             <div className="flex justify-center pt-[60px]">
-                <div className="w-[1000px]">
+                <div className="w-full md:max-w-[1000px]">
                     <CharInfoComponent></CharInfoComponent>
                 </div>
             </div>

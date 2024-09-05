@@ -8,6 +8,7 @@ import CheckInfoComponent from "./check/CheckInfoComponent";
 import CreatureComponent from "./creature/CreatureComponent";
 import EquipComponent from "./equip/EquipComponent";
 import SwitchingComponent from "./switching/SwitchingComponent";
+import CharTitlecomponent from "./charInfo/CharTitleComponent";
 
 const initState = {
     serverId: "",
@@ -74,16 +75,15 @@ const CharInfoComponent = () => {
     return (
         <div className="mb-20">
             {info.equipment && (
-                <div name="equip"
-                    className="w-[1000px]">
-
+                <div className="flex flex-wrap justify-center md:justify-between md:flex-row items-center">
                     <CharProfileComponent
                         serverId={profile.serverId} info={info}
                     ></CharProfileComponent>
-                    <MenuNav menu={menu} setMenu={setMenu} />
-                    {renderComponent()}
+                    <CharTitlecomponent data={info.data} />
                 </div>
             )}
+            <MenuNav menu={menu} setMenu={setMenu} />
+            {renderComponent()}
         </div>
     );
 }

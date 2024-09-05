@@ -19,7 +19,7 @@ const Accordion = ({ headerContent, children, isInitOpen = false }) => {
     }, [isOpen]);
 
     return (
-        <div className="mb-1">
+        <div className="mb-1 w-full">
             {/* 아코디언 헤더 */}
             <div
                 className={`bg-cat1 cursor-pointer min-h-[60px] flex items-center`}

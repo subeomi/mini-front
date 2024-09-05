@@ -30,7 +30,7 @@ const CreatureComponent = ({ creature }) => {
 
     return (
         <div className="flex justify-center text-white">
-            <div className="p-2 md:w-[90%] w-[60%]">
+            <div className="md:w-[90%] w-full p-2">
                 <div className="pb-2 font-bold flex justify-between">
                     <span>
                         크리쳐
@@ -58,7 +58,7 @@ const CreatureComponent = ({ creature }) => {
                                         </span>
                                     </div>
                                 }>
-                                <div className="mx-1 py-1 text-[13px] flex items-center">
+                                <div className="mx-1 py-1 text-[13px] flex md:flex-row flex-col md:items-center">
                                     <span className="flex items-center pr-4">
                                         <img src={`https://img-api.neople.co.kr/df/items/${item.itemId}`} />
                                         <span className="text-ellipsis overflow-hidden whitespace-nowrap w-max-[189px] ml-1">

@@ -29,9 +29,9 @@ const CheckEquipComponent = (equip) => {
     // console.log(chkList)
 
     return (
-        <div className="flex">
+        <div className="flex md:flex-row flex-col">
             {/* 장비 이미지 슬롯 */}
-            <div className="flex w-[50%]">
+            <div className="flex justify-center md:w-[50%]">
                 <div className="grid grid-cols-[repeat(2,42px)] grid-rows-[repeat(3,46px)]">
                     {equip?.map((item, index) => {
                         const gridItem = equipGridSlot['left'][item.slotName];
@@ -65,7 +65,7 @@ const CheckEquipComponent = (equip) => {
                 </div>
             </div>
             {/* 설명 */}
-            <div className="w-[50%]">
+            <div className="md:w-[50%] md:mt-0 mt-4">
                 {chkList.map(item => {
                     if (!item.hasOwnProperty('msg')) {
                         return null;

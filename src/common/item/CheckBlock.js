@@ -14,7 +14,8 @@ const CheckBlock = ({chk}) => {
     }
 
     return (
-        <div className={`bg-cat1 w-full min-h-[50px] ${chkBorderColors(chk?.lvl)} border-r-4 mb-2 flex items-center p-2`}>
+        <div className={`bg-cat1 w-full min-h-[50px] ${chkBorderColors(chk?.lvl)} border-r-4 mb-2 flex items-center p-2 
+        text-[13px] md:text-[16px]`}>
             {chk.msg}
         </div>
     );

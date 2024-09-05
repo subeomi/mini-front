@@ -26,7 +26,7 @@ const SwitchingComponent = ({ switching }) => {
 
     return (
         <div className="text-white flex justify-center">
-            <div className="w-[90%] p-2">
+            <div className="md:w-[90%] w-full p-2">
                 <div className="pb-2 font-bold flex justify-between">
                     <span>
                         버프강화
@@ -40,22 +40,20 @@ const SwitchingComponent = ({ switching }) => {
                         key={index + 'switching'}
                         headerContent={
                             <div
-                                className="w-full"
+                                className="w-full py-1"
                                 style={{
                                     borderRight: item.price || item.emblems?.some(em => em.price) ? '4px solid rgb(255,180,0)' : ''
                                 }}>
-                                <div className="flex min-h-[60px]">
+                                <div className="flex min-h-[60px] flex-col md:flex-row md:text-[14px] text-[12px]">
                                     {/* 스위칭 아이템 */}
-                                    <div className="flex items-center w-[70%]">
-                                        <p className="w-[64px] items-center justify-center flex mx-1 text-[13px]">
-                                            {item.slotName ? item.slotName.includes('아바타') ? item.slotName.replace(' 아바타', '') : item.slotName : "크리쳐"}
-                                        </p>
-                                        <span>
-                                            <span className="flex">
-                                                <img src={`https://img-api.neople.co.kr/df/items/${item.itemId}`} />
-                                            </span>
+                                    <p className="min-w-[64px] items-center justify-center flex md:mx-1 md:text-[13px] text-[10px] pb-1 md:p-0">
+                                        {item.slotName ? item.slotName.includes('아바타') ? item.slotName.replace(' 아바타', '') : item.slotName : "크리쳐"}
+                                    </p>
+                                    <div className="flex items-center md:w-[60%] md:p-0 pl-2">
+                                        <span className="flex">
+                                            <img className="min-w-[28px] min-h-[28px]" src={`https://img-api.neople.co.kr/df/items/${item.itemId}`} />
                                         </span>
-                                        <span className="px-2 text-[14px]">
+                                        <span className="px-2">
                                             <p>{item.itemName}</p>
                                             {item.clone && item.clone.itemName != null && (
                                                 <p>{item.clone.itemName}</p>
@@ -63,9 +61,9 @@ const SwitchingComponent = ({ switching }) => {
                                         </span>
                                     </div>
                                     {/* 엠블렘 블럭 */}
-                                    <div className="flex items-center">
+                                    <div className="flex w-full items-center md:justify-end md:mr-2 mt-2">
                                         {item.emblems && item.emblems.length > 0 && item.emblems.map((em, index) => (
-                                            <div className="text-[13px] py-1" key={index}>
+                                            <div className="px-2" key={index + 'switchingEm'}>
                                                 {emblemColors(em)}
                                             </div>
                                         ))}
@@ -73,72 +71,71 @@ const SwitchingComponent = ({ switching }) => {
                                 </div>
                             </div>
                         }>
-                            <div className="flex h-full p-2 items-center">
-                                <div className={`h-full grid w-[50%]grid-rows-1`}>
-                                    <div className="mx-1 text-[13px] flex items-center">
-                                        <span className="flex items-center pr-4 py-1">
-                                            <img src={`https://img-api.neople.co.kr/df/items/${item.itemId}`} />
-                                            <span className="text-ellipsis overflow-hidden whitespace-nowrap ml-1 max-w-[150px]">
-                                                {item.itemName}
-                                            </span>
-                                        </span>
-                                        {item.price ?
-                                            (<div>
-                                                <p>
-                                                    최근 평균 거래가 : {commaGold(item.price)}
-                                                </p>
-                                                <div className="flex">
-                                                    최근 거래내역 : {item.history ? (
-                                                        <Tooltip text={item.history}>
-                                                            <span className="text-blue-400">
-                                                                [거래내역]
-                                                            </span>
-                                                        </Tooltip>
-                                                    ) : (<span className="text-gray-400">거래 내역 없음</span>)}
-                                                </div>
-                                            </div>)
-                                            :
-                                            (<span className="text-gray-400">
-                                                거래 내역 없음
-                                            </span>)
-                                        }
-                                    </div>
+                        <div className="flex h-full md:items-center md:flex-row flex-col md:text-[14px] text-[12px]">
+                            <div className={`h-full grid md:w-[50%] grid-rows-1 md:flex-row flex-col md:mb-0 mb-4`}>
+                                <div className="flex items-center pr-4 py-1">
+                                    <img src={`https://img-api.neople.co.kr/df/items/${item.itemId}`} />
+                                    <span className="text-ellipsis overflow-hidden ml-1">
+                                        {item.itemName}
+                                    </span>
                                 </div>
-                                {item.emblems && (
-                                    <div className={`h-full grid w-[50%] ${item.emblems && item.emblems.length === 3 ? 'grid-rows-3' : item.emblems.length === 1 ? 'grid-rows-1' : item.emblems.length === 2 ? 'grid-rows-2' : 'grid-auto-rows'}`}>
-                                        {item.emblems && item.emblems.length > 0 && item.emblems.map((em, index) => (
-                                            <div className="mx-1 py-1 text-[13px] flex items-center" key={index}>
-                                                <span className="flex items-center pr-4">
-                                                    <span className="text-ellipsis overflow-hidden whitespace-nowrap ml-1 max-w-[150px]">
-                                                        {/* {emblemColors(em)} */}
-                                                        {em.itemName}
+                                {item.price ?
+                                    (<div>
+                                        <p>
+                                            최근 평균 거래가 : {commaGold(item.price)}
+                                        </p>
+                                        <div className="flex">
+                                            최근 거래내역 : {item.history ? (
+                                                <Tooltip text={item.history}>
+                                                    <span className="text-blue-400">
+                                                        [거래내역]
                                                     </span>
-                                                </span>
-                                                {em.price ?
-                                                    (<div>
-                                                        <p>
-                                                            최근 평균 거래가 : {commaGold(em.price)}
-                                                        </p>
-                                                        <div className="flex">
-                                                            최근 거래내역 : {em.history ? (
-                                                                <Tooltip text={em.history}>
-                                                                    <span className="text-blue-400">
-                                                                        [거래내역]
-                                                                    </span>
-                                                                </Tooltip>
-                                                            ) : (<span className="text-gray-400">거래 내역 없음</span>)}
-                                                        </div>
-                                                    </div>)
-                                                    :
-                                                    (<span className="text-gray-400">
-                                                        거래 내역 없음
-                                                    </span>)
-                                                }
-                                            </div>
-                                        ))}
-                                    </div>
-                                )}
+                                                </Tooltip>
+                                            ) : (<span className="text-gray-400">거래 내역 없음</span>)}
+                                        </div>
+                                    </div>)
+                                    :
+                                    (<span className="text-gray-400">
+                                        거래 내역 없음
+                                    </span>)
+                                }
                             </div>
+                            {item.emblems && (
+                                // 스위칭 엠블렘은 서버에서 플래티넘만 가져오는 중
+                                <div className={`h-full md:w-[50%] md:text-[14px] text-[12px]`}>
+                                    {item.emblems && item.emblems.length > 0 && item.emblems.map((em, index) => (
+                                        <div className="py-1 flex flex-col items-start" key={index + em.itemName}>
+                                            <div className="flex items-center pr-4">
+                                                <span className="text-ellipsis overflow-hidden whitespace-nowrap">
+                                                    {/* {emblemColors(em)} */}
+                                                    {em.itemName}
+                                                </span>
+                                            </div>
+                                            {em.price ?
+                                                (<div>
+                                                    <p>
+                                                        최근 평균 거래가 : {commaGold(em.price)}
+                                                    </p>
+                                                    <div className="flex">
+                                                        최근 거래내역 : {em.history ? (
+                                                            <Tooltip text={em.history}>
+                                                                <span className="text-blue-400">
+                                                                    [거래내역]
+                                                                </span>
+                                                            </Tooltip>
+                                                        ) : (<span className="text-gray-400">거래 내역 없음</span>)}
+                                                    </div>
+                                                </div>)
+                                                :
+                                                (<span className="text-gray-400">
+                                                    거래 내역 없음
+                                                </span>)
+                                            }
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
                     </Accordion>
                 ))}
             </div>
