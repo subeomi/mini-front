@@ -80,7 +80,7 @@ const IndexComponent = () => {
 
     return (
         <div className="flex justify-center">
-            <div className="w-[500px] h-[300px] mt-14 p-4">
+            <div className="md:w-[500px] h-[300px] mt-14 p-4 md:text-[14px] text-[12px]">
                 <div
                     className="flex justify-center items-center mt-6 px-4 py-5 border-2 
                 border-[rgb(35,41,50)] hover:border-[rgb(53,65,73)] rounded-md h-12 text-white">
@@ -112,11 +112,11 @@ const IndexComponent = () => {
                     <div className="p-4 flex flex-wrap justify-between items-center content-start bg-[rgb(35,41,50)] mt-4 rounded-md">
                         {recentSearch.map((item, index) => (
                             <div
-                                className="py-2 px-3 text-[14px] flex items-center mx-2 relative cursor-pointer text-white w-[200px]"
+                                className="py-2 px-1 flex items-center mx-2 relative cursor-pointer text-white md:w-[200px] w-full"
                                 key={index}
                                 onClick={() => goRecent(item)}
                             >
-                                <span className="text-[12px] text-gray-400 mr-2">
+                                <span className="md:text-[12px] text-[10px] text-gray-400 mr-2">
                                     {translationType(item.type)}
                                 </span>
                                 <span className="overflow-ellipsis">

@@ -88,9 +88,9 @@ const ListComponent = () => {
 
     return (
         <div className="text-white">
-            <div className="w-[1000px] flex flex-col justify-center">
+            <div className="md:w-[1000px] flex flex-col justify-center">
                 <div
-                    className="flex justify-center items-center mt-6 px-4 py-5 border-2 w-[468px] m-auto my-4
+                    className="flex justify-center items-center mt-6 px-4 py-5 border-2 w-[90%] md:w-[468px] m-auto my-4
                 border-[rgb(35,41,50)] hover:border-[rgb(53,65,73)] rounded-md h-12 text-white">
                     <input
                         type="text"
@@ -111,46 +111,41 @@ const ListComponent = () => {
                     </div>
                 </div>
 
-                <div className="p-2 flex flex-wrap gap-0 justify-center min-h-screen">
+                <div className="md:p-2 flex flex-wrap gap-0 justify-center min-h-screen">
                     {charList && charList.length > 0 && charList.map((char, index) => (
                         <Link key={char.characterId}
-                            className={`bg-[rgb(35,41,50)] w-[210px] h-[340px] rounded-md m-1 py-[10px] flex flex-col 
-                            justify-center items-center hover:bg-[rgb(40,50,57)] cursor-pointer`}
+                            className={`bg-[rgb(35,41,50)] w-[45%] md:w-[230px] md:h-[340px] h-[280px] rounded-md m-1 py-[10px] flex flex-col 
+                            justify-center items-center hover:bg-[rgb(40,50,57)] cursor-pointer relative`}
 
                             to={`/character?serverId=${char.serverId}&characterId=${char.characterId}`}>
-                            <div className="">
-                                <span className="flex w-[180px] justify-between items-center">
-                                    <p className="text-[12px]">{char.jobGrowName}</p>
-                                    <p className="text-[14px]">{transServerId(char.serverId)}</p>
-                                </span>
-                            </div>
-                            <div className="h-[70%]">
+                                    <span className="text-[10px] md:text-[12px] absolute top-3 left-4">{char.jobGrowName}</span>
+                                    <span className="text-[12px] md:text-[14px] absolute top-3 right-4">{transServerId(char.serverId)}</span>
+                            <div className="h-[70%] overflow-hidden">
                                 <img
                                     src={`https://img-api.neople.co.kr/df/servers/${char.serverId}/characters/${char.characterId}?zoom=1`} />
                             </div>
-                            <div className="flex flex-col justify-center items-center">
+                            <div className="text-[12px] md:text-[14px] flex flex-col justify-center items-center">
 
-                                <div className="text-[14px] flex items-center">
+                                <div className="flex items-center">
                                     <span className="text-[#3e965b]">
-                                        {char.adventureName || ''}
+                                        {char.adventureName || '-'}
                                     </span>
-                                    {char.adventureName && (<div className="v-s"></div>)}
+                                    <div className="v-s" />
                                     <span>
-                                        {char.guildName !== null && char.guildName !== 'null' ? char.guildName : '-'}
+                                        {char.guildName && char.guildName !== 'null' ? char.guildName : '-'}
                                     </span>
                                 </div>
 
-                                <p className="font-bold py-[1px]">
+                                <p className="text-[14px] md:text-[16px] font-bold py-[1px]">
                                     {char.characterName}
                                 </p>
                                 <span className="flex items-center">
-                                    <p className="text-[14px]">명성</p>
+                                    <p className="">명성</p>
                                     <p className="text-[#3392ff] ml-[5px]">{char.fame || 0}</p>
                                 </span>
                             </div>
                         </Link>
                     ))}
-
                 </div>
             </div>
         </div>

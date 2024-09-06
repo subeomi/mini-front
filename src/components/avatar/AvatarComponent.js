@@ -40,7 +40,7 @@ const AvatarComponent = ({ avatar }) => {
                                 >
                                     <div className="flex md:flex-row flex-col min-h-[85px] w-full md:text-[14px] text-[12px]">
                                         {/* 아바타 블럭 */}
-                                        <p className="min-w-[64px] flex items-center justify-center mx-1">
+                                        <p className="min-w-[64px] flex items-center justify-center mx-1 md:mb-0 mb-1">
                                             {transAvatarSlotName(item.slotName)}
                                         </p>
                                         <div className="md:w-[60%] flex items-center justify-start md:p-0 pl-2">
@@ -70,7 +70,7 @@ const AvatarComponent = ({ avatar }) => {
                                             </div>
                                         )}
                                         {/* 엠블렘 블럭 */}
-                                        <div className="flex justify-start flex-col md:w-[30%] md:m-0 mt-2">
+                                        <div className="flex justify-center md:items-end flex-col md:w-[30%] md:m-0 mt-2">
                                             {item.emblems && item.emblems.length > 0 && item.emblems.map((em, index) => (
                                                 <div className="md:text-[13px] text-[11px] md:py-1 px-2" key={index+'avatarEm'}>
                                                     {emblemColors(em)}

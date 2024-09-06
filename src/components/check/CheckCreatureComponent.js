@@ -16,8 +16,8 @@ const CheckCreatureComponent = (creature) => {
 
     return (
         <div className="flex md:flex-row flex-col">
-            <div className="flex justify-center">
-                <div className="grid grid-cols-[repeat(5,42px)] grid-rows-[repeat(3,46px)] md:w-[50%]">
+            <div className="flex md:w-[50%]">
+                <div className="grid grid-cols-[repeat(5,42px)] grid-rows-[repeat(3,46px)]">
                     {creature?.itemId && (
                         <div style={{ gridArea: '2 / 2' }} className={`m-[2px]`}>
                             <img width={`42px`} src={`https://img-api.neople.co.kr/df/items/${creature?.itemId}`} />
