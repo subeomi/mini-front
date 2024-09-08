@@ -9,6 +9,7 @@ import CreatureComponent from "./creature/CreatureComponent";
 import EquipComponent from "./equip/EquipComponent";
 import SwitchingComponent from "./switching/SwitchingComponent";
 import CharTitlecomponent from "./charInfo/CharTitleComponent";
+import LoadingPage from "../pages/LoadingPage";
 
 const initState = {
     serverId: "",
@@ -21,8 +22,8 @@ const CharInfoComponent = () => {
     const location = useLocation();
     const [info, setInfo] = useState({});
     const [profile, setProfile] = useState(initState);
-    const [skills, setSkills] = useState({});
     const [menu, setMenu] = useState('equip');
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
 
@@ -41,23 +42,14 @@ const CharInfoComponent = () => {
             }
 
             setInfo(data.data);
+            setLoading(false)
         })
     }, [location.search]);
-
-    useEffect(() => {
-        if (info) {
-            // setSkills(findCharSkill(info));
-            console.log('info: ', info)
-        }
-    }, [info])
-
-    // console.log('coolTimeMath: ', skills?.math)
-    // console.log('skills: ', skills);
 
 
     const renderComponent = () => {
         if (menu === 'equip') {
-            return <EquipComponent equipment={info.equipment} skills={skills}></EquipComponent>;
+            return <EquipComponent equipment={info.equipment}></EquipComponent>;
         } else if (menu === 'switching') {
             return <SwitchingComponent switching={info.switching}></SwitchingComponent>
         } else if (menu === 'avatar') {
@@ -71,6 +63,10 @@ const CharInfoComponent = () => {
             ></CheckInfoComponent>
         }
     };
+
+    if(loading){
+        return <LoadingPage></LoadingPage>
+    }
 
     return (
         <div className="mb-20">

@@ -3,19 +3,7 @@ import { commaGold, transformStatusArray } from "../../common/globalFunction";
 import Tooltip from "../../common/item/Tooltip";
 import Accordion from "../../common/item/Accordion";
 
-const EquipComponent = ({ skills, equipment }) => {
-
-    const [accordion, setAccordion] = useState([])
-
-    const handleAccordionIndex = (i) => {
-        const checkIndex = accordion.includes(i)
-
-        if (checkIndex) {
-            setAccordion(accordion.filter((index) => index !== i))
-        } else {
-            setAccordion([...accordion, i])
-        }
-    }
+const EquipComponent = ({ equipment }) => {
 
     return (
         <div>
@@ -27,7 +15,6 @@ const EquipComponent = ({ skills, equipment }) => {
                         </span>
                     </div>
                     {equipment?.length > 0 && equipment?.map((equip, index) => {
-                        const hasPrice = equip.enchantPrice || equip.price;
                         return (
                             <Accordion
                                 key={index + 'equip'}

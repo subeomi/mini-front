@@ -4,13 +4,13 @@ import CharTitlecomponent from "./CharTitleComponent";
 const CharProfileComponent = ({ info, serverId }) => {
 
     const data = info.data;
-    const price = {
-        avatar: info.avatar.sumPrice,
-        creature: info.creature.sumPrice,
-        switching: info.switching.sumPrice,
-        enchant: info.equipment.sumEnchantPrice,
-        equip: info.equipment.sumPrice
-    }
+    // const price = {
+    //     avatar: info.avatar.sumPrice,
+    //     creature: info.creature.sumPrice,
+    //     switching: info.switching.sumPrice,
+    //     enchant: info.equipment.sumEnchantPrice,
+    //     equip: info.equipment.sumPrice
+    // }
 
     return (
         <div className="flex justify-center p-2 pt-4 text-white md:w-[45%]">
